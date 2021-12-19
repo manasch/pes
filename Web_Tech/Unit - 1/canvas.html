@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <script>
+            function init(){
+                var c1 = document.querySelector("#c1");
+                var ctx = c1.getContext("2d");
+
+                // ctx.fillStyle = "red";
+                ctx.strokeRect(175, 60, 50, 50)
+                ctx.strokeRect(175, 190, 50, 50)
+                ctx.arc(200, 150, 50, 0, 2 * Math.PI, true)
+                ctx.fill();
+
+                c1.onclick = (event)=>{
+                    ctx.beginPath();
+                    ctx.arc(event.clientX, event.clientY, 50, 0, 2 * Math.PI, true);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+                //ctx.stroke();
+
+                cr = document.querySelector("circle")
+                t = setInterval(()=>{
+                    cr.cx.baseVal.value = 200 + Math.floor(Math.random() * 10);
+                    cr.cy.baseVal.value = 150 + Math.floor(Math.random() * 10);
+                }, 10);
+                
+                cr.onclick = ()=>{
+                    clearInterval(t);
+                }
+
+
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <canvas id="c1" width="400px" height="300px" style="border: 2px solid blue;">
+            Canvas not supported by your browser!!
+        </canvas>
+
+        <svg id="s1" width="400px" height="300px" style="border: 2px solid blue;">
+            <circle cx="200" cy="150" r="50" stroke="green" stroke-width="4" fill="yellow" />
+        </svg>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>XML v JSON</title>
+        <script></script>
+    </head>
+
+    <body>
+
+        <p id="demo"></p>
+        <p id="demo2"></p>
+        <p id="demo3"></p>
+
+        <p id="demo4"></p>
+        <p id="demo5"></p>
+        <p id="demo6"></p>
+
+        <script>
+            var text;
+
+            text = 
+            "<bookstore>" +
+                "<book id='001'>" +
+                    "<title> 400 Days </title>" +
+                    "<author> Chetan Bhagat </author>" +
+                    "<year> yet to be released </year>" +
+                "</book>" +
+                "<book id='002'>" +
+                    "<title> Five Point Someone </title>" +
+                    "<author> Chetan Bhagat </author>" +
+                    "<year> 2004 </year>" +
+                "</book>" +
+            "</bookstore>";
+
+            var parser = new DOMParser();
+            var xmlDOM = parser.parseFromString(text, "text/xml");
+
+            var titles = xmlDOM.getElementsByTagName("title");
+            document.querySelector("#demo").innerHTML = titles[0].textContent;
+            
+            titles[1].textContent += " - Made into 3 Idiots";
+
+            var serialize = new XMLSerializer();
+            var newstr = serialize.serializeToString(xmlDOM);
+
+            document.querySelector("#demo2").innerHTML = newstr;
+
+            document.querySelector("#demo3").innerHTML = titles[1].textContent;
+
+            var str = 
+            '{"movie1": {"name": "The Avengers", "cast": ["Robert D Jr.", "Chris Evans", "Tom hiddleston"]},\
+             "movie2": {"name": "The Avengers", "cast": ["Robert D Jr.", "Chris Evans", "Tom hiddleston"]}}';
+
+            var obj = JSON.parse(str);
+            obj.movie1.cast.push("Chris Hemsworth");
+
+            var newstr1 = JSON.stringify(obj, null, "<br/>");
+
+            document.querySelector("#demo4").innerHTML = newstr1;
+
+        </script>
+    </body>
+</html>

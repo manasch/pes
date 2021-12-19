@@ -1,0 +1,211 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+        //     class Test extends React.Component {
+        //         render() {
+        //             var test = {
+        //                 color: "red"
+        //             }
+        //             return (
+        //                 <div>
+        //                 <h1 style={test}>Hello World</h1>
+        //                 </div>
+        //             )
+        //         }
+        //     }
+
+        //     class Buttonify extends React.Component {
+        //         render() {
+        //             return (
+        //                 <div>
+        //                 <button type={this.props.behavious}>{this.props.children}</button>
+        //                 </div>
+        //             )
+        //         }
+        //     }
+
+        //     class Counter extends React.Component {
+        //         constructor(props, context) {
+        //             super(props, context);
+
+        //             this.state = {
+        //                 seconds: 0
+        //             };
+
+        //             this.timer = this.timer.bind(this);
+        //         }
+
+        //         componentDidUpdate() {
+        //             console.log("Updating!!");
+        //         }
+
+        //         componentDidMount() {
+        //             this.t = setInterval(this.timer, 1000);
+        //         }
+
+        //         componentWillUnmount() {
+        //             console.log("Stopping!!");
+        //             clearInterval(this.t);
+        //         }
+
+        //         timer() {
+        //             this.setState((pState) => {
+        //                 return {
+        //                     seconds: pState.seconds + 1
+        //                 }
+        //             })
+        //         }
+
+
+        //         render() {
+        //             return (
+        //                 <h1>{this.state.seconds}</h1>
+        //             )
+        //         }
+        //     }
+        
+        // function New(props) {
+        //     return (
+        //         <h1>Using Functions {props.children}</h1>
+        //     )
+        // }
+
+        // var colors = ["blue", "red", "green"]
+        // class ChangeText extends React.Component {
+        //     constructor(props, ctx) {
+        //         super(props, ctx);
+
+        //         this.myText = null;
+        //         this.setTRef = (element) => {
+        //             this.myText = element;
+        //         }
+
+        //         this.changeT = (event) => {
+        //             this.myText.innerHTML = "changed";
+        //             var i = Math.floor(Math.random() * 5);
+        //             this.myText.style.color = colors[i];
+        //         }
+        //     }
+
+        //     render() {
+        //         return (
+        //             <div>
+        //                 <h1 ref={this.setTRef}>This is the text</h1>
+        //                 <input type="button" value="Clik for magik" onClick={this.changeT} />
+        //             </div>
+        //         )
+        //     }
+
+        // }
+
+        
+        // function TB (props) {
+        //     return (
+        //         <input ref={props.inpRef} type="text" />
+        //     )
+        // }
+
+        // class Parent extends React.Component {
+        //     constructor(props, ctx) {
+        //         super(props, ctx);
+
+        //         this.doClick = (event) => {
+        //             this.inpText.focus();
+        //             console.log(this.inpText.value);
+        //         }
+        //     }
+
+        //     render() {
+        //         return (
+        //             <div>
+        //                 <TB inpRef={(el) => {this.inpText = el}} />
+        //                 <button onClick={this.doClick}>CLick me</button>
+        //             </div>
+        //         )
+        //     }
+        // }
+
+        // class Copy extends React.Component {
+        //     constructor(props, ctx) {
+        //         super(props, ctx);
+
+        //         this.txtChange = (event) => {
+        //             var txt;
+                    
+        //             if(event.shiftKey) {
+        //                 txt = '<span style="color: red;">' + event.target.value + "</span>";
+        //             }
+        //             else if(event.target.value == null) {
+        //                 txt = ''
+        //                 console.log("emty");
+        //             }
+        //             else {
+        //                 txt = event.target.value;
+        //             }
+
+        //             this.head.innerHTML = txt;
+        //         }
+
+        //     }
+
+        //     render() {
+        //         return (
+        //             <div>
+        //                 <input onKeyPress={this.txtChange} type="text" />
+        //                 <h1 ref={(el) => {this.head = el}} />
+        //             </div>
+        //         )
+        //     }
+        // }
+
+        const UContext = React.createContext();
+
+        class Profile extends React.Component {
+            static contextType = UContext;
+            render() {
+                return (
+                    <h1>Hello, {this.context} </h1>
+                );
+            }
+        }
+
+        function Dashboard() {
+            return <Profile />
+        }
+
+        class App extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <UContext.Provider value={this.props.uname}>
+                            <Dashboard />
+                        </UContext.Provider>
+                    </div>
+                );
+            }
+        }
+        
+        ReactDOM.render(
+            // <div>
+            //     <Buttonify behavious="submit">
+            //         What
+            //     </Buttonify>
+            //     <Test />
+            //     <Counter />
+            //     <New> What is this</New>
+            // </div>,
+            // <ChangeText />,
+            // <Parent />,
+            <App uname="thor"/>,
+            document.querySelector("#root")
+        )
+        </script>
+    </body>
+</html>

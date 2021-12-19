@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script>
+            function init()
+            {
+                count = 0;
+                t = setInterval(()=>{
+                    document.getElementById("pr1").value = count;
+                    count++;
+                    if(count == 100)
+                    {
+                        count = 0;                        
+                        clearInterval(t)
+                    }
+                }, 10)
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <progress id="pr1" value="0" max="100">30%</progress>
+    </body>
+</html>

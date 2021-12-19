@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <!-- Crossorigin used to not block scripts from another origin, tells the browser to not block scripts from any other origin apart from the hosted server -->
+
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            // ReactDOM.render(
+            //     <h1 name="abc">Batman Returns</h1>,
+            //     document.queryCommandIndeterm("#root")
+            // )
+
+            // ReactDOM.render(
+            //     // React.createElement("h1", {name: 'abc'}, "Batman Returns"),
+            //     document.querySelector("#root")
+            // )
+            ReactDOM.render(
+                React.createElement("div", null, 
+                    React.createElement("h1", {name: 'abc'}, "Batman Returns"),
+                    React.createElement("h1", null, "Batman Doesn't Return")
+                ),
+                document.querySelector("#root")
+            )
+        </script>
+    </body>
+</html>

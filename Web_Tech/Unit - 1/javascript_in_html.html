@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <!-- By default it assumes in javascript-->
+        <script>
+            //var x = new String("Hello world");
+            //var x = new Number("1.5")
+            //var x = parseInt("132 apples")
+            //var x = "1234" + 1
+            /*if(isNaN(x))
+                document.write("Not a number <br>")
+            else
+                document.write("<h1>" + x + "</h1><br>")
+            document.write(typeof(x));*/
+            /*
+            if("3" == 3)
+                document.write("same")
+            else
+                document.write("not same")
+            */
+            /*
+            var arr = new Array()
+            arr[1] = true
+
+            arr.length = 5
+
+            arr.push("11")
+            document.write(arr.length)
+
+            for (i in arr)
+                document.write(arr[i] + "<br>")
+            */
+
+            // can also mention as function add (arguements) and this can be accessed as an array but can't use array functions to it
+
+            function add(...args){ //add(n, ...args) first arguement will be assigned to n and the remaining will get assigned to the array
+                let sum = 0; //good practice to use let or var when declaring variables inside a function
+                for (i in args)
+                    sum += args[i];
+                return sum;
+            }
+
+            function addn(n, ...args){
+                let sum = n;
+                for (i in args)
+                    sum += args[i];
+                return sum;
+            }
+
+            //var addition = add //Reference to the function, can create reference to a function object
+
+            var addition = function(x, y){ //anonymous function if the number of the arguements sent are more than what's defined, it gets ignored
+                return x + y;
+            }
+
+            var subtraction = (x, y) =>{
+                return x - y;
+            }
+
+            function operate(x, y, operation){
+                return operation(x,y);
+            }
+
+            var x = add(10, 12, 34);
+            var y = addn(10, 12, 34);
+            var z = addition(10, 20, 90);
+            var k = operate(10, 20, addition);
+            var l = operate(20, 10, subtraction);
+            //console.log(x) //prints to the console
+            //document.write(x + " " +  y)
+            console.log(x, y, z, k, l);
+            console.log("Multiple of %d and %d is %d", 10, 20, operate(10, 20, (x,y) => {return x * y}));
+
+
+            num = 6;
+            console.log(num);
+            var num = 8; //Hoisting ---- The declaration is shifted to the top so it doesn't have to be declared, only for var, doesn't work for let and const
+            console.log(num);
+
+            //Hoisitng can be done for functions as well
+
+            var test;
+            console.log("Test variable is", test); //output will be undefined
+
+            function draw(x, side){
+                for (let i = 0; i < side; i++) {
+                    for (let j = 0; j < side; j++) {
+                        document.write(x);
+                    }
+                    document.write("<br>");
+                }
+            }
+
+            draw("0", 4)
+            //document.write("hell")
+
+        </script>
+    </body>
+</html>

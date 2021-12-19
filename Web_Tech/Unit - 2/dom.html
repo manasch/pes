@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<!-- DOM : Document Object <Model-->
+
+<html>
+    <head>
+        <title>DOM</title>
+        <script>
+            leftval = screen.width
+            function move()
+            {
+                leftval -= 20;
+                console.log("moving p")
+                mypara.style.left = leftval;
+                if(leftval < 20)
+                    clearInterval(t)
+            }
+
+            function init()
+            {
+                /*
+            //document.getElementById("p1").innerHTML = "This is a <span>Modified</span> paragraph!!";
+            document.querySelector("#p1").innerHTML = "This is modified too!";
+            document.querySelectorAll(".class"); //getElementsByClassName("class");
+            var parr = document.querySelectorAll("p"); //getElementsByTagName("p");
+            parr[1].style.backgroundColor = "lightblue";
+            parr[0].style.backgroundColor = "orange ";
+            
+            //for(i in parr)
+            parr.forEach
+            (
+                (i)=>{
+                i.style.borderBottomRightRadius = "10px";
+                i.style.borderTopLeftRadius = "10px";
+                i.style.color = "darkblue";
+                console.log(i);
+                }
+            )
+
+            var newp = document.createElement("p");
+            newp.innerHTML = "This is a <span>New</span> Element!!";
+
+            document.querySelectorAll("div")[1].appendChild(newp);
+            document.querySelectorAll("div")[1].insertBefore(newp, document.querySelectorAll("div")[1].firstChild);
+            document.querySelectorAll("div")[1].replaceChild(newp, document.querySelectorAll("div")[1].firstChild);
+
+            //newp.removve()
+            document.querySelectorAll("div")[1].removeChild(newp);
+        */
+
+        var cities = ["Mumbai", "Bangalore", "Chennai", "Kolkata"]
+        var newul = document.createElement("ul");
+        for(i in cities)
+        {
+            let newli = document.createElement("li");
+            newli.innerHTML = cities[i];
+            newul.appendChild(newli);
+        }
+        document.body.appendChild(newul);
+            }
+
+        var mypara = "This is a para to move"
+
+        </script>
+    </head>
+
+    <body onload="init()">
+        <h2> This is a DOM</h2>
+        <div>
+            <p>This is a <span>paragraph</span>, right!!</p>
+            <div>
+                <p id="p1">This is a paragrahp too!</p>
+            </div>
+        </div>
+    </body>
+</html>
+
+<!-- Assuming there is an array of image file name to be downloaded. On load of the page, 
+Create as many img elements and assign the src property to the values in the array.
+Only the first img element shuold be made cisiable initially.
+(set the style.display = "block" or none accprdingly) -->

@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <script>
+        </script>
+    </head>
+
+    <body>
+        <p></p>
+
+        <script>
+            var weather;
+            var date = new Promise(
+                function(resolve, reject){
+                    setTimeout(()=>{
+                    weather = true; // based on api call with date and location as parameters
+
+                    if(weather){
+                        const dateDetails = {
+                            place: 'Cubana Restaurant',
+                            date: '28-09-2021',
+                            location: '55th Street',
+                            table: 5
+                        }
+                        resolve(dateDetails);
+                    }
+                    else
+                    reject(new Error('Bad weather'));
+                    }, 1000);
+                // if put under setTimeout from weather = true, promise will be shown as pending until the timeout is completed
+                }
+            )
+
+            date
+            .then((details)=>{
+                var para = document.querySelector("p")
+                for (i in details)
+                    para.innerHTML += i + ":" + details[i] + "<br/>";
+
+                var nextDate = new Promise((resolve, reject)=>{
+                    var gooddate = true; // based on some condition
+                    if(gooddate)
+                        resolve({nextDate: '04-10-2021'});
+                    else
+                        reject(new Error('Bad Choice'));
+                })
+                return nextDate;
+            })
+            .then((nextDateDetails)=>{
+                console.log(nextDateDetails.nextDate);
+            })
+            .catch((error)=>{
+                document.querySelector("p").innerHTML += error.message;
+            })
+        </script>
+    </body>
+</html>

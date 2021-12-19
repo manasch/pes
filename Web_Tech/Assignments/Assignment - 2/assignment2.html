@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Registration Form</title>
+        <script src = "https://code.jquery.com/jquery-3.5.1.js"></script>
+        
+        <style>
+            table {
+            margin: 0 auto;
+            font-size: large;
+            border: 1px solid black;
+        }
+  
+        td {
+            background-color: #E4F5D4;
+            border: 1px solid black;
+        }
+  
+        th,
+        td {
+            font-weight: bold;
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+  
+        td {
+            font-weight: lighter;
+        }
+        </style>
+    </head>
+    <body>
+        <h1 align = "center">Registration Form</h1>            
+            <div>
+            <form name = "form" onsubmit="return myfunc()" method = "post">
+
+                <label>Name :&emsp;&emsp;&emsp;</label><input type  = "text" id = "name" name = "name" > <br><br>
+                <label>SRN :&emsp;&emsp;&emsp;&nbsp;</label> <input type = "text" id = "srn" name = "srn" pattern = "PES[1-3]UG(1[89]|2[01])(CS|ME|EE|EC)\d{3}" title = "Sample: PES2UG20CS400"> <br><br>
+                <label>Semester :&emsp;&ensp;</label> <input type = "text" id = "sem" name = "sem" pattern = "[1-8]" title = "Semester must be between 1 and 8" required> <br><br>
+                <label>Section :&emsp;&emsp;&nbsp;</label> <input type = "text" id = "sec" name = "sec" > <br><br>
+                <label>Phone :&emsp;&emsp;&ensp;&nbsp;</label> <input type = "text" id = "phone" name = "phone" required > <br><br>
+                <label>Club :&emsp;&emsp;&emsp;&nbsp;</label> <input type = "text" id = "club" name = "phone"> <br><br>
+
+                <input type = "reset">
+                <input type = "submit" id = "sub">
+
+            </form></div><br><br>
+        
+        <button>Click to add JQuery and hide form elements</button>&nbsp;&nbsp;
+        <button>Click to fade header</button>
+        <canvas id="canvas" width="650" height="200">
+            Canvas is not supported
+        </canvas>
+
+        <script src = "emoji.js"></script>
+    </body>
+</html>

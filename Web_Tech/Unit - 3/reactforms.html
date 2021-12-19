@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+
+    <body>
+        <!-- reactjs forms , uses onChange and onSubmit -->
+        <!-- has uncontrolled form componenets -->
+
+
+        <div id="root"></div>
+        <script type="text/babel">
+            class Form extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        num:0
+                    }
+
+                    this.process=(event)=>{
+                        // console.log(this.state.num)
+                        this.setState({
+                            num:event.target.value
+                        })
+                    }
+
+                    this.processSubmit=(event)=>{
+                        let dbl = this.state.num**2;
+                        this.para.innerHTML = dbl
+                        event.preventDefault();
+                    }
+                }
+
+                render() {
+                    return <div>
+                    <form onSubmit={this.processSubmit}>
+                        <input type="text" value={this.state.num} onChange={this.process}/>
+                        <button type="submit">Calculate</button>
+                    </form>
+                    <p ref={(el)=>{this.para=el}}></p>
+                    </div>
+                }
+            }
+
+            ReactDOM.render(
+                <Form />,
+                document.querySelector("#root")
+            )
+        </script>
+    </body>
+</html>

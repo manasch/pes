@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <script>
+            function init(){
+                var ww = new Worker("ww.js");
+
+                ww.postMessage(10);
+                ww.addEventListener("message", (event)=>{
+                    document.querySelector("div").innerHTML = event.data
+                })
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <div></div>
+    </body>
+</html>

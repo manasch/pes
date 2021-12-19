@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <div></div>
+        <script>
+            $.ajax({url:"data.txt",
+            type:"get",
+            data:{},
+            success:function(data, status, xhr){
+            $("div").html(Data)
+                }
+            })
+            $.get({url:"data.txt",
+            success:function(data, status, xhr){
+                $("div").html(data)
+                }
+            })
+        </script>
+    </body>
+</html>
