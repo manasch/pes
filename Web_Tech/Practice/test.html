@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <script type="text/javascript" src="rev.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Loads the library from online-->
+        <title>test</title>
+        <style>
+
+            body {
+                margin: 0;
+            }
+
+            .test {
+                background-color: cadetblue;
+                margin: 0;
+                /* border: 2em solid black; */
+                padding-bottom: 5px;
+                height: 80%;
+                padding: 4%;
+            }
+
+            .sub {
+                background-color: aqua;
+                width: 20%;
+                top: 0;
+                right: 0;
+                position: absolute;
+            }
+
+            #bt1 {
+                position: fixed;
+                top: 0;
+                right: 400;
+            }
+
+            .h {
+                color: palegoldenrod;
+            }
+
+            .audiotest {
+                background-color: palegreen;
+            }
+        </style>
+    </head>
+
+    <body onload="init()">
+        <div class="test">
+            <h1 class="h" id="hh">test</h1>
+            <!-- <table border="border" id="table1">
+                <caption>Tet</caption>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>DOB</th>
+                </tr>
+
+                <tr>
+                    <td rowspan=2>Manas</td>
+                    <td>19</td>
+                    <td>16062002</td>
+                </tr>
+
+                <tr>
+                    <td>19d</td>
+                    <td>160d62002</td>
+                </tr>
+            </table> -->
+
+            <table border="border" id="table1">
+                <caption>Prac</caption>
+            </table>
+
+            <button value="Add" id="bt1" onclick="addrow()">Add</button>
+            <div id="display"></div>
+<!-- 
+            <form method="post" target="_blank">
+                <label>one</label>
+                <input type="text" name="test name"/>
+                <input type="radio" name="food" /> Apple
+            </form>
+            <div class="sub">
+                This is a test field
+            </div> -->
+
+            
+            <div id="par">
+                This is a upper div
+                <ul id="i">
+                    <li>tete</li>
+                    <li>sdf</li>
+                </ul>
+            </div>
+
+            <form method="GET">
+                <input type="text" id="ctext" onchange="setCol(event)"/>
+                <input type="color" id="col" onchange="setText(event)"/>
+            </form>
+
+            <audio class="audiotest" preload controls="controls">
+                <source src="C:\Users\manas\Music\11 Save Your Tears.mp3" type="audio/mp3" />
+            </audio>
+<!-- 
+            <video autoplay controls="controls" class="vid">
+                <source src="D:\Anime\AOT\[Kawaiika-Raws] Shingeki no Kyojin (2020) 16 [BDRip 1920x1080 HEVC FLAC].mkv" type="video.mkv" />
+            </video> -->
+
+            <progress value="0" max="100" id="prog"></progress>
+
+            <select id="input1" onchange="selectop(event)">
+                <option value="faded.mp3">Faded by Alan Walker</option>
+                <option value="notfaded.mp3">Not faded</option>
+            </select>
+
+
+        </div>
+
+        <polygon points="200,10 250,190 160,210" style="fill:lime; stroke:purple; stroke-width:1" />
+        <!-- <script type="text/javascript">
+            document.write("<p>test</p>");
+        </script>         -->
+    </body>
+</html>
