@@ -1,3 +1,12 @@
 [submodule "3rd Sem/Data_Structures/DS-Assignment"]
 	path = 3rd Sem/Data_Structures/DS-Assignment
 	url = https://github.com/manasch/ds-assignment
+[submodule "2nd Sem/C/fairplay-cipher"]
+	path = 2nd Sem/C/fairplay-cipher
+	url = git@github.com:manasch/fairplay-cipher.git
+[submodule "1st Sem/PCPS/python-clock"]
+	path = 1st Sem/PCPS/python-clock
+	url = git@github.com:manasch/python-clock.git
+[submodule "3rd Sem/Web_Tech/twitter-clone"]
+	path = 3rd Sem/Web_Tech/twitter-clone
+	url = git@github.com:manasch/twitter-clone.git
