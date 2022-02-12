@@ -1,0 +1,17 @@
+x=0.0:0.5:10.0
+x=x'
+y=[152;195;217;230;241;254;263;275;286;301;326;456;484;490;498;505;511;517;522;526;537]
+N=length(x)
+plot(x,y)
+scf
+dydx=diff(y(:))./diff(x(:))
+dydx(N)=dydx(N-1)
+x1=x+(0.5)
+plot(x1,dydx)
+xgrid(1, 1, 1)
+xlabel('Volume of K2Cr2O7 added (in mL)')
+ylabel("$\frac{$\Delta$E}{$\Delta$V}$")
+xtitle("Potentiometric Titration")
+xstring(8,250,"Scale:")
+xstring(8,230,"X-axis = 1 unit = 0.5 mL")
+xstring(8,220,"Y-axis = 1 unit = 20 mV/mL")

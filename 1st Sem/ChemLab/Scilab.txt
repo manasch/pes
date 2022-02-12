@@ -1,0 +1,61 @@
+x = [0.0 : 0.5 : 4.0]'
+y = [51.3; 46.3; 41.1; 36.6; 31.0; 27.0; 22.5; 18.5; 15.0]
+X = [x ones(x)]
+a = X \ y
+xx = [0.0 : 0.5 : 4.5]'
+yy = a(1) * xx + a(2)
+plot(xx, yy)
+plot2d(x, y, -1)
+
+x = [4.5 : 0.5 : 11.0]'
+y = [15.3; 16.0; 16.8; 17.3; 18.1; 18.6; 19.4; 19.9; 20.5; 21.1; 21.9; 22.2; 23.8; 26.5]
+X = [x ones(x)]
+a = X \ y
+xx = [3.0 : 0.5 : 12.0]'
+yy = a(1) * xx + a(2)
+plot(xx, yy)
+plot2d(x, y, -1)
+
+x = [11.5 : 0.5 : 14.5]'
+y = [27.9; 29.7; 31.1; 33.0; 34.7; 36.4; 37.9]
+X = [x ones(x)]
+a = X \ y
+xx = [10.0 : 0.5 : 14.5]'
+yy = a(1) * xx + a(2)
+plot(xx, yy)
+plot2d(x, y, -1)
+
+xtitle("Conductometric Titration")
+xlabel("Volume of NaOH (in mL.)")
+ylabel("Conductance")
+xgrid(5)
+xstring(9,50,['Scale'])
+xstring(9,46,['X-axis: 1 unit = 5 mL']
+xstring(9,45,['Y-axis: 1 unti = 5 mho or siemen']
+
+x=[0.0:0.5:4.0]' 
+y=[51.3;46.4;41.1;36.5;31.0;27.0;22.5;18.5;15.0]
+X = [x ones(x)] 
+a=X\y 
+xx = [0.0:0.5:4.5]’
+yy=a(1)*xx + a(2) 
+plot(xx,yy)
+plot2d(x,y,-1)
+
+x=[4.5:0.5:11]' 
+y=[15.3;16.0;16.8;17.3;18.1;18.6;19.4;19.9;20.5;21.1;21.7;22.2;23.8;26.5]
+X = [x ones(x)] 
+a=X\y 
+xx = [3.0:0.5:12]’
+yy=a(1)*xx + a(2) 
+plot(xx,yy)
+plot2d(x,y,-1)
+
+x=[11.5:0.5:14.5]' 
+y=[27.8;29.7;31.1;32.9;34.7;36.4;37.9]
+X = [x ones(x)] 
+a=X\y 
+xx = [10:0.5:15.5]’
+yy=a(1)*xx + a(2) 
+plot(xx,yy)
+plot2d(x,y,-1)

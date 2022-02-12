@@ -1,0 +1,11 @@
+x=[0.0:2.0:10.0]'
+y=[0.0;0.04;0.07;0.09;0.13;0.15]
+X=[x ones(x)]
+a=X\y
+xx=[0.0:0.5:10.0]'
+yy=a(1)*xx+a(2)
+plot(xx,yy)
+plot2d(x,y,-1)
+xstring(1,0.14,"Scale:")
+xstring(1,0.13,"X-axis = 1 unit = 1 mL")
+xstring(1,0.12,"Y-axis = 1 unit = 0.02 OD")

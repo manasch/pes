@@ -1,0 +1,16 @@
+function y=yth(t,n)
+y=n(1)*t+n(2)
+endfunction
+m=2
+tm=[0.2; 0.5]
+ym=[1.071; 1.491]
+n(1)=(ym(2)-ym(1))/(tm(2)-tm(1))
+n(2)=ym(2)-n(1)*tm(2)
+tt=linspace(0,1.071*max(tm),100)';
+yy=yth(tt,n);
+scf()
+plot(tm,ym,"kx")
+plot(tt,yy,"b-")
+xstring(0.06,1.50,"Scale:")
+xstring(0.06,1.47,"X-axis = 1 unit = 0.02 g/dL(C)")
+xstring(0.06,1.44,"Y-axis = 1 unit = 0.05")

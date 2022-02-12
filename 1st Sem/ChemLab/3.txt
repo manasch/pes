@@ -1,0 +1,22 @@
+x=0.0:0.5:7.0
+x=x'
+y=[2.45;3.08;3.40;3.67;3.94;4.40;4.65;4.80;5.00;5.30;5.96;11.40;11.59;12.00;12.30]
+N=length(x)
+plot(x,y)
+xlabel('Volume of NaOH added (in mL)')
+ylabel("pH")
+xtitle("Potentiometric Titration")
+xstring(1,12,"Scale:")
+xstring(1,11.5,"X-axis = 1 unit = 0.5 mL")
+xstring(1,11,"Y-axis = 1 unit = 20 pH")
+scf
+dydx=diff(y(:))./diff(x(:))
+dydx(N)=dydx(N-1)
+x1=x+(0.5)
+plot(x1,dydx)
+xlabel('Volume of NaOH added (in mL)')
+ylabel("$\frac{$\Delta$pH}{$\Delta$V}$")
+xtitle("Potentiometric Titration")
+xstring(1,11,"Scale:")
+xstring(1,10.5,"X-axis = 1 unit = 0.5 mL")
+xstring(1,10,"Y-axis = 1 unit = 20 pH/mL")
