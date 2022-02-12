@@ -1,0 +1,8 @@
+Digital image processing is the use of a digital computer
+to process digital images through an algorithm. It has many advantages
+over analog image processing
+The generation and development of digital image processing are mainly affected by thre
+factors
+The development of computers
+The development of mathematics
+The demand for a wide range of applications in environment,agriculture, military, industry and medical science

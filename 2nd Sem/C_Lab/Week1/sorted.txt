@@ -1,0 +1,6 @@
+ball
+cat
+apple
+dog
+banana
+goat
