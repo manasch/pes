@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+        <style>
+            div.class {
+                background-color: red
+            }
+
+            h1 {
+                background-color: yellow
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            class Hello extends React.Component {
+                render() {
+                    // return <h1>Hello There, Good Evening</h1>
+                    // return <h1>Hello {this.props.name}, {this.props.message}</h1>
+                    //className will be needed for react
+                    // return <div className="class">
+                    var mystyle = {color: 'blue'};
+                    return <div>
+                        <h1 style={mystyle}>Hello {this.props.name}, {this.props.message}</h1>
+                            {this.props.children}
+                    </div>
+                    
+                }
+            }
+
+            ReactDOM.render(
+                // <Hello />,
+                // document.querySelector("#root")
+                <div>
+                    <Hello name="Sanjay" message="Good Evening" />
+                    <Hello name="Vijay" message="Good Day" />
+                </div>,
+                document.querySelector("#root")
+                /*
+                    React.createElement("Hello", {name: "Sanjay", greeting: "Good Evening"}, null)
+                */
+            )
+        </script>
+    </body>
+</html>

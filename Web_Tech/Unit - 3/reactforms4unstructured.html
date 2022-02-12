@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+
+    <body>
+        <!-- reactjs forms , uses onChange and onSubmit -->
+        <!-- has uncontrolled form componenets -->
+
+
+        <div id="root"></div>
+        <script type="text/babel">
+            class Form extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        hght:180,
+                        wght:60,
+                        bmistat:"To be calculated"
+                    }
+
+                    this.process = (event)=>{
+                        var name = event.target.name
+                        var value = event.target.value
+                        this.setState({
+                            [name]:value
+                        })
+                    }
+                    this.calcbmi = (event)=>{
+                        var bmistatus;
+                        var bmi = this.state.wght / ((this.state.hght * this.state.hght) / 10000)
+                        if (bmi < 19)
+                            bmistatus = "Underweight"
+                        else if (bmi < 25)
+                            bmistatus = "Normal"
+                        else
+                            bmistatus = "Overweight"
+
+                        this.
+                        event.preventDefault();
+                    }
+                }te
+
+                render() {
+                    return <div>
+                    <form onSubmit={this.calcbmi}>
+                        <input name="hght" value={this.state.hght} onChange={this.process}/>
+                        <input name="wght" value={this.state.wght} onChange={this.process}/>
+                        <button type="submit">Calculate</button>
+                    </form>
+                    <p>{this.state.bmistat}</p>
+                    </div>
+                }
+            }
+
+            ReactDOM.render(
+                <Form />,
+                document.querySelector("#root")
+            )
+        </script>
+    </body>
+</html>

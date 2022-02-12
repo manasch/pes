@@ -1,0 +1,242 @@
+<html>
+    <style>
+        /*styling to getting all elements to the centre*/
+        html, body {
+            height: 100%;
+        }
+
+        html {
+            display: table;
+            margin: auto;
+        }
+
+        body {
+            vertical-align: middle;
+        }
+      
+    </style>
+    
+    <body onload="addEmoji()">
+        <div id="formdiv">
+            <!--using table to get proper alignment of all entry forms-->
+            <form id="frm">
+                <table>
+                    <caption><h2>Enter Details Below</h2></caption>
+                    <!--every tr is followed by another tr which has a column span of
+                        2 and has blankspace as data to get more distance between the subsequent inputs-->
+
+                    <!--this region has lots of unused id for the elements as at one point were probably required
+                            but might not be required now...however i decided not to remove them just incase i need them later-->
+
+                    <tr><td>First Name*</td><td><input type="text" id="fname" size="30" onkeyup="checkField(event)" required></td></tr>
+                    <tr><td colspan="2" id="fnamediv">&nbsp;</td></tr>
+                    
+                    <tr><td>Last Name</td><td><input type="text" id="lname" size="30"></td></tr>
+                    <tr><td colspan="2">&nbsp;</td></tr>
+                    
+                    <tr><td>Phone Number*</td><td><input type="text" id="Mobile Number" size="30" onkeyup="checkPhoneNumber(event)" required></td></tr>
+                    <tr><td colspan="2" id="phnodiv">&nbsp;</td></tr>
+
+                    <tr><td>E-Mail ID*</td><td><input type="text" id="E-Mail ID" size="30" onkeyup="checkMailFormat(event)" required></td></tr>
+                    <tr><td colspan="2" id="maildiv">&nbsp;</td></tr>
+
+                    <tr><td>Address*</td><td><textarea id="Address" rows="5" cols="30" onkeyup="checkField(event)" required></textarea></td></tr>
+                    <tr><td colspan="2" id="line1div">&nbsp;</td></tr>
+
+                    <tr><td>City*</td><td><input type="text" id="City" size="30" onkeyup="checkField(event)" required></td></tr>
+                    <tr><td colspan="2" id="citydiv">&nbsp;</td></tr>
+
+                    <tr><td>State*</td><td><input type="text" id="State" size="30" onkeyup="checkField(event)" required></td></tr>
+                    <tr><td colspan="2" id="statediv">&nbsp;</td></tr>
+
+                    <tr><td>Pincode*</td><td><input type="text" id="Pincode" size="30" onkeyup="checkPincode(event)" required></td></tr>
+                    <tr><td colspan="2" id="pindiv">&nbsp;</td></tr>   
+
+                </table>
+                <p style="font-size:10px;">* Fields are mandatory</p><br>
+                &emsp;&emsp;&emsp;&emsp;&emsp;<input type="reset" id="reset" value="Reset"> <!--addevent listener is used for the reset button-->
+                &emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" id="btnsubmit" value="Submit"><br>
+            </form>            
+        </div>
+
+        <div id="canvdiv" style="text-align: center;"><canvas id="canv" width="96" height="96">Your browser does not support the HTML5 canvas tag.</canvas></div>
+        
+        <script>
+            function checkMailFormat(event){
+                if(validateEmail(event.target.value)){
+                    //e-mail is valid so set the box color to green to inform the same
+                    event.target.style.borderColor = "Black";
+                    event.target.style.outlineColor = "LawnGreen";
+                }
+                else{
+                    //e-mail is invalid so set the box color to red to alert for required correction
+                    event.target.style.borderColor = "red";
+                    event.target.style.outlineColor = "red";   
+                }              
+            }
+
+            function validateEmail(email) {
+                    //will check for e-mail id based on the format of the regex given below
+                    //const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    const re = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b$/
+                    return re.test(String(email).toLowerCase());
+                }  
+
+            function checkPhoneNumber(event){             
+                if(validatePhoneNumber(event.target.value)){
+                    //phone number is valid so set the box color to green to inform the same
+                    event.target.style.borderColor = "Black";
+                    event.target.style.outlineColor = "LawnGreen";
+                }
+                else{
+                    //phone number is not of indian region or is not 10digits in which case the box becomes red in color
+                    event.target.style.borderColor = "red";
+                    event.target.style.outlineColor = "red";   
+                }   
+            }
+            function validatePhoneNumber(num){
+                    //regex for the mobile numbers valid in india
+                    const re = /^[6-9]\d{9}$/;
+                    return re.test(String(num));
+            }
+
+            function checkField(event){
+                if(event.target.value.length==0){
+                    //if a mandatory field is empty it will  become red in color
+                    event.target.style.borderColor = "red";
+                    event.target.style.outlineColor = "red";
+                }else{
+                    //the field is not empty so switch color to green
+                    event.target.style.borderColor = "Black";
+                    event.target.style.outlineColor = "LawnGreen";
+                }
+            }
+            
+            function checkPincode(event){
+                if(validatePincode(event.target.value)){
+                    //pincode is valid for indian region so set box color to green
+                    event.target.style.borderColor = "Black";
+                    event.target.style.outlineColor = "LawnGreen";
+                }
+                else{
+                    //invalid pincode for india so set box color to red
+                    event.target.style.borderColor = "red";
+                    event.target.style.outlineColor = "red";   
+                }
+            }
+
+            function validatePincode(num){
+                //regex for pincode for india
+                const re = /^[1-9]\d{5}$/;
+                return re.test(String(num))
+            }       
+
+            document.getElementById("reset").addEventListener("click",(event)=>{
+                if(!confirm("Are you sure you want to clear all fields?")){
+                    //if user clicks cancel, the command below will prevent resetting of form from happening
+                    event.preventDefault();                    
+                }
+                else{
+                    //since user confirmed resetting of form, the emoji (if visible) is also hidden
+                    hideEmoji();
+                }
+                         
+            })
+
+            document.getElementById("btnsubmit").addEventListener("click",submission,true)
+            function submission(event){
+                event.preventDefault();
+                // if(!validatePhoneNumber(document.getElementById("Mobile Number").value)){
+                //     //incase of invalid phonenumber the submission is stopped and the user is alerted to check validity of mobile number
+                //     event.preventDefault();
+                //     //emoji is also displayed in this case
+                //     showEmoji();
+                //     alert("Mobile Number invalid or not from Indian provider");
+                // }
+                // else if(!validateEmail(document.getElementById("E-Mail ID").value)){
+                //     //incase of invalid email id the submission is terminated and the user is alerted to chekc validtiy of the email id
+                //     event.preventDefault();
+                //     //emoji is displayed
+                //     showEmoji();
+                //     alert("E-Mail ID is not valid");
+                // }
+                // else if(!validatePincode(document.getElementById("pincode").value)){
+                //     //pincode is invalid so check
+                //     event.preventDefault();
+                //     showEmoji();
+                //     alert("Pincode invalid or not for India")
+                // }
+                var fn = document.getElementById("fname");
+                var ph = document.getElementById("Mobile Number");
+                var em = document.getElementById("E-Mail ID");
+                var add = document.getElementById("Address");
+                var ci = document.getElementById("City");
+                var st = document.getElementById("State");
+                var pin = document.getElementById("Pincode");
+                
+                var failMsg = "The following data are incorrect:\n";
+
+                var cond = [fn,ph,em,add,ci,st,pin];
+                for(let i=0;i<cond.length;i++){
+                    if(!validatePhoneNumber(cond[i].value)&&!validateEmail(cond[i].value)&&!validatePincode(cond[i].value)){
+                        failMsg+=cond[i].id+"\n";
+                        var flag = true;
+                    }
+                }
+                if(flag){
+                    showEmoji();
+                    alert(failMsg);
+                }
+                else{
+                    if(!confirm("Are you sure you want to submit?")){
+                        //if user decides to cancel the confirmation submission is terminated
+                        hideEmoji(); //since there were no errors the emoji can be removed
+                    }
+                    else{
+                        //submission successful meaning no errors in form so hide emoji
+                        hideEmoji();
+                        document.getElementById("frm").submit();
+                        alert("Form Has Been Submitted");
+                    }
+                }
+            }
+            
+            function addEmoji(){
+                //function to add image to canvas
+                var c = document.getElementById("canv");
+                var ctx=c.getContext("2d");
+                var img= new Image();
+
+                img.addEventListener("load",function(){
+                    //waiting for image to load before adding to canvas
+                    ctx.drawImage(img,0,0,96,96);                 
+                },false);
+                img.src = "sadge.jpg";
+                document.getElementById("canv").style.visibility="hidden"; //keeping it hidden by default
+            }
+
+            function showEmoji(){
+                //to make the emoji visible
+                document.getElementById("canv").style.visibility="visible";
+            }
+            function hideEmoji(){
+                //to hide the emoji
+                document.getElementById("canv").style.visibility="hidden";
+            }
+        </script>
+
+
+
+
+        <div>
+            <input type="button" id="showhide" value="Show\Hide">
+            <h2 id="he2">This is a h2 element</h2>
+        </div>             
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+            $(document).ready(()=>{
+                $("#showhide").click()
+            })
+        </script>
+    </body>
+</html>

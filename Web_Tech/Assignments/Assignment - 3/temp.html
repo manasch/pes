@@ -1,0 +1,111 @@
+<html>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <head>
+    <title>Order Summary</title>
+<style>
+  .root{
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    position: absolute;
+    align-items: center;
+    top:70px;
+    left:10px;
+    justify-content:center;
+  }
+
+  #root > div{
+    margin: 6px;
+  }
+
+  #total{
+
+    bottom: 100px;
+  }
+
+</style>
+</head>
+  <body>
+    <script type="text/babel">
+        var total = 0;
+
+class Data extends React.Component {
+  props: {
+    'productName': string; 'productDescription' : string;
+    'productPrice' : number;
+  };
+  constructor(props) {
+    super(props);
+    this.state = {value : 0, price : parseInt(this.props.productPrice)};
+  }
+
+  onClick = () => {
+    this.setState({value : this.state.value + 1});
+    this.setState(
+        {price : this.state.price + parseInt(this.props.productPrice)});
+        total += parseInt(this.props.productPrice);
+
+    }
+  reduceQuantity = () => {
+    if (this.state.value == 0){
+      this.setState({price: parseInt(this.props.productPrice)});
+    } else {
+      this.setState({value: this.state.value - 1, price: this.state.price - parseInt(this.props.productPrice)});
+      total -= parseInt(this.props.productPrice);
+    };
+    }
+  render() {
+    return (
+      <div>
+        <label>Name - {this.props.productName}</label>
+        <br/>
+        <label>Item description - </label><br/><label>{this.props.productDescription}</label>
+        <br/>
+        <label>Quantity: {this.state.value}</label>
+        <br/>
+        <label>Price: {this.state.price}</label>
+        <br/>
+        <button onClick = {this.onClick}>+</button>
+        <button onClick = {this.reduceQuantity}>-</button>
+       
+        </div>
+        );
+  }
+}
+
+class Total extends React.Component{
+componentDidMount() {
+  this.interval = setInterval(() => this.setState({ time: Date.now() }), 1);
+}
+componentWillUnmount() {
+  clearInterval(this.interval);
+}
+
+  render (){
+    return(
+      <div>
+        <label>Total: {total}</label>
+      </div>
+    );
+  }
+}
+var divStyle =
+    {padding : "10px", border : "6px"};
+
+ReactDOM.render(
+  <div>
+    <Data productName = "Pizza" productDescription = "A mobile phone" productPrice ='10000'/>
+    <Data productName = "Burger" productDescription = "A laptop" productPrice = '60000'/>
+    <Data productName = "Hot Dog" productDescription = "A monitor" productPrice = '5000'/>
+  </div>,
+  document.getElementById('root')
+);
+ReactDOM.render(<div><Total/></div>,document.getElementById('total'));
+    </script>
+    <h1>Order Summary</h1>
+    <div id="root"></div><br>
+    <div id="total"></div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+Event
+
+<html>
+    <head>
+        <title>Event handlers</title>
+        <script>
+            function init(){
+                var para = document.querySelector("p");
+                para.ondblclick = (event)=>{
+                    if(event.target.style.backgroundColor == "")
+                        event.target.style.backgroundColor = "red";
+                    else
+                        event.target.style.backgroundColor = ""
+                }
+                // para.ondblclick = handler;
+                // para.addEventListener("click", handler);
+            }
+
+            function handler(event){
+                if(event.type == "dblclick")
+                {
+                    if(event.target.style.backgroundColor == "")
+                        event.target.style.backgroundColor = "yellow";
+                    else
+                        event.target.style.backgroundColor = ""
+                }
+                else
+                {
+                    if(event.target.style.backgroundColor == "")
+                        event.target.style.backgroundColor = "blue";
+                    else
+                        event.target.style.backgroundColor = ""
+                }
+                var newp = document.createElement("p");
+                newp.innerHTML = event.target.innerHTML;
+                event.target.parentNode.appendChild(newp);
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <!-- On click event, event will run when the button is clicked -->
+        <script>
+            // element.on<event> = handler;
+            // element.addEventListener(event, handler); specify the event to listen to, takes an optional 3rd parameter
+
+            // mouse, keyboard and form are some examples of event sources
+
+        </script>
+
+        <div>
+            <!-- <p onclick="alert('paragraph got clicked')">This is to be clicked</p> -->
+            <p onclick="handler(event)">This para is to be clicked</p> 
+            <!-- Inline CSS event handler has to be passed explicitely -->
+        </div>
+    </body>
+</html>

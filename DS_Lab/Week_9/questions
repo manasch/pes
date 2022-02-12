@@ -1,0 +1,5 @@
+1) write a program to insert a mobile number (10 digits) along with the name of the customer into a hash table, add functions to delete
+	i) based on phone number
+	ii) function to search a particular phone number
+	
+display the details accordingly, handle the collision using seperate chaining and linear probing techniques

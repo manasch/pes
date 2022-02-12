@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            class Form extends React.Component {
+                constructor(props) {
+                    super(props);
+
+                    this.onChange = (event)=>{
+                        this.para.innerHTML = this.inp.value//event.target.value
+                    }
+
+                    this.onSubmit = (event)=>{
+                        console.log(this.inp.value);
+                        event.preventDefault();
+                    }
+                }
+
+            render() {
+                return <div>
+                        <form onSubmit={this.onSubmit}>
+                            <input type="text" onChange={this.onChange} ref={(el)=>{this.inp = el}}/><br />
+                            <button type="submit">Submit</button>
+                        </form>
+                        <p ref={(el)=>{this.para = el}}></p>
+                    </div>
+            }
+        }
+        ReactDOM.render(
+            <Form />,
+            document.querySelector("#root")
+        )
+        </script>
+    </body>
+</html>

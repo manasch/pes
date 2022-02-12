@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <script>
+            function load(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("get", "data.txt", true);
+                xhr.onreadystatechange = show;
+                xhr.send();
+            }
+            function show(){
+                if(this.readyState == 4 && this.status == 200){
+                    document.querySelector("div").innerHTML = this.responeText;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <button onclick="load()">Load</button>
+        <div></div>
+    </body>
+</html>

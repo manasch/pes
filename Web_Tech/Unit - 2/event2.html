@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <script>
+            function init()
+            {
+                inp = document.querySelector("#inp1");
+                frm = document.querySelector("#frm1");
+
+                frm.onsubmit = ()=>
+                {
+                    // event.preventDefault();
+                    if (inp.value.length == 0) {
+                        console.log("input it empty");
+                        return false;
+                    }
+                    else
+                        return true;
+                }
+
+                frm.onreset = ()=>
+                {
+                    var stat = confirm("Do you really want to reset");
+                    return stat;
+                }
+
+                inp.onfocus = ()=>
+                {
+                    document.querySelector("#p1").style.display = "inline";
+                }
+
+                inp.onblur = ()=>
+                {
+                    document.querySelector("#p1").style.display = "none";
+                }
+            }
+
+            function handler()
+            {
+                // inp = document.querySelector("#inp1");
+
+                var newp = document.createElement("p");
+                newp.innerHTML = event.target.value;
+                // newp.innerHTML = inp.value;
+
+                document.body.appendChild(newp);
+            }
+        </script>
+    </head>
+
+    <body onload="init()">
+        <div>
+            <!-- <form> to be excluded as it submits it automatically -->
+                <!-- <input type="text" id="inp1"/> -->
+                <!-- <button onclick="handler()">Click</button> -->
+                <!-- <input onchange="handler(event)" type="text" id="inp1"/> -->
+                <!-- <p style="display:none" id="p1">Enter text for new para</p> -->
+            <!-- </form> -->
+
+            <form id="frm1">
+                <input onchange="handler(event)" type="text" id="inp1"/>
+                <p style="display:none" id="p1">Enter text for new para</p>
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+    </body>
+</html>

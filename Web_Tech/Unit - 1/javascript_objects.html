@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            //Creating objects
+            /*
+            {}
+            {"x" , "y"}
+            function(x, y){}
+            new Object()
+            */
+
+            /*
+            var obj = {};
+            obj.name = "Name";
+            obj.age = 20;
+            obj.getDetails = function(params) {
+                return this.name + " " + this.age;
+            }
+            console.log(obj.getDetails());
+
+            var obj1 = {
+                "name": "Name",
+                "age": 20,
+                "getDetails": function(){
+                    return this.name + " " + this.age;
+                }
+            }
+            console.log(obj1.getDetails());
+
+            var obj2 = Object.create(obj1); //creates a new object
+            var obj3 = obj1; //creates a reference to obj1
+            console.log(obj2.getDetails());
+            console.log(obj3.getDetails());
+            */
+            //Constructor
+            /*
+            function item(pname, pqty, pdesc){
+                this.name = pname;
+                this.qty = pqty;
+                this.desc = pdesc;
+                this.getDetails = function(){
+                    return this.name + " " + this.qty + " " + this.desc;
+                }
+            }*/
+
+            //var i1 = new item("Nike", 20, "Jogging Shoes");
+            //console.log(i1.getDetails());
+
+            
+            class item{
+                constructor(pname, pqty, pdesc){
+                    this.name = pname;
+                    this.qty = pqty;
+                    this.desc = pdesc;
+                }    
+                
+                getDetails(){
+                    return this.name + " " + this.qty + " " + this.desc;
+                }
+            }
+            
+            //var i2 = new item("Puma", 50, "Running Shoes");
+            //console.log(i2.getDetails());
+            
+
+            // 06-09-21
+
+            /*
+            function gameconsole(pname, pqty, pdesc, presolution) // want to have similar properties as item function
+            {
+                item.call(this, pname, pqty, pdesc)
+                this.res = presolution;
+                this.getDetails = function(){
+                    return this.name + " " + this.qty + " " + this.desc + " " + this.res;
+                }
+                // item funciton is called here, inherits similar properties to that function
+                // javascript is object based, everything will be called in terms of object
+            }*/
+
+            //gameconsole.__proto__ = item;
+            //gameconsole.__proto__.constructor = gameconsole;
+            /*
+            var i5 = new item("Nike", 20, "Jogging Shoes");
+            console.log(i5.getDetails()); // Translated to getDetails.call(i1)
+            var i6 = new item("PS5", 200, "Console with UHD graphics")
+            console.log(i6.getDetails());*/
+
+            
+            class gameconsole extends item{
+                constructor(pname, pqty, pdesc, presolution){ // want to have similar properties as item function
+                    super(pname, pqty, pdesc);
+                    this.res = presolution;
+                    /*this.getDetails = function(){
+                        return this.name + " " + this.qty + " " + this.desc + " " + this.res;
+                    }*/
+                }
+            }
+
+            var gc1 = new gameconsole("PS6", 200, "Console with UHD graphics", "1080i UHD");
+            console.log(gc1.getDetails());            
+        </script>
+    </body>
+</html>

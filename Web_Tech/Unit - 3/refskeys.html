@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            class Parent extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+                    this.doClick = (event)=>{
+                        this.inputText.focus();
+                        console.log(this.inputText.value);
+                    }
+                    this.inc = (event)=>{
+                        this.inputText.focus();
+                        this.inputText.value++;
+                    }
+                    this.dec = (event)=>{
+                        this.inputText.focus();
+                        this.inputText.value--;
+                    }
+                }
+                componentDidMount() {
+                    this.inputText.focus();
+                    this.inputText.value = "0"
+                    console.log(this.inputText.value);
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <input ref = {(el)=>{this.inputText=el}} type="text" />
+                            <button onClick = {this.doClick}>Click</button>
+                            <button onClick = {this.inc}>Up</button>
+                            <button onClick = {this.dec}>Down</button>
+                        </div>
+                    )
+                }//<CustomInput inputRef = {(el)=>{this.inputText=el}} />
+            }
+
+            ReactDOM.render(
+                <Parent></Parent>,
+                document.querySelector("#root")
+            )
+        
+        </script>
+    </body>
+</html>

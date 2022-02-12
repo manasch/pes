@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Sign Up Form</title>
+	<script src = "https://code.jquery.com/jquery-3.5.1.js"></script>
+
+	<style type="text/css">
+		input:required {
+ 			border-color: red;
+		}
+
+		textarea:required {
+			border-color: red;
+		}
+	</style>
+
+	<script type="text/javascript">
+		
+		function init() {
+			document.querySelector("#submit").addEventListener("click", validate, true)
+		}
+
+		function drawEmoji(flag) {
+			var c1 = document.getElementById("canvas");
+			var ctx = c1.getContext("2d");
+			var img = new Image();
+
+			img.addEventListener("load", () => {
+				ctx.drawImage(img, 0, 0, 100, 100);
+			}, false)
+
+			if (flag) {
+				img.src = "sadge.png";
+			}
+			else {
+				img.src = "gladge.jpg";
+			}
+		}
+
+		function validate(event)
+		{
+			event.preventDefault()
+
+			const fname = document.getElementById("fname")
+			const email = document.getElementById("email")
+			const phone = document.getElementById("phone")
+			const address = document.getElementById("address")
+
+			const valid = [fname, email, phone, address];
+			console.log(valid)
+
+			var fail_msg = "These fields are missing: \n"
+			const pass_msg = "The form has been submitted"
+			var flag = false;
+
+			for (let i = 0; i < valid.length; i++) {
+				if (valid[i].checkValidity() == false) {
+					fail_msg += valid[i].id.toUpperCase() + "\n";
+					flag = true;	
+				}
+			}
+
+			drawEmoji(flag)
+
+			if (flag) {
+				alert(fail_msg)
+			}
+			else {
+				alert(pass_msg)
+			}
+		}
+
+	</script>
+</head>
+<body onload="init()">
+	<form method="post">
+		<div id="f1" class="form">
+			<h1 align="center" style="text-align :center;">Sign Up Here</h1>
+
+			<label for="fname"><b>First Name</b></label><br>
+			<input type="text" id="fname" placeholder="First Name" name="fname" required><br><br>
+
+			<label for="lname"><b>First Name</b></label><br>
+			<input type="text" id="lname" placeholder="Last Name" name="lname"><br><br>
+
+			<label for="email"><b>Email ID</b></label><br>
+			<input type="email" id="email" placeholder="xyz@mail.domain" name="email" title="Please enter a valid Email ID, Example: abc@gmail.com" required><br><br>
+
+			<label for="phone"><b>Phone Number</b></label><br>
+			<input type="text" id="phone" name="phone" pattern="[6-9]\d{9}" title="Only 10 Digit Numbers are Accepted" required><br><br>
+
+			<label for="address"><b>Address</b></label><br>
+			<textarea id="address" name="address" placeholder="XYZ Street" rows="10" cols="40" required></textarea><br><br>
+
+			<canvas id="canvas" width="100" height="100">
+				Canvas not supported
+			</canvas><br><br>
+
+			<button type="submit" id="submit">Submit</button>
+			<button type="reset" id="reset">Reset</button>
+		</div>
+	</form><br><br>
+
+	<button id="jb">Add Elements by JQuery</button>
+
+	<button id="rb">Remove the CSS</button>
+
+	<button id="fb">Fade In Header Elements</button>
+
+	<button id="fbo">Fade Out Header Elements</button>
+
+	<script type="text/javascript">
+		$(document).ready(() => {
+			$("#jb").click(() => {
+				$("body").append($("<h1>").html("This is a new header").css("color", "red"))
+			})
+
+			$("#rb").click(() => {
+				$("h1").css("color", "black")
+			})
+
+			$("#fb").click(() => {
+				$("h1").fadeIn("slow")
+			})
+
+			$("#fbo").click(() => {
+				$("h1").fadeOut("slow")
+			})
+		})
+	</script>
+</body>
+</html>

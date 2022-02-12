@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script>
+            var options = {
+                timeout: 3000,
+                maximumAge: 20
+            }
+            // navigator.geolocation.getCurrentPosition((position)=>{
+            ps = navigator.geolocation.watchPosition((position)=>{
+                document.querySelector("div").innerHTML = position.coords.longitude + ", " + position.coords.latitude;
+            }, (error)=>{
+                console.log(error.code + " " + error.message);
+            }, options);
+
+            setInterval(()=>{
+                navigator.geolocation.clearWatch(ps);
+            }, 30000)
+        </script>
+    </head>
+    <body>
+        <div></div>
+    </body>
+</html>

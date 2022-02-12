@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            class Book extends React.Component {
+                
+                render() {
+                    return (
+                        <div>
+                            <p> this is a para {this.props.value}</p>
+                        </div>
+                    )
+                }
+            }
+
+            class Shelf extends React.Component {
+
+                render() {
+                    return (
+                        <div>
+                            <Book {...this.props} />
+                        </div>
+                    )
+                }
+            }
+
+            class Main extends React.Component {
+
+                render() {
+                    return (
+                        <div>
+                            <Shelf value="Comedy"/>
+                            <Shelf value="Not" />
+                        </div>
+                    )
+                }
+            }
+
+            class Clock extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        time: new Date()
+                    }
+                }
+
+                tick = () => {
+                    this.setState({time: new Date()})
+                }
+
+                componentDidMount() {
+                    setInterval(() => {
+                        this.tick()
+                    }, 1000)
+                }
+
+                componentDidUpdate(nextProps, prevState) {
+                    console.log(nextProps, prevState);
+                }
+
+                render() {
+                    return (
+                        <div>
+                            {this.state.time.toLocaleTimeString()}
+                        </div>
+                    )
+                }
+            }
+        
+        
+        
+        ReactDOM.render(
+            <Clock />,
+            document.querySelector("#root")
+        )
+        </script>
+    </body>
+</html>

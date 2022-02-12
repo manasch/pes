@@ -1,0 +1,20 @@
+p.footer {
+    width: 200px;
+    height: 100px;
+    color: green;
+    background-color: grey;
+    padding: 20px;
+    border: 3px solid black;
+    margin: 20px;
+    display: inline;
+}
+
+p:hover {
+    color: green;
+    background-color: lightblue;
+}
+
+a:hover {
+    color: hotpink;
+    background-color: lightblue;
+}

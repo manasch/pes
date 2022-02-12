@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <div></div>
+        <script>
+            fetch("data.txt")
+            .then(function(response){
+                return response.text();
+            })
+            .then(function(text){
+                document.querySelector("div").innerHTML = text;
+            })
+        </script>
+    </body>
+</html>

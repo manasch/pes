@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>jquery testing</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Loads the library from online-->
+    </head>
+
+    <body>
+        <p>(Show / Hide) Popular Games</p>
+        <ul>
+            <li>PUBG</li>
+            <li id = "g1">COD</li>
+            <li>Assassin's Creed</li>
+        </ul>
+        <script>
+            // $("li").css("color", "red"); 
+            // $("ul>li:last").css("color", "blue").html("Flappy Bird").attr("id", "game1");
+            // var s1 = $("ul>li:last").css("color");
+
+            // console.log(s1);
+
+            // var newli = document.createElement("li");
+            // $(newli).attr("id", "newgame").css("border", "1px solid black").html("CSGO").css("color", "brown");
+            // $("ul>li:last").after(newli);
+
+            $(document).ready(()=>{ // document object, define a ready function, equivalent to onload
+                $("p").click((event)=>{
+                    // $("ul>li:first").css("color", "red");
+                    $(event.target).css("color", "blue");
+                    $("ul").slideToggle("slow");
+                
+                })
+
+                $("li").mouseover((event)=>{
+                    $(event.target).animate({
+                        fontSize: "2em",
+                        opacity: "0.5",
+                    }, 100)
+                    $(event.target).css("color", "red");
+                })
+                
+                $("li").mouseleave((event)=>{
+                    $(event.target).animate({
+                        fontSize: "1em",
+                        opacity: "1"
+                    }, 100)
+                    $(event.target).css("color", "black");
+                })
+                
+            })
+
+        </script>
+    </body>
+</html>

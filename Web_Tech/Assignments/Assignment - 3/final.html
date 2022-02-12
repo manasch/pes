@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <title>Order Summary</title>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+
+    <body>
+        <div id="root"></div>
+        <div id="total"></div>
+        <script type="text/babel">
+            var total = 0;
+
+            class ItemMenu extends React.Component {
+                constructor(props) {
+                    super(props);
+
+                    this.state = {qty: 0, price: parseInt(this.props.price)};
+
+                    this.inc = () => {
+                        this.setState(({qty: this.state.qty + 1}));
+                        
+                        total += this.state.price;
+                        console.log(total);
+                    }
+
+                    this.dec = () => {
+                        if (this.state.qty > 0) {
+                            this.setState({qty: this.state.qty -= 1});
+                            total -= this.state.price;
+                        }
+                        console.log(total);
+                    }
+                }
+
+                componentDidMount() {
+                    document.body.style.backgroundColor = "orange";
+                }
+
+                render() {
+                    var itemStyle = {
+                        border: '1px solid black',
+                        display: 'inline-block',
+                        borderRadius: '25px',
+                        backgroundColor: 'lightblue',
+                        boxSizing: 'content-box',
+                        padding: '20px',
+                        marginRight: '20px'
+                    }
+
+                    var titleStyle = {
+                        color: 'green',
+                        fontSize: '1.2em',
+                        fontWeight: 'bold'
+                    }
+
+                    var buttonStyle = {
+                        backgroundColor: 'lightgreen',
+                        borderRadius: '5px',
+                        marginRight: '5px',
+                        width: '2em'
+                    }
+
+                    return <p style = {itemStyle}>
+                            <b>Item Name: </b><span style = {titleStyle}>{this.props.title}</span><br /><br />
+                            <b>Description: </b>{this.props.desc}<br /><br />
+                            <b>Price: </b>{this.state.price} INR<br /><br />
+                            <b>Quantity: </b><span ref={(el) => {this.qty = el}}>{this.state.qty}</span><br /><br />
+
+                            <button style={buttonStyle} onClick={this.inc}>+</button>
+                            <button style={buttonStyle} onClick={this.dec}>-</button>
+                        </p>
+                }
+            }
+
+            class Total extends React.Component {
+                componentDidMount() {
+                    this.interval = setInterval(() => this.setState({time: Date.now()}), 1);
+                }
+
+                componentWillUnmount() {
+                    clearInterval(this.interval);
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <b>Total Bill: {total} INR</b>
+                        </div>
+                    )
+                }
+            }
+
+            ReactDOM.render(
+                <div>
+                    <h1 align="center"> ORDER SUMMARY </h1>
+
+                    <ItemMenu title="DELL Inspiron" desc="1 TB HDD, Intel i7, 16 GB RAM" price="85000"/> 
+                    <ItemMenu title="Pixel 4a" desc="128 GB Storage, 6 GB LPDDR4x RAM, 3140 mAh" price="30000"/>
+                    <ItemMenu title="Mi Power Bank" desc="10000 mAh, 4 USB Ports, Fast Charging" price="8000"/>
+                    <br /><br />
+                </div>,
+                document.querySelector("#root")
+            )
+
+            ReactDOM.render(
+                <Total />,
+                document.querySelector("#total")
+            )
+        </script>
+    </body>
+</html>
