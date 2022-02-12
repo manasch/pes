@@ -1,3 +1,0 @@
-# Ignoring ipynb and csv files inside the SDS folders for github's linguist detection
-SDS/*.ipynb -linguist-detectable
-SDS/*.csv -linguist-detectable
