@@ -1,0 +1,20 @@
+Books/
+*template*
+ignore
+.vscode
+*.docx
+*.doc
+*.xlsx
+
+# Output files
+*.out
+*.o
+*.exe
+
+# Archives
+*.zip
+*.7z
+
+# Images
+*.jpg
+*.png

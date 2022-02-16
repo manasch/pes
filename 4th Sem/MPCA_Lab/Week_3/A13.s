@@ -1,0 +1,24 @@
+.TEXT
+LDR R5, =A
+LDR R6, =B
+LDR R7, =C
+
+MOV R3, #3
+MOV R4, #0
+
+LOOP:
+	LDR R1, [R5], #4
+	LDR R2, [R6], #4
+	MLA R4, R1, R2, R4
+
+	STR R4, [R7], #4
+	SUB R3, R3, #1
+	TEQ R3, #0
+	BNE LOOP
+
+SWI 0X011
+
+.DATA
+A: .WORD 1, 3, 5
+B: .WORD 2, 4, 6
+C: .WORD 0, 0, 0

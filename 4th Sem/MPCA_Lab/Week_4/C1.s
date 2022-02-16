@@ -1,0 +1,16 @@
+.DATA
+	A: .WORD 10, 20, 30, 40, 50
+
+.TEXT
+	LDR R0, =A
+
+	LDMIA R0!, {R1 - R5}
+	MOV R1, #5
+	MOV R2, #15
+	MOV R3, #25
+	MOV R4, #35
+	MOV R5, #45
+	STMDB R0!, {R1 - R5}0
+
+	SWI 0X011
+.END

@@ -1,0 +1,66 @@
+Clue 1:
+Visit Events page, roadshow
+
+download cookie viewer -> https://pastebin.com/K6w7pz5J
+The clue code for this clue is: cabbageheads
+Keep that in mind.
+
+Now navigate to https://the-hunt.vercel.app/af0a71cb to proceed.
+
+
+Clue 2:
+Install a python package called PILTH from pypi.org and find what all functions are there
+(hunt) PS D:\peslabhunt> python
+Python 3.8.10 (tags/v3.8.10:3d8993a, May  3 2021, 11:48:03) [MSC v.1928 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import PILTH
+>>> dir(PILTH)
+['Get_Next_Task', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__path__', '__spec__', 'gimmeLinkAndCode']
+>>> PILTH.gimmeLinkAndCode
+<function gimmeLinkAndCode at 0x0000014F66482820>
+>>> PILTH.Get_Next_Task
+<module 'PILTH.Get_Next_Task' from 'D:\\peslabhunt\\hunt\\lib\\site-packages\\PILTH\\Get_Next_Task.py'>
+>>> PILTH.gimmeLinkAndCode()
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|h|t|t|p|s|:|/|/|t|h|e|-|h|u|n|t|.|v|e|r|c|e|l|.|a|p|p|/|3|6|0|3|2|0|7|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+  _   _   _   _   _   _   _   _   _   _   _   _
+ / \ / \ / \ / \ / \ / \ / \ / \ / \ / \ / \ / \
+( e | a | r | t | h | s | h | a | k | e | r | s )
+ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/
+
+>>>
+
+
+Clue 3:
+https://the-hunt.vercel.app/wordle/
+
+clue: sccam
+code: sabermetrics
+
+Clue 4:
+Inspect element, search for 'clue'
+click the website icon multiple times
+
+Clue 5:
+https://the-hunt.vercel.app/chess/
+put the chess pieces in correct place rook and elephant
+
+code: abbreviation
+
+Clue 6:
+https://the-hunt.vercel.app/df608544/
+
+Go to their github page and check the repo sudo_clue, check commit history
+Your clue is: …
+
+A famous quote by Henry Wadsworth Longfellow has particular relevance in one of the subpages on the PES Innovation Lab website that showcase the work we've done. Find it, and it will lead you forward.
+
+`Music is the universal language of mankind`
+click that and you go to youtube link rick rolled: https://www.youtube.com/watch?v=3ROQ8WSzByc
+
+code: internship
+
+the-hunt.vercel.app/a867b5d2
+the end
