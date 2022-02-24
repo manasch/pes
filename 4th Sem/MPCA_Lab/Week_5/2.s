@@ -1,0 +1,36 @@
+@ WRITE A PROGRGAM TO FIND THE SMALLEST NUMBER IN AN ARRAY OF N 32 BIT NUMBERS
+.DATA
+    A: .WORD 17, 20, 30, 40, 50, 60, 70, 80, 90, 100
+    FOUNDMSG: .ASCIZ "ELEMENT FOUND"
+    @ NOTFOUNDMSG: .ASCIZ "ELEMENT NOT FOUND"
+
+.TEXT
+    LDR R2, =A
+    MOV R5, #0 @ COUNT
+    
+    LOOP:
+        LDR R3, [R2]
+        @ FIRST ELEMENT IS ASSUMED TO BE THE SMALLEST ELEMENT
+        LDR R4, [R2, #4]!
+        CMP R3, R4
+        BGT LARGE
+        B L1
+
+    LARGE:
+        MOV R3, R4
+    L1:
+        ADD R5, R5, #1
+        CMP R5, #10
+        BNE LOOP
+        LDR R0, =FOUNDMSG
+        SWI 0X02
+    
+    AND R0, R3, #0XF0
+    MOV R0, R0, LSR #4
+    ORR R0, R0, #0X30
+    SWI 0X00
+    AND R0, R3, #0X0F
+    ORR R0, R0, #0X30
+    SWI 0X00
+    SWI 0X011
+    

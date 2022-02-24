@@ -5,6 +5,12 @@ ignore
 *.docx
 *.doc
 *.xlsx
+*.pdf
+!*CS111*
+
+# Test files
+*test*
+*temp*
 
 # Output files
 *.out
@@ -18,3 +24,4 @@ ignore
 # Images
 *.jpg
 *.png
+

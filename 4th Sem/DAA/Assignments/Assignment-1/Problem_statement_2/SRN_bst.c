@@ -1,5 +1,5 @@
-// Name:
-// SRN: 
+// Name: Manas Chebrolu
+// SRN: PES1UG20CS111
 #include "bst.h"
 #include <stdlib.h>
 
