@@ -13,43 +13,11 @@
  ** The implementation can assume it is initialized to 0.
  */
 
-// Function that will make sure that the array is a heap
-// last is the index of the last element
-// static void heapify(heap_t *heap, int last)
-// {
-//     int parent, child;
-//     int key;
-
-//     parent = 0; // root
-//     child = (2 * parent) + 1; // left child
-//     key = heap->arr[parent];
-
-//     while (child <= last)
-//     {
-//         if (child + 1 <= last)
-//         {
-//             if (heap->arr[child + 1] > heap->arr[child])
-//             {
-//                 child++; // Right child
-//             }
-//         }
-//         if (key < heap->arr[child])
-//         {
-//             heap->arr[parent] = heap->arr[child];
-//             parent = child;
-//             child = (2 * parent) + 1;
-//         }
-//         else
-//             break;
-//     }
-//     heap->arr[parent] = key;
-// }
-
 // Function to create a heap in top down approach
+// last is the index of the last element in the array heap
 static void top_down_heap(heap_t *heap, int last, int *count)
 {
-    int child, parent, k;
-    int key;
+    int child, parent, k, key;
 
     for (k = 1; k <= last; k++)
     {
@@ -57,7 +25,7 @@ static void top_down_heap(heap_t *heap, int last, int *count)
         key = heap->arr[child];
         parent = (child - 1) / 2;
 
-        while ((child > 0) && (key > heap->arr[parent]) && ++(*count))
+        while ((child > 0) && ++(*count) && (key > heap->arr[parent]))
         {
             heap->arr[child] = heap->arr[parent];
             child = parent;
@@ -84,11 +52,11 @@ void init_heap(heap_t *heap, int max_size)
 // location pointed to by count_ptr.
 void insert(heap_t *heap, int key, int *count_ptr)
 {
-    int c = 0;
+    if (heap->size == heap->max_size)
+        return;
 
     heap->arr[(heap->size)++] = key;
-    top_down_heap(heap, heap->size - 1, &c);
-    *count_ptr = c;
+    top_down_heap(heap, heap->size - 1, count_ptr);
 }
 
 // *Removes and Returns* the maximum element in the heap
@@ -96,12 +64,11 @@ void insert(heap_t *heap, int key, int *count_ptr)
 // location pointed to by count_ptr.
 int extract_max(heap_t *heap, int *count_ptr)
 {
-    int c = 0;
     int max = heap->arr[0];
 
+    // Replacing the root with the last element and decrementing the counter
     heap->arr[0] = heap->arr[(heap->size)--];
-    top_down_heap(heap, heap->size - 1, &c);
-    *count_ptr = c;
+    top_down_heap(heap, heap->size - 1, count_ptr);
     return max;
 }
 
@@ -109,7 +76,14 @@ int extract_max(heap_t *heap, int *count_ptr)
 // Returns the element if found, else -1
 int search(const heap_t *heap, int key, int *count_ptr)
 {
-
+    // Search has to be done linearly
+    int i = 0;
+    while (i < heap->size && ++(*count_ptr) && heap->arr[i] != key)
+        i++;
+        
+    if (i < heap->size) // element found
+        return key;
+    return -1;
 }
 
 // Returns the maximum value of the element in the heap
@@ -118,15 +92,12 @@ int search(const heap_t *heap, int key, int *count_ptr)
 int find_max(const heap_t *heap, int *count_ptr)
 {
     *count_ptr = 0;
-
     return heap->arr[0];
 }
 
 // Returns the minimum value in the heap
 int find_min(const heap_t *heap, int *count_ptr)
 {
-    int c = 0;
-    
     /* 
         The minimum element cannot be a non-leaf node,
         as max heap requires its parent to be greater
@@ -137,10 +108,9 @@ int find_min(const heap_t *heap, int *count_ptr)
     int min = heap->arr[heap->size / 2];
     for (int i = 1 + heap->size / 2; i < heap->size; i++)
     {
-        if (++c && heap->arr[i] < min)
+        if (++(*count_ptr) && heap->arr[i] < min)
             min = heap->arr[i];
     }
-    *count_ptr = c;
     return min;
 }
 
