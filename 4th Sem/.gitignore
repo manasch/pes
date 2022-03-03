@@ -3,9 +3,13 @@ Books/
 ignore
 .vscode
 *.docx
+*.docx#
 *.doc
 *.xlsx
+*.csv
 *.pdf
+*.ppt
+*.pptx
 !*CS111*
 
 # Test files
@@ -20,8 +24,14 @@ ignore
 # Archives
 *.zip
 *.7z
+*.gz
 
-# Images
+# Images and Videos
 *.jpg
 *.png
+*.mp4
+*.mkv
 
+# Subfolder git repositories
+linux_stable
+icmpdoor

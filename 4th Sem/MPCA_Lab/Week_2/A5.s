@@ -11,10 +11,10 @@
 	LDR R2, =C
 	LDR R3, =D
 	LDR R4, =E
-	LDR R5, [R0] @A
-	LDR R6, [R1] @B
-	LDR R7, [R2] @C
-	LDR R8, [R3] @D
+	LDR R5, [R0] ;A
+	LDR R6, [R1] ;B
+	LDR R7, [R2] ;C
+	LDR R8, [R3] ;D
 
 	CMP R5, R6
 	BEQ C1

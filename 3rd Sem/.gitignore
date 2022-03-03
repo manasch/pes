@@ -1,3 +1,4 @@
 # Root
-Unix/
 /*.pdf
+Unix/*
+!Unix/practice

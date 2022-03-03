@@ -1,15 +1,15 @@
-@ Write a program in ARM7TDMI-ISA to find the sim of N data items in the memory.
-@ Store the result in the memory location
-@	a) Use Pre-Indexing addressing mode
-@	b) Use Post-Indexing addressing mode
-@	c) Use Auto-Indexing addressing mode
+; Write a program in ARM7TDMI-ISA to find the sim of N data items in the memory.
+; Store the result in the memory location
+;	a) Use Pre-Indexing addressing mode
+;	b) Use Post-Indexing addressing mode
+;	c) Use Auto-Indexing addressing mode
 
-@ Auto-Indexing addressing mode
+; Auto-Indexing addressing mode
 
 .TEXT
 	LDR R1, =A
 	LDR R3, =SUM
-	MOV R2, #0 @ Sum register
+	MOV R2, #0 ; Sum register
 	MOV R4, #1
 	MOV R5, #4
 

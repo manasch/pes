@@ -1,4 +1,4 @@
-@ Write an ALP to compare the value R0 and R1 , add if R0 = R1, else subtract
+; Write an ALP to compare the value R0 and R1 , add if R0 = R1, else subtract
 
 MOV R0, #5
 MOV R1, #3

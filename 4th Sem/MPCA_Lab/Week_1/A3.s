@@ -1,4 +1,4 @@
-@ Based on the value of the number in R0, if R0 = 0, then store 1 in R1, if R0 = +ve then store 2 in R2 else IF RI = -ve, then store 3
+; Based on the value of the number in R0, if R0 = 0, then store 1 in R1, if R0 = +ve then store 2 in R2 else IF RI = -ve, then store 3
 MOV R0, #-4
 MOV R1, #0
 

@@ -3,10 +3,25 @@
 	url = https://github.com/manasch/ds-assignment
 [submodule "2nd Sem/C/fairplay-cipher"]
 	path = 2nd Sem/C/fairplay-cipher
-	url = git@github.com:manasch/fairplay-cipher.git
+	url = https://github.com/manasch/fairplay-cipher
 [submodule "1st Sem/PCPS/python-clock"]
 	path = 1st Sem/PCPS/python-clock
-	url = git@github.com:manasch/python-clock.git
+	url = https://github.com/manasch/python-clock
 [submodule "3rd Sem/Web_Tech/twitter-clone"]
 	path = 3rd Sem/Web_Tech/twitter-clone
-	url = git@github.com:manasch/twitter-clone.git
+	url = https://github.com/manasch/twitter-clone
+[submodule "4th Sem/CN/Assignments/Assignment-2"]
+	path = 4th Sem/CN/Assignments/Assignment-2
+	url = https://github.com/manasch/socket_file_transfer
+[submodule "4th Sem/CN/Assignments/Assignment-3/icmp_reverse_shell"]
+	path = 4th Sem/CN/Assignments/Assignment-3/icmp_reverse_shell
+	url = https://github.com/manasch/icmp_backdoor
+[submodule "4th Sem/LA/Assignments/Project"]
+	path = 4th Sem/LA/Assignments/Project
+	url = https://github.com/manasch/image_manipulation
+[submodule "4th Sem/MPCA/Assignments/tag-bag"]
+	path = 4th Sem/MPCA/Assignments/tag-bag
+	url = https://github.com/manasch/tag-bag
+[submodule "4th Sem/DAA/Assignments/Assignment-234"]
+	path = 4th Sem/DAA/Assignments/Assignment-234
+	url = https://github.com/manasch/DAA-Assignment234-Airport_Management_System

@@ -1,0 +1,7 @@
+OS - Programming Exercise - 1
+
+Create the following programs using system calls learnt in class such as fork, exec, wait, etc.
+
+1. Write a program to create a new directory, called newdir and a new file inside it, using fork() and exec() system call.
+2. Create a global array with values [1, 6, 2, 4, 5, 8, 9, 0]. Sort the same in descending order within the child process, and ascending order in the parent process.
+3. Write a program which concatenates the two strings s1 and s2. Now use exec to execute another user defined program that prints the concatenated string.

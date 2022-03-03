@@ -5,10 +5,10 @@
 
 .text
 	ldr r0, =num
-	mov r3, #0 @ count register
+	mov r3, #0 ; count register
 	ldr r1, [r0]
 
-	mov r2, #0 @ count number of 1's
+	mov r2, #0 ; count number of 1's
 
 	l2:
 		movs r1, r1, lsr #1
@@ -18,7 +18,7 @@
 	l3:
 		cmp r3, #32
 		bne l2
-		cmp r2, #1 @ checking for odd or even number of 1's
+		cmp r2, #1 ; checking for odd or even number of 1's
 		bne l4
 		b l5
 
