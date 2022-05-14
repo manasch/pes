@@ -1,0 +1,4 @@
+# Ignoring ipynb, html and csv files folders for github's linguist detection
+*.ipynb -linguist-detectable
+*.csv -linguist-detectable
+*.html -linguist-detectable
