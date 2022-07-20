@@ -2,6 +2,7 @@ Books/
 *template*
 ignore
 .vscode
+*.odt
 *.docx
 *.docx#
 *.doc
@@ -35,3 +36,6 @@ ignore
 # Subfolder git repositories
 linux_stable
 icmpdoor
+
+# Exceptions
+!*[mM][aA][nN][uU][aA][lL]*
