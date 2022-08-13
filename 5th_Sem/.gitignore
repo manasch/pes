@@ -1,0 +1,35 @@
+# Folders
+__pycache__
+
+# Extensions
+*.docx
+*.docx#
+*.doc
+*.csv
+*.pdf
+*.ppt
+*.pptx
+*.xsl
+*.xslx
+
+# Binary and executables
+*.out
+*.o
+*.exe
+
+# Archives
+*.7z
+*.zip
+*.gz
+
+# Images and Videos
+*.jpg
+*.jpeg
+*.png
+*.mp4
+*.mkv
+
+# Exceptions
+!*CS111*
+*temp*
+!MI_Lab/Week_1/example.csv
