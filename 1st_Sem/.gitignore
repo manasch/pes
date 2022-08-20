@@ -4,3 +4,5 @@ Books/
 .vscode
 __pycache__
 
+*.pdf
+*.png

@@ -1,0 +1,21 @@
+WEEK – 2
+6 th September 2021 to 11th september 2021
+
+TOPIC : SINGLY LINKED LIST
+
+1. Implement the following operations on singly linked list (5 + 5Marks)
+
+(ii) Swap 2 nodes without swapping the data.
+(iii) Delete every alternate node starting from the first node
+
+2. Perform the addition of 2 polynomials stored as a Singly linked list. Structure of a polynomial
+nodes is as follows:(20 Marks)
+struct poly{
+int coeff;
+int px;// power of x
+int py;// power of y
+struct node *next;// pointer to hold address of next node.
+}
+Ex : first polynomial-> 3x^2 y^2 + 2xy^2 + 3xy
+second polynomial -> 4x^2 y^2 +3x^2 y+6xy
+resultant polynomial-> 7x^2 y^2 + 2xy^2 + 3x^2 y + 9xy

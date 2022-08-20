@@ -1,0 +1,55 @@
+WEEK – 3
+13 th September 2021 to 18th September 2021
+
+TOPIC : ORDERED LIST & DOUBLY LINKED LIST
+
+1. Create an telephone directory containing the customers details as : Name, Phone no, Address, Area.
+Create an ordered doubly list based on name.
+
+// struct definition for node
+typedef struct Node {
+    char *name;
+    int phone_number;
+    char *address;
+    char *area;
+    struct Node *next, *prev;
+} Node;
+
+// struct definition for customer details
+typedef struct CustomerDetails {
+    Node *head;
+} CustomerDetails;
+
+- 15 Marks
+
+
+2. Create an Employee with the following fields – SSN, Name, Dept, Designations, Salary, Phone no, Age. Every
+employee should work in a department and department shoud have a name and number associated with it.
+
+// struct definition for department
+typedef struct Department{
+    char *name;
+    int number;
+} Department;
+
+// struct defition for doubly linked list node
+typedef struct Node{
+    char *ssn;
+    char *name;
+    Department *department;
+    char *designations;
+    int salary;
+    int phone_number;
+    int age;
+    struct Node *next, *prev;
+} Node;
+
+// struct definition for employee
+typedef struct Employees {
+    Node *head;
+} Employees;
+
+1. Delete all the employeees whose age is greater than 58. - 15 Marks
+2. Display the details of all empolyees who work in paticular department. - 10 Marks
+
+Note : Program should work for all the boundry conditions.

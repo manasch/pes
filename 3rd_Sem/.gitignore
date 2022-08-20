@@ -1,4 +1,16 @@
-# Root
-/*.pdf
+# Exception
 Unix/*
 !Unix/practice
+
+# Extensions to ignore
+*.pdf
+*.odt
+*.o
+*.exe
+*.mp4
+*.zip
+*.png
+*.docx
+
+# VS Code stuff
+.vscode

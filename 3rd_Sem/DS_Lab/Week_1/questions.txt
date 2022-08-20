@@ -1,0 +1,34 @@
+WEEK – 1
+30 th August to 4th September 2021
+
+RECURSION(5 + 5 MARKS)
+
+(i) Write a recursive function to search for a substring within a given string. Return True if substring
+is found, else return false
+Ex: input :
+string : This is our first DS Lab
+substring : DS
+output : True
+
+string : This is our first DS Lab
+substring : DBMS
+output : False
+
+(ii) Write a recursive function to generate all permutations of a given text
+Ex : input : ABC, output : ABC,ACB, BAC, BCA, CAB, CBA
+
+STRUCTURE AND DYNAMIC MEMORY ALLOCATION ( 10 MARKS)
+
+1). Write a C program to create a record for few students containing the student details as SRN,
+Name, semester, marks for 5 subjects. Each subject should have a code associated with it
+a. Compute the class average marks in a particular subject.
+b. Sort the students based on SRN.
+
+ASSIGNMENT : (10 MARKS)
+
+1. Perform Tower of Hanoi using recursion
+2. Write a C program to create a record for IPL Players containing the details as player name, team
+name, details of the matches played. Match details should keep track of 14 matches, with player
+playing the match or not and runs scored if he has played a particular match.
+a. Display the player details who scored maximum runs in a particular match.
+b. Also compute the number of matches played by each player.

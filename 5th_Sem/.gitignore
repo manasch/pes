@@ -16,6 +16,7 @@ __pycache__
 *.out
 *.o
 *.exe
+*.bin
 
 # Archives
 *.7z
@@ -30,6 +31,5 @@ __pycache__
 *.mkv
 
 # Exceptions
-!*CS111*
 *temp*
 !MI_Lab/Week_1/example.csv
