@@ -1,27 +1,27 @@
 [submodule "3rd Sem/Data_Structures/DS-Assignment"]
 	path = 3rd_Sem/Data_Structures/DS-Assignment
-	url = https://github.com/manasch/ds-assignment
+	url = git@github.com:manasch/ds-assignment.git
 [submodule "2nd Sem/C/fairplay-cipher"]
 	path = 2nd_Sem/C/fairplay-cipher
-	url = https://github.com/manasch/fairplay-cipher
+	url = git@github.com:manasch/fairplay-cipher.git
 [submodule "1st Sem/PCPS/python-clock"]
 	path = 1st_Sem/PCPS/python-clock
-	url = https://github.com/manasch/python-clock
+	url = git@github.com:manasch/python-clock.git
 [submodule "3rd Sem/Web_Tech/twitter-clone"]
 	path = 3rd_Sem/Web_Tech/twitter-clone
-	url = https://github.com/manasch/twitter-clone
+	url = git@github.com:manasch/twitter-clone.git
 [submodule "4th Sem/CN/Assignments/Assignment-2"]
 	path = 4th_Sem/CN/Assignments/Assignment-2
-	url = https://github.com/manasch/socket_file_transfer
+	url = git@github.com:manasch/socket_file_transfer.git
 [submodule "4th Sem/CN/Assignments/Assignment-3/icmp_reverse_shell"]
 	path = 4th_Sem/CN/Assignments/Assignment-3/icmp_reverse_shell
-	url = https://github.com/manasch/icmp_backdoor
+	url = git@github.com:manasch/icmp_backdoor.git
 [submodule "4th Sem/LA/Assignments/Project"]
 	path = 4th_Sem/LA/Assignments/Project
-	url = https://github.com/manasch/image_manipulation
+	url = git@github.com:manasch/image_manipulation.git
 [submodule "4th Sem/MPCA/Assignments/tag-bag"]
 	path = 4th_Sem/MPCA/Assignments/tag-bag
-	url = https://github.com/manasch/tag-bag
+	url = git@github.com:manasch/tag-bag.git
 [submodule "4th Sem/DAA/Assignments/Assignment-234"]
 	path = 4th_Sem/DAA/Assignments/Assignment-234
-	url = https://github.com/manasch/DAA-Assignment234-Airport_Management_System
+	url = git@github.com:manasch/DAA-Assignment234-Airport_Management_System.git

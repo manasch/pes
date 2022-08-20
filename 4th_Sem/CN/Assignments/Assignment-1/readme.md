@@ -1,0 +1,1 @@
+- Assignment 1 was a written assignment. (Numericals)

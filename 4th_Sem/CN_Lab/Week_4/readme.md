@@ -1,0 +1,1 @@
+- Setting up local cache between system and vm and testing browser load speed.
