@@ -9,6 +9,7 @@ __pycache__
 *.pdf
 *.ppt
 *.pptx
+*.pptx#
 *.xsl
 *.xslx
 

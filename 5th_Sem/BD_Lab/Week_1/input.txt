@@ -1,0 +1,15 @@
+big
+data
+lab
+hands
+on
+1
+hello
+world
+map
+reduce
+big
+data
+data
+big
+nice
