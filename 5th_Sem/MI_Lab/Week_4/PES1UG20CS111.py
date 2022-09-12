@@ -93,25 +93,20 @@ class KNN:
         # TODO
         neigh_dists, idx_of_neigh = self.k_neighbours(x)
         pred = []
-        yes, no = 0, 0
 
         if self.weighted:
             weighted_dists = 1 / neigh_dists
         
         for w, idxs in enumerate(idx_of_neigh):
+            # Assigns count of all classes to 0
+            classes = {x: 0 for x in set(self.target)}
             for indx, idx in enumerate(idxs):
-                if self.target[idx]:
-                    if self.weighted:
-                        yes += weighted_dists[w][indx]
-                    else:
-                        yes += 1
+                if self.weighted:
+                    classes[self.target[idx]] += weighted_dists[w][indx]
                 else:
-                    if self.weighted:
-                        no += weighted_dists[w][indx]
-                    else:
-                        no += 1
-            
-            pred.append(1) if yes > no else pred.append(0)
+                    classes[self.target[idx]] += 1
+            classes = sorted(classes.items(), key=lambda x: x[1], reverse=True)
+            pred.append(classes[0][0])
 
         return np.array(pred)
 
@@ -127,18 +122,7 @@ class KNN:
         """
         # TODO
         result = self.predict(x)
-        # True Positvie, True Negative, False Positive, False Negative
-        tp, tn, fp, fn = 0, 0, 0, 0
-
-        for i, res in enumerate(result):
-            if res == 1 and y[i] == 1:
-                tp += 1
-            elif res == 1 and y[i] == 0:
-                fp += 1
-            elif res == 0 and y[i] == 1:
-                fn += 1
-            else:
-                tn += 1
-        
-        accuracy = (tp + tn) / (tp + tn + fp + fn)
+        # Accuracy = (True Positive + True Negative) / (True Positvie + True Negative + False Positive + False Negative)
+        # list(np.logical_xor(result, y)).count(False) -> gives the number of correct predictions
+        accuracy = list(np.logical_xor(result, y)).count(False) / len(result)
         return accuracy * 100
