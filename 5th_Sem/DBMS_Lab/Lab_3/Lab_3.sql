@@ -1,8 +1,6 @@
-# Railway Reservation System
+-- Railway Reservation System
+-- Database description
 
-## Database description
-
-```sql
 create database pes1ug20cs111_manas;
 
 use pes1ug20cs111_manas;

@@ -10,8 +10,8 @@ __pycache__
 *.ppt
 *.pptx
 *.pptx#
-*.xsl
-*.xslx
+*.xls
+*.xlsx
 
 # Binary and executables
 *.out
@@ -35,3 +35,5 @@ __pycache__
 *temp*
 !MI_Lab/Week_1/example.csv
 Hacktober2022
+BD/Assignments/Assignment_2/Dataset_Students/*
+!DBMS_Lab/Lab_4/**/*.csv
