@@ -9,8 +9,9 @@ __pycache__
 *.pdf
 *.ppt
 *.pptx
-*.xsl
-*.xslx
+*.pptx#
+*.xls
+*.xlsx
 
 # Binary and executables
 *.out
@@ -33,3 +34,6 @@ __pycache__
 # Exceptions
 *temp*
 !MI_Lab/Week_1/example.csv
+Hacktober2022
+BD/Assignments/Assignment_2/Dataset_Students/*
+!DBMS_Lab/Lab_4/**/*.csv
