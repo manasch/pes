@@ -122,7 +122,10 @@ class Tensor:
                 Gradient to a and b
         """
         # TODO
-        pass
+        if gradients is None:
+            gradients = np.array(np.ones((self.shape[0], self.shape[1])))
+        
+        return (gradients, gradients)
 
     def grad_matmul(self, gradients=None):
         """
@@ -137,7 +140,13 @@ class Tensor:
                 Gradients to a and b
         """
         # TODO
-        pass
+        if gradients is None:
+            gradients = np.array(np.ones((self.shape[0], self.shape[1])))
+        
+        Y = np.matmul(np.transpose(self.history[1].arr), gradients)
+        X = np.matmul(gradients, np.transpose(self.history[2].arr))
+
+        return (X, Y)
 
     def backward(self, gradients=None):
         """
@@ -158,4 +167,15 @@ class Tensor:
             Nothing. (The gradients of leaf have to set in their respective attribute(leafobj.grad))
         """
         # TODO
-        pass
+        tensor_object = self.history[0]
+        # When the tensor object in consideration is the leaf node
+        if tensor_object == 'leaf':
+            if self.requires_grad:
+                self.grad = np.add(gradients, self.grad)
+            
+            return
+        # When the tensor object in consideration is not a leaf node
+        gradients = self.grad_add(gradients) if tensor_object == 'add' else self.grad_matmul(gradients)
+        
+        self.history[1].backward(gradients[0])
+        self.history[2].backward(gradients[1])

@@ -1,5 +1,6 @@
 # Folders
 __pycache__
+.vscode
 
 # Extensions
 *.docx
@@ -12,6 +13,7 @@ __pycache__
 *.pptx#
 *.xls
 *.xlsx
+*.stackdump
 
 # Binary and executables
 *.out
@@ -23,6 +25,7 @@ __pycache__
 *.7z
 *.zip
 *.gz
+*.bz2
 
 # Images and Videos
 *.jpg
@@ -30,10 +33,12 @@ __pycache__
 *.png
 *.mp4
 *.mkv
+*.gif
 
 # Exceptions
+ignore/*
 *temp*
 !MI_Lab/Week_1/example.csv
-Hacktober2022
 BD/Assignments/Assignment_2/Dataset_Students/*
 !DBMS_Lab/Lab_4/**/*.csv
+*boilerplate*
