@@ -33,6 +33,21 @@ from compartment
 group by train_number
 order by count(*) limit 2;
 
+-- Alternative
+
+with comp (train_no, comp_count) as (
+	select train_number, count(*)
+	from compartment
+	group by train_number
+	order by count(*) desc
+)
+select train_no, comp_count
+from comp
+where comp_count in (
+	select max(comp_count)
+	from comp
+);
+
 -- 5 Display the number of phone numbers corresponding to the user_id(s) ADM_001, USR_006, USR_10
 
 select user_id, count(*)
