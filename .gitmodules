@@ -25,3 +25,9 @@
 [submodule "4th Sem/DAA/Assignments/Assignment-234"]
 	path = 4th_Sem/DAA/Assignments/Assignment-234
 	url = git@github.com:manasch/DAA-Assignment234-Airport_Management_System.git
+[submodule "5th_Sem/SE/Project"]
+	path = 5th_Sem/SE/Project
+	url = git@github.com:manasch/SE-Project-Blockchain.git
+[submodule "5th_Sem/MI/Project"]
+	path = 5th_Sem/MI/Project
+	url = git@github.com:manasch/MI-Project-Flappy-Bird.git
