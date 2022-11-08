@@ -41,5 +41,6 @@ ignore/*
 *temp*
 !MI_Lab/Week_1/example.csv
 BD/Assignments/Assignment_2/Dataset_Students/*
+BD/Assignments/Assignment_3/Dataset/*
 !DBMS_Lab/Lab_4/**/*.csv
 *boilerplate*

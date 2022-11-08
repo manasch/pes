@@ -17,13 +17,13 @@ sudo apt install scala git -y
 
 
 # Downloading and setting up Spark
-wget https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz
-tar xf spark-3.3.0-bin-hadoop3.tgz
+wget https://dlcdn.apache.org/spark/spark-3.3.1/spark-3.3.1-bin-hadoop3.tgz
+tar xf spark-3.3.1-bin-hadoop3.tgz
 if [ -d "/opt/spark" ]; then
     echo "Spark directory exists, deleting it."
     sudo rm -rf /opt/spark
 fi
-sudo mv spark-3.3.0-bin-hadoop3 /opt/spark
+sudo mv spark-3.3.1-bin-hadoop3 /opt/spark
 sudo rm -rf spark-*
 
 # Configuring Spark
