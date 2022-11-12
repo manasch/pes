@@ -31,3 +31,6 @@
 [submodule "5th_Sem/MI/Project"]
 	path = 5th_Sem/MI/Project
 	url = git@github.com:manasch/MI-Project-Flappy-Bird.git
+[submodule "5th_Sem/DBMS/Project"]
+	path = 5th_Sem/DBMS/Project
+	url = git@github.com:manasch/Chess_Database_Management_System-DBMS_Project.git
