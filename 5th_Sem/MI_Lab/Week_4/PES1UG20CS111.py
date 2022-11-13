@@ -124,5 +124,5 @@ class KNN:
         result = self.predict(x)
         # Accuracy = (True Positive + True Negative) / (True Positvie + True Negative + False Positive + False Negative)
         # list(np.logical_xor(result, y)).count(False) -> gives the number of correct predictions
-        accuracy = list(np.logical_xor(result, y)).count(False) / len(result)
+        accuracy = list(np.logical_xor(np.array(result, dtype=int), np.array(y, dtype=int))).count(False) / len(result)
         return accuracy * 100

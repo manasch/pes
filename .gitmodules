@@ -25,3 +25,15 @@
 [submodule "4th Sem/DAA/Assignments/Assignment-234"]
 	path = 4th_Sem/DAA/Assignments/Assignment-234
 	url = git@github.com:manasch/DAA-Assignment234-Airport_Management_System.git
+[submodule "5th_Sem/SE/Project"]
+	path = 5th_Sem/SE/Project
+	url = git@github.com:manasch/SE-Project-Blockchain.git
+[submodule "5th_Sem/MI/Project"]
+	path = 5th_Sem/MI/Project
+	url = git@github.com:manasch/MI-Project-Flappy-Bird.git
+[submodule "5th_Sem/DBMS/Project"]
+	path = 5th_Sem/DBMS/Project
+	url = git@github.com:manasch/Chess_Database_Management_System-DBMS_Project.git
+[submodule "5th_Sem/BD/Project"]
+	path = 5th_Sem/BD/Project
+	url = git@github.com:Projects-RR-2022/BD1_067_111_119_266.git
