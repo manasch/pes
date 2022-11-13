@@ -34,3 +34,6 @@
 [submodule "5th_Sem/DBMS/Project"]
 	path = 5th_Sem/DBMS/Project
 	url = git@github.com:manasch/Chess_Database_Management_System-DBMS_Project.git
+[submodule "5th_Sem/BD/Project"]
+	path = 5th_Sem/BD/Project
+	url = git@github.com:Projects-RR-2022/BD1_067_111_119_266.git
