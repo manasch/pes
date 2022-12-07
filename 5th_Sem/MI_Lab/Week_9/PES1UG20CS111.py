@@ -15,7 +15,24 @@ class KMeansClustering:
         self.n_init = n_init
         self.max_iter = max_iter
         self.delta = delta
-
+    
+    def euclidian_distance(self, x, y, dim):
+        dist = 0
+        for i in range(dim):
+            dist += (x[i] - y[i]) ** 2
+        
+        return dist ** 0.5
+    
+    def find_cluster_freq(self, clusters):
+        freq = {}
+        for c in clusters:
+            if c not in freq:
+                freq[c] = 1
+            else:
+                freq[c] += 1
+        
+        return freq
+    
     def init_centroids(self, data):
         idx = np.random.choice(
             data.shape[0], size=self.n_cluster, replace=False)
@@ -69,7 +86,18 @@ class KMeansClustering:
             (M) Vector (M number of samples in the train dataset)(numpy int)
         """
         #TODO
-        pass
+        ans = []
+        num_data = data.shape[0]
+        dim = self.centroids.shape[1]
+
+        for i in range(data.shape[0]):
+            dists = []
+            for j in range(self.n_cluster):
+                dists.append(self.euclidian_distance(data[i], self.centroids[j], dim))
+            
+            ans.append(np.argmin(dists))
+
+        return np.array(ans)
 
     def m_step(self, data, cluster_assgn):
         """
@@ -80,7 +108,17 @@ class KMeansClustering:
         Change self.centroids
         """
         #TODO
-        pass
+        freq = self.find_cluster_freq(cluster_assgn)
+        new_centroids = np.zeros((len(freq), len(data[0])))
+
+        for idx, point in enumerate(data):
+            c = cluster_assgn[idx]
+            new_centroids[c] += point
+        
+        for idx, centroid in enumerate(new_centroids):
+            new_centroids[idx] = centroid / freq[idx]
+        
+        self.centroids = new_centroids
 
     def evaluate(self, data):
         """
@@ -91,4 +129,11 @@ class KMeansClustering:
             metric : (float.)
         """
         #TODO
-        pass
+        metric = 0
+        dim = self.centroids.shape[1]
+        
+        for c in range(len(self.centroids)):
+            for d in range(len(data)):
+                metric += np.sum(self.euclidian_distance(data[c], data[d], dim) ** 2)
+        
+        return metric

@@ -1,0 +1,31 @@
+4 sets -- 2 queries
+
+Consider the following schema 
+STUDENT     - Name, StudentNumber, Class, Major
+COURSE        - CourseName , CourseNumber,  CreditHours , Dept.
+SECTION       - SectionIdentifier ,CourseNumber , Semester, Year ,Instructor
+Grade_Report  - StudentNumber ,SectionIdentifier ,Grade
+Prerequisite – CourseNumber, PrerequisiteNumber
+
+set - 01
+a)Retrieve the names of all courses taught by the Professors during the period 2001- 2004
+
+b) We need to maintain report of the student as follows:
+Student_Report(StudentNumber, CourseNumber,marks)
+
+Populate this table with each student's number with all the courses he/she has registered. Populate the marks of each student for the courses they have enrolled in multiples of 10 with maximum of 100 marks. (without using insert statements)
+
+c) For such schema, create a trigger so that the total and average of specified marks is automatically inserted whenever a record is insert into Student_Report.
+
+set - 02
+a) Retrieve the names and major departments of all students who do not have a grade of A in any of their courses.
+
+b) We need to maintain report of the student as follows:
+Student_Report(StudentNumber, SectionIdentifier,Instructor,marks)
+
+Populate this table with each student's number with all the courses he/she has registered. Populate the marks of each student for the courses they have enrolled in multiples of 10 with maximum of 100 marks. (without using insert statements)
+
+c) Create a trigger to specify the remarks based on the grade of a student
+Grade A -- "Excellent"
+Grade B -- "Very Good"
+Grade C -- "Fair"
