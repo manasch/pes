@@ -36,7 +36,7 @@
 	url = git@github.com:manasch/Chess_Database_DBMS_Project.git
 [submodule "5th_Sem/BD/Project"]
 	path = 5th_Sem/BD/Project
-	url = git@github.com:Projects-RR-2022/BD1_067_111_119_266.git
+	url = git@github.com:manasch/BD_Project_YaK.git
 [submodule "5th_Sem/AA/Project"]
 	path = 5th_Sem/AA/Project
 	url = git@github.com:manasch/Advanced_Algorithms_Project.git
