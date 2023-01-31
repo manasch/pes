@@ -16,6 +16,7 @@ __pycache__
 *.stackdump
 *.bkp
 *.dtmp
+*.rar
 
 # Binary and executables
 *.out
@@ -39,4 +40,7 @@ __pycache__
 
 # Exceptions
 lex.yy.c
+y.tab.*
 *test*
+ignore
+!/CD/Lab/Week_1_2/*.c
