@@ -44,3 +44,4 @@ y.tab.*
 *test*
 ignore
 !/CD/Lab/Week_1_2/*.c
+.obsidian
