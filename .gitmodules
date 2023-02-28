@@ -40,3 +40,6 @@
 [submodule "5th_Sem/AA/Project"]
 	path = 5th_Sem/AA/Project
 	url = git@github.com:manasch/Advanced_Algorithms_Project.git
+[submodule "6th_Sem/CC/Assignment/Assignment_2"]
+	path = 6th_Sem/CC/Assignment/Assignment_2a
+	url = git@github.com:manasch/PES1UG20CS111_Jenkins.git

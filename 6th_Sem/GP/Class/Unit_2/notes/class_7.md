@@ -12,15 +12,15 @@ void handle(double x) {...}
 template <typename T>
 struct parser
 {
-	void parse() {
-		handle(42);
-	}
+   void parse() {
+      handle(42);
+   }
 };
 
 void handle(int x) {...}
 int main() {
-	struct parser a;
-	a.parse() // will go to the double handler
+   struct parser a;
+   a.parse() // will go to the double handler
 }
 ```
 
@@ -67,16 +67,16 @@ int main()
 ```cpp
 template <typename T>
 struct base_parser {
-	using value_type = T;
+   using value_type = T;
 };
 
 template <typename T>
 struct parser : base_parser<T> {
-	void parse(){
-		//value_type v{}; //1
-		typename base_parser<T>::value_type v{}; //2
-		std::cout << "parse\n";
-	}
+   void parse(){
+      //value_type v{}; //1
+      typename base_parser<T>::value_type v{}; //2
+      std::cout << "parse\n";
+   }
 };
 ```
 

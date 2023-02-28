@@ -17,12 +17,15 @@ __pycache__
 *.bkp
 *.dtmp
 *.rar
+*.epub
+*.gch
 
 # Binary and executables
 *.out
 *.o
 *.exe
 *.bin
+*.class
 
 # Archives
 *.7z

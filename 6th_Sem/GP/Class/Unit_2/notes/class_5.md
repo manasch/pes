@@ -5,25 +5,25 @@
 ```cpp
 template<typename T>
 class Accessor {
-	public:
-		static T getData(const Container<T> &c) {
-			return c.data;
-		}
+  public:
+    static T getData(const Container<T> &c) {
+      return c.data;
+    }
 };
 
 template<typename T>
 class Container {
-	private:
-		T data;
-	public:
-		Container(Tdata): data(data) {}
-		friend class Accessor<T>
+  private:
+    T data;
+  public:
+    Container(Tdata): data(data) {}
+    friend class Accessor<T>
 };
 
 int main() {
-	Container<int> c(10);
-	std::cout  << Accessor<int>::getData(c) << std::endl;
-	return 0;
+  Container<int> c(10);
+  std::cout  << Accessor<int>::getData(c) << std::endl;
+  return 0;
 }
 ```
 

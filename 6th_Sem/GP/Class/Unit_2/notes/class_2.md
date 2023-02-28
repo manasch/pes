@@ -1,4 +1,4 @@
-- If a class derived is public, then it doesn't matter if the base class is private or public, it would be able to access it.
+- ~~If a class derived is public, then it doesn't matter if the base class is private or public, it would be able to access it~~. (This it totally wrong)
 
 ```cpp
 #include <iostream>
@@ -6,24 +6,24 @@
 using namespace std;
 
 class Base{
-	private:
-		void func() {
-			cout << "func\n";
-		}
+    private:
+        void func() {
+            cout << "func\n";
+        }
 };
 
 class Derived: public Base {
-	public:
-		void callBase() {
-			func()
-		}
+    public:
+        void callBase() {
+            func()
+        }
 }
 
 int main() {
-	Derived derived;
-	derived.callBase();
-	cout << '\n';
-	return 0;
+    Derived derived;
+    derived.callBase();
+    cout << '\n';
+    return 0;
 }
 ```
 
@@ -37,16 +37,16 @@ int main() {
 template<class T>
 class Base
 {
-	public:
-		void set (const T&val) {data = val;}
-	private:
-		T data;
+    public:
+        void set (const T&val) {data = val;}
+    private:
+        T data;
 };
 
 class Derived: public Base<T>
 {
-	template
-	public: void set (const T& v)
+    template
+    public: void set (const T& v)
 }
 ```
 

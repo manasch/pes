@@ -6,20 +6,20 @@
 #include <iostream>
 
 class C {
-	public:
-		int x;
-		int *y;
+    public:
+        int x;
+        int *y;
 };
 
 int main() {
-	C c1(10);
-	C c2(c1);
-	C c3 = c1; // Reference of an object
+    C c1(10);
+    C c2(c1);
+    C c3 = c1; // Reference of an object
 
-	std::cout << "c2.x = " << c2.x << std::endl;
-	std::cout << "c3.x = " << c3.x << std::endl;
+    std::cout << "c2.x = " << c2.x << std::endl;
+    std::cout << "c3.x = " << c3.x << std::endl;
 
-	return 0;
+    return 0;
 }
 ```
 
