@@ -42,8 +42,8 @@ __pycache__
 *.gif
 
 # Exceptions
-lex.yy.c
-y.tab.*
+*.yy.*
+*.tab.*
 *test*
 ignore
 !/CD/Lab/Week_1_2/*.c
