@@ -47,4 +47,5 @@ __pycache__
 *test*
 ignore
 !/CD/Lab/Week_1_2/*.c
+!/CD/Assignment/Assignment_1/sample_cases/*
 .obsidian

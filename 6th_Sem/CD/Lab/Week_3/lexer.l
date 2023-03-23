@@ -16,6 +16,8 @@ opExponent  ([Ee][+-]?{digits})?
 number  {digits}{opFraction}{opExponent}
 %option yylineno
 
+%option noyywrap
+
 %%
 \/\/(.*) ; // ignore comments
 [\t\n] ; // ignore whitespaces

@@ -1,13 +1,3 @@
-create table book (
-    isbn varchar(255) primary key,
-    title varchar(255),
-    lang varchar(50),
-    year int,
-    available int,
-    author_id varchar(255),
-    publisher_id varchar(255)
-);
-
 create table member (
     id varchar(255) primary key,
     address varchar(255),
@@ -37,6 +27,17 @@ create table genre (
     name varchar(255)
 );
 
+create table book (
+    isbn varchar(255) primary key,
+    title varchar(255),
+    lang varchar(50),
+    year int,
+    available int,
+    author_id varchar(255),
+    publisher_id varchar(255),
+    foreign key (publisher_id) references publisher(id)
+);
+
 create table book_genre (
     bookid varchar(255),
     genreid varchar(255),
@@ -54,8 +55,8 @@ create table author_publisher (
 create table member_borrow (
     memberid varchar(255),
     bookid varchar(255),
-    issuedate varchar(255),
-    returndate varchar(255),
+    issuedate date,
+    returndate date,
     foreign key (memberid) references member(id),
     foreign key (bookid) references book(isbn)
 );
