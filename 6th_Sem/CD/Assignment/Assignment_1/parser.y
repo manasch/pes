@@ -6,6 +6,7 @@
     
     #define YYSTYPE char *
 
+
     // Initial declarations of variables
     int type = -1;
     char *vval = "~";
@@ -43,36 +44,20 @@ PROG    :   T_INCLUDE '<' T_HEADER '>' PROG
         ;
 
 DECLR   :   TYPE LISTVAR
-        |   TYPE LISTVAR ARRVAR
+        |   TYPE ARRAY
         ;
 
-ARRVAR  :   '=' EXPR
-        |   INITARRAY
-        ;
-
-INITARRAY   :   '=' '{' ARRCONTENT '}'
-            |   '=' T_STRLITERAL
-            |
-            ;
-
-ARRCONTENT  :   T_NUM
-            |   T_NUM ',' ARRCONTENT
-            |   T_STRLITERAL ',' ARRCONTENT
-            ;
-
-ARRAY   :   T_ID BRACKET    {
-                                if (check_sym_tab($1)) {
-                                    // printf("Variable %s is already declared\n", $1);
-                                    yyerror(strdup("Variable already exists"));
-                                }
-                                else {
-                                    insert_symbol($1, array_size, type, yylineno, scope);
-                                }
+ARRAY   :   T_ID BRACKET {
+                            if (check_sym_tab($1)) {
+                                yyerror(strdup("Array is already declared"));
+                            } else {
+                                insert_symbol($1, size(type) * array_size, type, yylineno, scope);
+                                array_size = 1;
                             }
-        ;
+                         }
 
 BRACKET :   '[' T_NUM ']' BRACKET {array_size *= atoi($2);}
-        |   '[' T_ID ']' BRACKET {array_size *= atoi($2);}
+        |   '[' T_ID ']' BRACKET // When accessing it using c[i]
         |
         ;
 
@@ -80,35 +65,36 @@ LISTVAR :   LISTVAR ',' VAR
         |   VAR
         ;
 
-FOR :   T_FOR '(' DECLR_ASSGN ';' T_ID REL_OP EXPR ';' T_ID UNARY_OP_SUFFIX')' '{' {++scope;} STMT '}' {--scope;}
-    ;
-
-DECLR_ASSGN :   TYPE LISTVAR
-            ;
-
 VAR :   T_ID '=' EXPR   {
                             if (check_sym_tab($1)) {
                                 // printf("Variable %s is already declared\n", $1);
-                                yyerror(strdup("Variable already exists"));
+                                yyerror(strdup("Variable is already declared"));
                             }
                             else {
                                 insert_symbol($1, size(type), type, yylineno, scope);
                                 insert_val($1, vval, yylineno);
-                                vval = "~";
-                                type = -1;
+                                // vval = "~";
+                                // type = -1;
                             }
                         }
+    |   T_ID BRACKET '=' EXPR {
+                                type = retrieve_type($1);
+                                if (check_sym_tab($1)) {
+                                    yyerror(strdup("Array is already declared"));
+                                }
+                                else {
+                                    insert_symbol($1, size(type), type, yylineno, scope);
+                                }
+                              }
     |   T_ID            {
-                            // printf("%s %d\n", $1, yylineno);
                             if (check_sym_tab($1)) {
                                 // printf("Variable %s is already declared\n", $1);
-                                yyerror(strdup("Variable already exists"));
+                                yyerror(strdup("Variable is already declared"));
                             }
                             else {
                                 insert_symbol($1, size(type), type, yylineno, scope);
-                                type = -1;
+                                // type = -1;
                             }
-                            // display_sym_tab();
                         }
 
 // Assign type here to be returned to the declaration grammar
@@ -121,22 +107,36 @@ TYPE    :   T_INT {type = INT;}
 // Grammar for assignment
 ASSGN   :   T_ID {type = retrieve_type($1);} '=' EXPR   {
                                                             if (!check_sym_tab($1)) {
-                                                                // printf("Variable %s is not declared %d\n", $1, yylineno);
+                                                                // printf("Variable %s is not declared\n", $1);
                                                                 yyerror(strdup("Variable is not declared"));
                                                             }
                                                             insert_val($1, vval, yylineno);
-                                                            vval = "~";
-                                                            type = -1;
-                                                            // display_sym_tab();
+                                                            // vval = "~";
+                                                            // type = -1;
                                                         }
+        |   T_ID {type = retrieve_type($1);} BRACKET '=' EXPR   {
+                                                                    if (!check_sym_tab($1)) {
+                                                                        yyerror(strdup("Array is not declared"));
+                                                                    }
+                                                                }
         ;
 
 EXPR    :   EXPR REL_OP E
-        |   E {vval = $1;}
         |   EXPR LOGICAL_OP E
-        |   E UNARY_OP_SUFFIX
-        |   UNARY_OP_PREFIX E
+        |   E UNARY
+        |   UNARY_PREFIX E
+        |   E {vval = $1;}
         ;
+
+UNARY   :   T_INCR
+        |   T_DECR
+        ;
+
+UNARY_PREFIX    :   UNARY   
+                |   '-'
+                |   '+'
+                |   '!'
+                ;
 
 // Expression grammar
 E   :   E '+' T {
@@ -146,7 +146,7 @@ E   :   E '+' T {
                         sprintf($$, "%lf", (atof($1) + atof($3)));
                     else {
                         // printf("Character used in arithmetic\n");
-                        yyerror(strdup("Char used in arithmetic"));
+                        yyerror(strdup("Character used in arithmetic"));
                         $$ = "~";
                     }
                 }
@@ -157,7 +157,7 @@ E   :   E '+' T {
                         sprintf($$, "%lf", (atof($1) - atof($3)));
                     else {
                         // printf("Character used in arithmetic\n");
-                        yyerror(strdup("Char used in arithmetic"));
+                        yyerror(strdup("Character used in arithmetic"));
                         $$ = "~";
                     }
                 }
@@ -171,7 +171,7 @@ T   :   T '*' F {
                         sprintf($$, "%lf", (atof($1) * atof($3)));
                     else {
                         // printf("Character used in arithmetic\n");
-                        yyerror(strdup("Char used in arithmetic"));
+                        yyerror(strdup("Character used in arithmetic"));
                         $$ = "~";
                     }
                 }
@@ -182,7 +182,7 @@ T   :   T '*' F {
                         sprintf($$, "%lf", (atof($1) / atof($3)));
                     else {
                         // printf("Character used in arithmetic\n");
-                        yyerror(strdup("Char used in arithmetic"));
+                        yyerror(strdup("Character used in arithmetic"));
                         $$ = "~";
                     }
                 }
@@ -190,6 +190,7 @@ T   :   T '*' F {
     ;
 
 F   :   '(' EXPR ')'
+    |   '!' '(' EXPR ')'
     |   T_ID    {
                     if (check_sym_tab($1)) {
                         char *val_check = retrieve_val($1);
@@ -236,20 +237,10 @@ REL_OP  :   T_LESSEREQ
         |   T_NOTEQUAL
         ;
 
-LOGICAL_OP  :   T_ANDAND
-            |   T_OROR
+LOGICAL_OP  :   T_OROR
+            |   T_ANDAND
             |   '!'
             ;
-
-UNARY_OP_SUFFIX :   T_INCR
-                |   T_DECR
-                ;
-
-UNARY_OP_PREFIX :   UNARY_OP_SUFFIX
-                |   '-'
-                |   '+'
-                |   '!'
-                ;
 
 // Grammar for main function
 MAIN    :   TYPE T_MAIN '(' EMPTY_LISTVAR ')' '{' {++scope;} STMT '}' {--scope;}
@@ -269,11 +260,10 @@ STMT    :   STMT_NO_BLOCK STMT
 STMT_NO_BLOCK   :   DECLR ';'
                 |   ASSGN ';'
                 |   EXPR ';'
-                |   T_IF COND {++scope;} STMT {--scope;}
-                |   T_IF COND {++scope;} STMT {--scope;} T_ELSE STMT
+                |   T_IF '(' COND ')' {++scope;} STMT {--scope;}
+                |   T_IF '(' COND ')' {++scope;} STMT {--scope;} T_ELSE STMT
                 |   ITERATOR
-                |   ';'
-                |   error PROG
+                |   error
                 ;
 
 ITERATOR    :   WHILE
@@ -281,8 +271,24 @@ ITERATOR    :   WHILE
             |   FOR
             ;
 
-DO  :   T_DO WHILE_BODY WHILE
+DO  :   T_DO WHILE_BODY WHILE ';'
     ;
+
+FOR :   T_FOR '(' FOR_COND ';' EXPR ';' EXPR ')' STMT_NO_BLOCK
+    |   T_FOR '(' FOR_COND ';' EXPR ';' EXPR ')' '{' {++scope;} STMT '}' {--scope;}
+    ;
+
+FOR_COND    :   DECLR
+            |   ASSGN
+            ;
+
+WHILE   :   T_WHILE '(' COND ')' WHILE_BODY
+        ;
+
+WHILE_BODY  :   STMT_NO_BLOCK
+            |   BLOCK
+            |
+            ;
 
 BLOCK   :   '{' {++scope;} STMT '}' {--scope;}
         ;
@@ -290,14 +296,6 @@ BLOCK   :   '{' {++scope;} STMT '}' {--scope;}
 COND    :   EXPR
         |   ASSGN
         ;
-
-WHILE   :   T_WHILE '(' COND ')' WHILE_BODY
-        ;
-
-WHILE_BODY  :   STMT_NO_BLOCK
-            |   '{' {++scope;} STMT '}' {--scope;} ';'
-            |
-            ;
 
 %%
 
@@ -312,6 +310,8 @@ int main(int argc, char *argv[]) {
         printf("Parsing Successful\n");
     else
         printf("Parsing Unsuccessful\n");
-    // display_sym_tab();
+    
+    printf("\n-----Symbol Table-----\n");
+    display_sym_tab();
     return 0;
 }
