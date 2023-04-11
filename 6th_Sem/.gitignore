@@ -19,6 +19,7 @@ __pycache__
 *.rar
 *.epub
 *.gch
+*.txt
 
 # Binary and executables
 *.out
@@ -46,6 +47,6 @@ __pycache__
 *.tab.*
 *test*
 ignore
-!/CD/Lab/Week_1_2/*.c
+!/CD/**/*test*.c
 !/CD/Assignment/Assignment_1/sample_cases/*
 .obsidian
