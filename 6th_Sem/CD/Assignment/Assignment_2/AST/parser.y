@@ -28,23 +28,22 @@
 
 %%
 START : SEQ     {
-                    display_exp_tree($1->first);
+                    display_exp_tree($1);
                     printf("Valid syntax\n");
                     YYACCEPT;
                 }
         ;
 
-SEQ :   S SEQ   {$$ = init_exp_node(strdup("seq"), init_exp_node(strdup("S"), $1, NULL, NULL, NULL), init_exp_node(strdup("seq"), $2, NULL, NULL, NULL), NULL, NULL);}
-    |   S       {$$ = init_exp_node(strdup("S"), $1, NULL, NULL, NULL);}
-    |           {$$ = NULL;}
+SEQ :   S SEQ   {$$ = init_exp_node(strdup("seq"), $1, $2, NULL);}
+    |   S       {$$ = $1;}
     ;
 
-S   :   T_IF '(' C ')' '{' SEQ '}' SEQ  {$$ = init_exp_node(strdup("if"), $3, $6, NULL, init_exp_node(strdup("seq"), $8, NULL, NULL, NULL));}
-    |   T_IF '(' C ')' '{' SEQ '}' T_ELSE '{' SEQ '}' SEQ   {$$ = init_exp_node(strdup("if-else"), $3, $6, $10, init_exp_node(strdup("seq"), $12, NULL, NULL, NULL));}
+S   :   T_IF '(' C ')' '{' SEQ '}'  {$$ = init_exp_node(strdup("if"), $3, $6, NULL);}
+    |   T_IF '(' C ')' '{' SEQ '}' T_ELSE '{' SEQ '}'   {$$ = init_exp_node(strdup("if-else"), $3, $6, $10);}
     |   ASSGN {$$ = $1;}
     ;
 
-C   :   E RELOP E {$$ = init_exp_node(strdup($2), $1, $3, NULL, NULL);}
+C   :   E RELOP E {$$ = init_exp_node(strdup($2), $1, $3, NULL);}
 
 RELOP   :   '<' {$$ = "<";}
         |   '>' {$$ = ">";}
@@ -55,24 +54,24 @@ RELOP   :   '<' {$$ = "<";}
         ;
 
 /* Grammar for assignment */
-ASSGN : T_ID '=' E ';'  {$$ = init_exp_node(strdup("="), init_exp_node($1, NULL, NULL, NULL, NULL), $3, NULL, NULL);}
-    ;
+ASSGN   :   T_ID '=' E ';'  {$$ = init_exp_node(strdup("="), init_exp_node($1, NULL, NULL, NULL), $3, NULL);}
+        ;
 
 /* Expression Grammar */
-E   :   E '+' T {$$ = init_exp_node(strdup("+"), $1, $3, NULL, NULL);}
-    |   E '-' T {$$ = init_exp_node(strdup("-"), $1, $3, NULL, NULL);}
+E   :   E '+' T {$$ = init_exp_node(strdup("+"), $1, $3, NULL);}
+    |   E '-' T {$$ = init_exp_node(strdup("-"), $1, $3, NULL);}
     |   T       {$$ = $1;}
     ;
     
     
-T   :   T '*' F {$$ = init_exp_node(strdup("*"), $1, $3, NULL, NULL);}
-    |   T '/' F {$$ = init_exp_node(strdup("/"), $1, $3, NULL, NULL);}
+T   :   T '*' F {$$ = init_exp_node(strdup("*"), $1, $3, NULL);}
+    |   T '/' F {$$ = init_exp_node(strdup("/"), $1, $3, NULL);}
     |   F       {$$ = $1;}
     ;
 
 F   :   '(' E ')'   {$$ = $2;}
-    |   T_ID        {$$ = init_exp_node(strdup($1), NULL, NULL, NULL, NULL);}
-    |   T_NUM       {$$ = init_exp_node(strdup($1), NULL, NULL, NULL, NULL);}
+    |   T_ID        {$$ = init_exp_node(strdup($1), NULL, NULL, NULL);}
+    |   T_NUM       {$$ = init_exp_node(strdup($1), NULL, NULL, NULL);}
     ;
 
 %%

@@ -23,7 +23,7 @@ lex.yy.c: lexer.l
 clean:
 	rm -f *.tab.* *.yy.* *.out *.exe *.o
 
-run:
+test:
 	cat test_input_1.c | ./$(OUTPUT)
 	@printf "\n"
 	cat test_input_2.c | ./$(OUTPUT)
@@ -33,3 +33,7 @@ run:
 	cat test_input_4.c | ./$(OUTPUT)
 	@printf "\n"
 	cat test_input_5.c | ./$(OUTPUT)
+
+NUMBERS=1 2 3
+run:
+	$(foreach val, $(NUMBERS), cat sample_test_$(val).c | ./$(OUTPUT); echo;)

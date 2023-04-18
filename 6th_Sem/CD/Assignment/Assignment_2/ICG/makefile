@@ -2,6 +2,7 @@ CC=gcc
 UNAME := $(shell uname)
 LEX=flex
 YACC=yacc
+ICG_QUAD=icg_quad.txt
 
 ifeq ($(UNAME), Linux)
 OPTIONS=-g -ll
@@ -23,23 +24,27 @@ lex.yy.c: lexer.l
 clean:
 	rm -f *.tab.* *.yy.* *.out *.exe *.o *.txt
 
-run:
+test:
 	cat test_input_1.c | ./$(OUTPUT)
 	@printf "\n"
-	cat icg_quad.txt
+	cat $(ICG_QUAD)
 	@printf "\n"
 	cat test_input_2.c | ./$(OUTPUT)
 	@printf "\n"
-	cat icg_quad.txt
+	cat $(ICG_QUAD)
 	@printf "\n"
 	cat test_input_3.c | ./$(OUTPUT)
 	@printf "\n"
-	cat icg_quad.txt
+	cat $(ICG_QUAD)
 	@printf "\n"
 	cat test_input_4.c | ./$(OUTPUT)
 	@printf "\n"
-	cat icg_quad.txt
+	cat $(ICG_QUAD)
 	@printf "\n"
 	cat test_input_5.c | ./$(OUTPUT)
 	@printf "\n"
-	cat icg_quad.txt
+	cat $(ICG_QUAD)
+
+NUMBERS=1 2
+run:
+	$(foreach val, $(NUMBERS), echo;  cat ./sample_test_$(val).c | ./$(OUTPUT); echo ; cat $(ICG_QUAD); echo ;)
