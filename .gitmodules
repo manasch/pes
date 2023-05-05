@@ -49,3 +49,9 @@
 [submodule "6th_Sem/GP/Project"]
 	path = 6th_Sem/GP/Project
 	url = git@github.com:manasch/gphl.git
+[submodule "6th_Sem/OOAD/Project"]
+	path = 6th_Sem/OOAD/Project
+	url = git@github.com:manasch/trender.git
+[submodule "6th_Sem/DBT/Project"]
+	path = 6th_Sem/DBT/Project
+	url = git@github.com:manasch/dbt-project-reddit.git
