@@ -1,0 +1,89 @@
+@startuml
+enum LeaveStatus {
++  NEW
++  APPROVED
++  REJECTED
+}
+enum LeaveType {
++  CL
++  SL
++  VL
+}
+class Employee {
+- String Name
+- int id
++ String getName()
++ int getId()
++ String toString()
+}
+class Leave {
+# Employee employee
+# LeaveStatus leaveStatus
+# LeaveType leaveType
+# String approvedBy
+# LocalDate requestDate
+# LocalDate approvalDate
+# String comments
++ Employee getEmployee()
++ LeaveStatus getLeaveStatus()
++ void setLeaveStatus(LeaveStatus)
++ LeaveType getLeaveType()
++ String getApprovedBy()
++ void setApprovedBy(String)
++ LocalDate getRequestDate()
++ LocalDate getApprovalDate()
++ void setApprovalDate(LocalDate)
++ String getComments()
++ void setComments(String)
++ String toString()
+}
+class SickLeave {
+# LocalDate leaveDate
++ String toString()
+}
+class CasualLeave {
+# LocalDate leaveDate
+# String leaveReason
++ String toString()
+}
+class VacationLeave {
+# LocalDate startDate
+# LocalDate endDate
++ String toString()
+}
+interface LeaveHandler {
+~ void setNextHandler(LeaveHandler)
+~ void handleLeave(Leave)
+}
+abstract class BaseLeaveHandler {
+- LeaveHandler nextHandler
++ void setNextHandler(LeaveHandler)
++ void handleLeave(Leave)
+# {abstract}boolean canHandle(Leave)
+# {abstract}void processLeave(Leave)
+}
+class TechLeadLeaveHandler {
++ boolean canHandle(Leave)
++ void processLeave(Leave)
+}
+class ProjectManagerHandler {
++ boolean canHandle(Leave)
++ void processLeave(Leave)
+}
+class DirectorLeaveHandler {
++ boolean canHandle(Leave)
++ void processLeave(Leave)
+}
+class Main {
++ {static} void main(String[])
+}
+
+
+Leave <|-- SickLeave
+Leave <|-- CasualLeave
+Leave <|-- VacationLeave
+LeaveHandler <|.. BaseLeaveHandler
+BaseLeaveHandler <|-- TechLeadLeaveHandler
+BaseLeaveHandler <|-- ProjectManagerHandler
+BaseLeaveHandler <|-- DirectorLeaveHandler
+@enduml

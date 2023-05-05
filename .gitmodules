@@ -40,3 +40,18 @@
 [submodule "5th_Sem/AA/Project"]
 	path = 5th_Sem/AA/Project
 	url = git@github.com:manasch/Advanced_Algorithms_Project.git
+[submodule "6th_Sem/CC/Assignment/Assignment_2"]
+	path = 6th_Sem/CC/Assignment/Assignment_2a
+	url = git@github.com:manasch/PES1UG20CS111_Jenkins.git
+[submodule "6th_Sem/CC/Project"]
+	path = 6th_Sem/CC/Project
+	url = git@github.com:manasch/CC-Project-Microservices.git
+[submodule "6th_Sem/GP/Project"]
+	path = 6th_Sem/GP/Project
+	url = git@github.com:manasch/gphl.git
+[submodule "6th_Sem/OOAD/Project"]
+	path = 6th_Sem/OOAD/Project
+	url = git@github.com:manasch/trender.git
+[submodule "6th_Sem/DBT/Project"]
+	path = 6th_Sem/DBT/Project
+	url = git@github.com:manasch/dbt-project-reddit.git
