@@ -6,7 +6,7 @@
 
 ## 1st Sem
 
-- Stuff here isn't well organized as I didn't know about code management, so it's pretty messy.
+> Stuff here isn't well organized as I didn't know about code management, so it's pretty messy.
 
 | Coursework | Code | Link |
 | ------ | ---- | ---- |
@@ -19,7 +19,7 @@
 
 ## 2nd Sem
 
-- Got better management, but C folder is still messy.
+> Got better management, but C folder is still messy.
 
 | Coursework | Code | Link |
 | ------ | ---- | ---- |
@@ -31,7 +31,7 @@
 
 ## 3rd Sem
 
-- Started using git-scm for the first time. Better management.
+> Started using git-scm for the first time.
 
 | Coursework | Code | Link |
 | ------ | ---- | ---- |
@@ -76,7 +76,7 @@
 | MI Lab | UE20CS302 | [MI-Lab](./5th_Sem/MI_Lab/) |
 | MI Project | UE20CS302 | [Flappy Bird](./5th_Sem/MI/Project/) |
 | SE Lab | UE20CS303 | [SE-Lab](./5th_Sem/SE_Lab/) |
-| SE Project | UE20CS303 | [Blockchain Intro](./5th_Sem/SE/Project/) |
+| SE Project | UE20CS303 | [Blockchain Demo](./5th_Sem/SE/Project/) |
 | AA Assignments | UE20CS311 | [AA-Assignments](./5th_Sem/AA/Assignments/) |
 | AA Project | UE20CS311 | [Multi-Encryption Performance](./5th_Sem/AA/Project/) |
 | BD Assignments | UE20CS322 | [BD-Assignments](./5th_Sem/BD/Assignments/) |
@@ -87,21 +87,20 @@
 
 ## 6th Sem
 
+> Painful semester but finally done :)
+
 | Coursework | Code | Link |
 | ------ | ---- | ---- |
 | CC Assignments | UE20CS351 | [CC-Assignments](./6th_Sem/CC/Assignment/) |
 | CC Lab | UE20CS351 | [CC-Lab](./6th_Sem/CC/Lab/) |
-| CC Project | UE20CS351 | [](./6th_Sem/CC/Project/) |
+| CC Project | UE20CS351 | [Breaking Down Monoliths](./6th_Sem/CC/Project/) |
 | OOADJ Lab | UE20CS352 | [OOADJ-Lab](./6th_Sem/OOAD/Lab/) |
-| OOADJ Project | UE20CS352 | [](./6th_Sem/OOAD/Project/) |
+| OOADJ Project | UE20CS352 | [3D-Renderer](./6th_Sem/OOAD/Project/) |
 | CD Assignments | UE20CS353 | [CD-Assignments](./6th_Sem/CD/Assignment/) |
 | CD Lab | UE20CS353 | [CD-Lab](./6th_Sem/CD/Lab/) |
 | GP Assignments | UE20CS331 | [GP-Assignments](./6th_Sem/GP/Assignment/) |
-| GP Project | UE20CS331 | [](./6th_Sem/GP/Project/) |
+| GP Project | UE20CS331 | [Generic Graph Library](./6th_Sem/GP/Project/) |
 | DBT Assignments | UE20CS343 | [DBT-Assignments](./6th_Sem/DBT/Assignment/) |
-| DBT Project | UE20CS343 | [](./6th_Sem/DBT/Project/) |
+| DBT Project | UE20CS343 | [Reddit Stream+Batch Processing](./6th_Sem/DBT/Project/) |
 
 ---
-
-
-
