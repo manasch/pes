@@ -1,0 +1,37 @@
+# Folders
+.cache
+.vscode
+__pycache__
+node_modules
+
+# Extensions
+*.7z
+*.bz2
+*.class
+*.csv
+*.doc
+*.docx
+*.exe
+*.gz
+*.h5
+*.jpg
+*.jpeg
+*.mp4
+*.o
+*.odt
+*.odg
+*.out
+*.pdf
+*.png
+*.ppt
+*.pptx
+*.rar
+*.stackdump
+*.xls
+*.xlsx
+*.yy.*
+*.zip
+
+# Exceptions
+*test*
+*temp*
