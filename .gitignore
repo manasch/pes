@@ -3,6 +3,7 @@
 .vscode
 __pycache__
 node_modules
+placements/
 
 # Extensions
 *.7z
