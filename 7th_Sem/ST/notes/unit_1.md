@@ -1,5 +1,7 @@
 # Introduction to Software Quality and Testing
 
+> *Software Testing is not defined by the words we put, but the actions we take*
+
 **Software**: Collection of computer programs that perform a task.
 
 	- System Software: Device drivers, Utilities
@@ -93,6 +95,8 @@ Quality Management:
 - Quality Control (product-oriented, issues in manufacturing products, focus on resulting product)
 
 Cost of Quality: Price of all efforts to achieve product or service quality. Typically should be 3%-5% of project cost.
+
+> This includes the work to build a product or service that conforms to the requirements and all work resulting non-conformance to the requirements.
 
 - Prevention Cost
 - Appraisal Cost
@@ -234,5 +238,169 @@ Models:
 
 ---
 
+Levels of testing [^3]
+- Unit (W)
+- Integration (W)
+- System (B)
+- UAT (B)
+
+Unit Techniues
+- Basis Path
+- Control Struct - Conditional coverage, loops coverage
+- Mutation
+
+System
+- GUI, F NF, Usability
+
+UAT
+- alpha - customer come to company and do test
+- beta - install software in user env and do test
+
+Quality Management
+- Planning
+- Assurance
+- Control
+- Improvement
+
+|#|QA|QC|
+|-|--|--|
+|1|Process|Product|
+|2|Prevention|Detect & Correct|
+|3|During cycle|After product is built|
+|4|Staff func|Line func|
+|5|Reviews, audits|Testing levels|
+
+
+Fish Bone
+- Agree on the problem statement
+- Agree on main categories of causes
+- Brainstorm
+- Why this
+- Why that
+- Why
+
+ETVX - Represent any phase of sw dev
+> minimize the delay between defect injection and defect detection
+- Entry
+- Task
+- Verification
+- eXit
+
+---
+
+#### Testing
+
+As per ANSI/IEEE 1059, Testing in Software Engineering is a process of evaluating a software product to find whether the current software product meets the required conditions or not.
+
+Types:
+- Functional
+- Non-Functional
+- Maintenance (Regression)
+
+> Software Testing Life Cycle (STLC) is a process used to test software and ensure that quality standards are met
+> Software Testing Life Cycle (STLC) is a sequence of specific activities conducted during the testing process to ensure software quality goals are met.
+> STLC involves both verification and validation activities.
+
+Phases:
+- (Contract Signing)
+- Requirement Analysis
+	- Identify types of tests to be performed.
+	- Gather details about testing priorities and focus.
+	- Prepare [Requirement Traceability Matrix (RTM)](https://www.guru99.com/traceability-matrix.html).
+	- Identify test environment details where testing is supposed to be carried out.
+	- Automation feasibility analysis (if required).
+	- RTM
+	- Automation feasibility report. (if applicable)
+- Test Planning
+	- Senior QA manager determines the test plan strategy along with efforts and cost estimates for the project.
+	- Determine resources
+	- Preparation of test plan/strategy document for various types of testing
+	- Test tool selection
+	- Test effort estimation
+	- Resource planning and determining roles and responsibilities.
+	- Training requirement
+	- Test Plan Doc
+- Test case development
+	- Create test cases, automation scripts (if applicable)
+	- Review and baseline test cases and scripts
+	- Create test data (If Test Environment is available)
+	- Test Cases/scripts
+	- Test data
+- Test Environment setup
+	- Understand the required architecture, environment set-up and prepare hardware and software requirement list for the Test Environment.
+	- Setup test Environment and test data
+	- Perform [smoke test](https://www.guru99.com/smoke-testing.html) on the build
+	- Env ready with test data setup
+	- Smoke test results
+- Test Execution
+	- Execute tests as per plan
+	- Document test results, and log defects for failed cases
+	- Map defects to test cases in RTM
+	- Retest the [Defect](https://www.guru99.com/defect-management-process.html) fixes
+	- Track the defects to closure
+	- RTM complete
+	- Test case with results
+	- Defect reports
+- (Retest Defects)
+- Test Cycle closure
+	- Evaluate cycle completion criteria based on Time, Test coverage, Cost,Software, Critical Business Objectives, Quality
+	- Prepare test metrics based on the above parameters.
+	- Document the learning out of the project
+	- Prepare Test closure report
+	- Test result analysis to find out the defect distribution by type and severity
+	- Test closure report
+	- Test metrics
+
+**Entry Criteria**: Entry Criteria gives the prerequisite items that must be completed before testing can begin.
+
+**Exit Criteria**: Exit Criteria defines the items that must be completed before testing can be concluded
+
+Test Case:
+- Test Case ID
+- Test Description
+- Assumptions and Pre-Conditions
+- Test Data
+- Steps to be Executed
+- Expected Result
+- Actual Result and Post-Conditions
+- Pass/Fail
+
+Testing Types
+- Based on Method
+	- White-Box - test coverage
+		- Path
+		- Condition
+		- Loop
+	- Black-Box - functionalities i/o, behavioural
+		- Functional (functionality, business req)
+		- Non-Functional (perf, usability, scalability)
+		- Regression (**after code fixes**, to see if new code is not affecting the existing code)
+- Based on Requirements Type
+	- Functional (Correctness of internals)
+		- Unit
+		- Smoke
+		- Integration
+		- Regression
+	- Non-Functional - Reliability, Load, Perf, Accountability (Work in external env)
+		- Perf
+		- Load
+		- Stress
+		- Scale
+- Based on Life Cycle Phase [^3]
+	- Unit (W)
+	- Integration (W/B)
+	- System (B)
+- Based on needs
+	- [Regression](https://www.javatpoint.com/regression-testing)
+		- Impact analysis (customer business knowledge, developer coding knowledge, test engineer product knowledge)
+		- Impact area document
+		- Report -> Tech lead
+	- Acceptance (Performed by customer before accepting the software into prod)
+		- Fitness tool: input values and generate test cases automatically
+	- alpha - beta
+		- a - limited user base at dev site (sometimes independent team of testers, in-house)
+		- b - larger end user base at customer site
+
 [^1]: Project Management Body of Knowledge
 [^2]: Parallel
+[^3]: White Box / Black Box
