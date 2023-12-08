@@ -34,6 +34,8 @@ Online Defn
 Slides Defn
 - Project: Software app developed for specific customer/specific customer requirements. Only used by the specific org.
 - Product: Software app developed for the market req. and is used by multiple customers.
+- Project: Service Based Companies (Infosys, Accenture, TCS)
+- Product: Product Based Companies (Google, Microsoft, Oracle)
 
 Software Quality ? (again)
 - Field of study and practice that describes the desirable attributes of software products
@@ -95,7 +97,7 @@ Quality Management:
 - Quality Control (product-oriented, issues in manufacturing products, focus on resulting product)
 
 Cost of Quality: Price of all efforts to achieve product or service quality. Typically should be 3%-5% of project cost.
-
+	 
 > This includes the work to build a product or service that conforms to the requirements and all work resulting non-conformance to the requirements.
 
 - Prevention Cost
@@ -179,9 +181,12 @@ Models:
 	- Clockwise progress
 	- Phases
 		- Identification
+			- Business req, System req, Subsystem req, Unit req
 		- Design
+			- Conceptual, Architectural, Logical, Physical Product, Final
 		- Construct or Build (POC)
 		- Evaluation & Risk analysis (Schedule slippage, cost overrun)
+			- Tech feasibility, management risks, schedule slippage
 	- Pros
 		- Multiple versions, Version Control Model
 		- Testing every cycle
@@ -224,8 +229,8 @@ Models:
 	- static testing, dynamic testing
 	- Walkthrough: Informal, with peers, any time no req.
 	- Inspection: Formal, 6-8 ppl,  Mod, Writer, Reader, Scheduled.
-	- Verification - Before the software is ready (static, *doing the right thing*) review, walk, inspection
-	- Validation - After the software is ready (dynamic, *doing the thing right*) test, unit, integration, system.
+	- Verification - Before the software is ready (static, *doing the thing right*) review, walk, inspection
+	- Validation - After the software is ready (dynamic, *doing the right thing*) test, unit, integration, system.
 	- UAT, System Testing, Integration Testing, Unit Testing
 	- Pros
 		- Test in each phase, less no. of chance to get bugs later
@@ -262,14 +267,13 @@ Quality Management
 - Control
 - Improvement
 
-|#|QA|QC|
-|-|--|--|
-|1|Process|Product|
-|2|Prevention|Detect & Correct|
-|3|During cycle|After product is built|
-|4|Staff func|Line func|
-|5|Reviews, audits|Testing levels|
-
+| #   | QA              | QC                     |
+| --- | --------------- | ---------------------- |
+| 1   | Process         | Product                |
+| 2   | Prevention      | Detect & Correct       |
+| 3   | During cycle    | After Product is built |
+| 4   | Staff Func      | Line Func              |
+| 5   | Reviews, Audits | Testing Levels         | 
 
 Fish Bone
 - Agree on the problem statement

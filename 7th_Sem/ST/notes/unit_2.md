@@ -18,13 +18,13 @@
 	- Manual
 	- Automated
 		- Isolating for more rigorous testing, helps reveal unnecessary between the code
-- Pros
-	- Can understand functionality by looking at the unit api
-	- Refactor code later
-	- Modular
-- Cons
-	- Can't catch every error
-	- Only catch unit, no integration (duh)
+	- Pros
+		- Can understand functionality by looking at the unit api
+		- Refactor code later
+		- Modular
+	- Cons
+		- Can't catch every error
+		- Only catch unit, no integration (duh)
 - Methods
 	- Black Box
 	- White Box
@@ -161,6 +161,8 @@ Types;
 ### Integration Testing
 
 - Uncovers inter-component interface and functional problems
+- Potential problems with external interfaces.
+- Since dealing with partially built systems, defects could be found at an earlier stage.
 - Errors
 	- Interface mismatch –  Parameters / return value – order, type and other semantics
 	- Missing interfaces
@@ -175,7 +177,7 @@ Types;
 
 - Approaches (All are incremental – except System Integration)
 	1. Top down
-		- Stubs
+		- Stubs (Funcs with just return statements)
 		- Empty funcs with returns
 		- Higher levels first
 		- High-level logic
@@ -186,7 +188,7 @@ Types;
 		- Agile suited
 		- Leaf nodes get tested multiple times
 		- No stubs
-		- Drivers
+		- Drivers (It provides a means of  defining, declaring or otherwise creating, any variables, constants or other items needed in the testing of the unit and a means of monitoring the states of these items, any input and output mechanisms needed in the testing of unit)
 		- Easy to observe flow of data
 		- Poor support for early release
 	3. Bi-Directional
@@ -237,6 +239,13 @@ How to write test scenarios
 
 Scenario Testing - End to End
 - Testing “full aspect of main functionality"
+
+Good Scenario:
+- Hacker mindset
+- Check competition and their predecessor
+- List benefits and end to end tasks
+- Determine technical aspects of the requirements
+- List the system events and how it handles these.
 
 System Integration
 - System integration means that all the components of the system are integrated together and tested as an entire unit.

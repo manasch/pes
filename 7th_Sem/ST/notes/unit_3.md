@@ -117,6 +117,29 @@ Ex: Changing the hyperlink in html and seeing the change in real time.
 
 ---
 
+# RTM
+
+- A document that demonstrates the relationship between requirements and other artifacts.
+- Used to prove that the requirements have been fulfilled.
+- To ensure none of the requirements have been left out of the testing cycle.
+
+#### Types of RTM
+- Forward (Requirement -> Test Cases) - Progress in the desired direction
+- Backward (Test cases -> Requirement) - Remain on the right track
+- Bi-Directional
+
+#### Advantages
+- Confirms 100% test coverage
+- highlights any requirements missing or docs inconsistencyies
+- Shows overall defects or execution status
+- Helps in analyzing or estimating impact.
+
+#### Test Coverage
+- States which requirements of the customers are to be verified when the testing phase starts.
+- Whether the test cases are written and executed to ensure to test the software application completely.
+- Max can be achieved with the help of good requirement traceability.
+
+---
 # Test Management
 
 #### Project
@@ -188,7 +211,16 @@ Ex: Changing the hyperlink in html and seeing the change in real time.
 	- People Management
 	- Integrating with product release
 - Test Reporting
-	- Dijkstra's Doctrine
+	- Test Incidence Report
+	- Test Cycle Report
+	- Test Summary Report
+	- Variance Reports
+	- Summary of Test Results
+	- Comprehensive Assessment
+	- Recommendation for Release
+		- Dijkstra's Doctrine
+		- Quality Profile
+		- Final Decision
 
 #### Best Practices
 
@@ -206,6 +238,13 @@ Ex: Changing the hyperlink in html and seeing the change in real time.
 4. Verification
 5. Closure
 6. Report
+
+#### Objectives of Defect Management Process
+- Early Detection of Defects
+- Process enhancement
+- Mitigate defect impact
+- Defect prevention
+- Defect resolution
 
 Stages
 
