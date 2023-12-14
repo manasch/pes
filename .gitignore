@@ -1,5 +1,6 @@
 # Folders
 .cache
+.obsidian
 .vscode
 __pycache__
 node_modules

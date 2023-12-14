@@ -1,57 +1,57 @@
-[submodule "3rd Sem/Data_Structures/DS-Assignment"]
-	path = 3rd_Sem/Data_Structures/DS-Assignment
-	url = git@github.com:manasch/ds-assignment.git
-[submodule "2nd Sem/C/fairplay-cipher"]
-	path = 2nd_Sem/C/fairplay-cipher
-	url = git@github.com:manasch/fairplay-cipher.git
-[submodule "1st Sem/PCPS/python-clock"]
+[submodule "1st_Sem/PCPS/python-clock"]
 	path = 1st_Sem/PCPS/python-clock
 	url = git@github.com:manasch/python-clock.git
-[submodule "3rd Sem/Web_Tech/twitter-clone"]
+[submodule "2nd_Sem/C/fairplay-cipher"]
+	path = 2nd_Sem/C/fairplay-cipher
+	url = git@github.com:manasch/fairplay-cipher.git
+[submodule "3rd_Sem/Data_Structures/DS-Assignment"]
+	path = 3rd_Sem/Data_Structures/DS-Assignment
+	url = git@github.com:manasch/ds-assignment.git
+[submodule "3rd_Sem/Web_Tech/twitter-clone"]
 	path = 3rd_Sem/Web_Tech/twitter-clone
 	url = git@github.com:manasch/twitter-clone.git
-[submodule "4th Sem/CN/Assignments/Assignment-2"]
+[submodule "4th_Sem/CN/Assignments/Assignment-2"]
 	path = 4th_Sem/CN/Assignments/Assignment-2
 	url = git@github.com:manasch/socket_file_transfer.git
-[submodule "4th Sem/CN/Assignments/Assignment-3/icmp_reverse_shell"]
+[submodule "4th_Sem/CN/Assignments/Assignment-3/icmp_reverse_shell"]
 	path = 4th_Sem/CN/Assignments/Assignment-3/icmp_reverse_shell
 	url = git@github.com:manasch/icmp_backdoor.git
-[submodule "4th Sem/LA/Assignments/Project"]
+[submodule "4th_Sem/DAA/Assignments/Assignment-234"]
+	path = 4th_Sem/DAA/Assignments/Assignment-234
+	url = git@github.com:manasch/daa_assignment234.git
+[submodule "4th_Sem/LA/Assignments/Project"]
 	path = 4th_Sem/LA/Assignments/Project
 	url = git@github.com:manasch/image_manipulation.git
-[submodule "4th Sem/MPCA/Assignments/tag-bag"]
+[submodule "4th_Sem/MPCA/Assignments/tag-bag"]
 	path = 4th_Sem/MPCA/Assignments/tag-bag
 	url = git@github.com:manasch/tag-bag.git
-[submodule "4th Sem/DAA/Assignments/Assignment-234"]
-	path = 4th_Sem/DAA/Assignments/Assignment-234
-	url = git@github.com:manasch/DAA-Assignment234-Airport_Management_System.git
-[submodule "5th_Sem/SE/Project"]
-	path = 5th_Sem/SE/Project
-	url = git@github.com:manasch/SE-Project-Blockchain.git
-[submodule "5th_Sem/MI/Project"]
-	path = 5th_Sem/MI/Project
-	url = git@github.com:manasch/MI-Project-Flappy-Bird.git
-[submodule "5th_Sem/DBMS/Project"]
-	path = 5th_Sem/DBMS/Project
-	url = git@github.com:manasch/Chess_Database_DBMS_Project.git
-[submodule "5th_Sem/BD/Project"]
-	path = 5th_Sem/BD/Project
-	url = git@github.com:manasch/BD_Project_YaK.git
 [submodule "5th_Sem/AA/Project"]
 	path = 5th_Sem/AA/Project
-	url = git@github.com:manasch/Advanced_Algorithms_Project.git
-[submodule "6th_Sem/CC/Assignment/Assignment_2"]
+	url = git@github.com:manasch/aa-project.git
+[submodule "5th_Sem/BD/Project"]
+	path = 5th_Sem/BD/Project
+	url = git@github.com:manasch/bd-project-yak.git
+[submodule "5th_Sem/DBMS/Project"]
+	path = 5th_Sem/DBMS/Project
+	url = git@github.com:manasch/dbms-project-chess-database.git
+[submodule "5th_Sem/MI/Project"]
+	path = 5th_Sem/MI/Project
+	url = git@github.com:manasch/mi-project-flappy-bird.git
+[submodule "5th_Sem/SE/Project"]
+	path = 5th_Sem/SE/Project
+	url = git@github.com:manasch/se-project-blockchain.git
+[submodule "6th_Sem/CC/Assignment/Assignment_2a"]
 	path = 6th_Sem/CC/Assignment/Assignment_2a
 	url = git@github.com:manasch/PES1UG20CS111_Jenkins.git
 [submodule "6th_Sem/CC/Project"]
 	path = 6th_Sem/CC/Project
-	url = git@github.com:manasch/CC-Project-Microservices.git
+	url = git@github.com:manasch/cc-project-microservices.git
+[submodule "6th_Sem/DBT/Project"]
+	path = 6th_Sem/DBT/Project
+	url = git@github.com:manasch/dbt-project-reddit.git
 [submodule "6th_Sem/GP/Project"]
 	path = 6th_Sem/GP/Project
 	url = git@github.com:manasch/gphl.git
 [submodule "6th_Sem/OOAD/Project"]
 	path = 6th_Sem/OOAD/Project
 	url = git@github.com:manasch/trender.git
-[submodule "6th_Sem/DBT/Project"]
-	path = 6th_Sem/DBT/Project
-	url = git@github.com:manasch/dbt-project-reddit.git
