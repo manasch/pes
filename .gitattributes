@@ -2,3 +2,5 @@
 *.ipynb -linguist-detectable
 *.csv -linguist-detectable
 *.html -linguist-detectable
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text

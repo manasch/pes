@@ -1,0 +1,302 @@
+\documentclass[conference]{IEEEtran}
+% \IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[round]{natbib}
+\usepackage{subfigure}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+% {\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
+% should not be used}
+% \thanks{Identify applicable funding agency here. If none, delete this.}
+
+\makeatletter
+\newcommand{\linebreakand}{%
+  \end{@IEEEauthorhalign}
+  \hfill\mbox{}\par
+  \mbox{}\hfill\begin{@IEEEauthorhalign}
+}
+\makeatother
+
+\title{AudioPalette: Generating Soundtracks Through Feature Extraction from Images
+}
+
+
+\author{\IEEEauthorblockN{Abhinav Vasireddy}
+\IEEEauthorblockA{\textit{Dept. of CSE} \\
+\textit{PES University}\\
+Bengaluru, India \\
+abhinav.vasireddy144@gmail.com}
+\and
+\IEEEauthorblockN{Tushar N Kumar}
+\IEEEauthorblockA{\textit{Dept. of CSE} \\
+\textit{PES University}\\
+Bengaluru, India \\
+8tushar.kumar12@gmail.com}
+\and
+\IEEEauthorblockN{Manas Chebrolu}
+\IEEEauthorblockA{\textit{Dept. of CSE} \\
+\textit{PES University}\\
+Bengaluru, India \\
+manas.nchebrolu@gmail.com}
+\linebreakand
+\IEEEauthorblockN{Karthik Nair}
+\IEEEauthorblockA{\textit{Dept. of CSE} \\
+\textit{PES University}\\
+Bengaluru, India \\
+karthik16092002@gmail.com}
+\and
+\IEEEauthorblockN{V.R. Badri Prasad}
+\IEEEauthorblockA{\textit{Dept. of CSE} \\
+\textit{PES University}\\
+Bengaluru, India \\
+badriprasad@pes.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+In this experiment, we aim to create a streamlined way of generating a musical soundtrack from an image. The proposed pipeline employs extracting important features from an image, such as the context in terms of text captioning and the sentiment portrayed by the image. Here, we also introduce our ``pace'' model, which was trained on a manually annotated dataset of around 8k images. This model essentially extracts the ``pace'' or ``tempo'' for the soundtrack, from the image. Based on a survey conducted, the pace model proved to be a necessary and impactful addition to the pipeline. Using these extracted features, Meta's music generation model, MusicGen, generates the soundtrack. We discuss the methods used along with the underlying architectures and demonstrate their effectiveness in creating a suitable auditory experience. Another functionality that has been implemented is the generation of a slideshow with music, with the input being a set of similar images. The study highlights potential applications in multimedia, immersive storytelling, and more.
+\end{abstract}
+
+\begin{IEEEkeywords}
+cnn, rnn, image captioning, sentiment analysis, music generation, resnet
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+{
+Artistic experiences attain greater depth through multi-sensory engagement. In the recent developments of multi-modal landscapes, image-to-music is an unexplored area and through this research experiment, we try to bridge that gap.
+\\
+
+Trying to transform the essence of an image into music is a difficult task because the ``essence'' is subjective for every individual and therefore there could be an abundance of possibilities for a single image.
+\\
+
+Multiple approaches can be considered, such as directly co-relating certain features from an image to specific audio and combining them in a shared space, or converting these features to an intermediary format before transforming this to the musical output. The latter approach may result in the loss of some subtleties, but it can be built on existing technologies.
+We propose a unique and distinctive pipeline by combining an array of off-the-shelf components with our model known as the ``Pace'' model. This pipeline generates a soundtrack that can capture the numerous factors of the image. The various components of the pipeline work in conjunction to discern the aforementioned attributes of the image, each playing its role.
+\\
+
+In addition to creating a soundtrack for a single image, we also offer the functionality of creating a slideshow from the input of several input images, with a cohesive backing soundtrack. This could be extended to various applications.
+
+The system can be used to generate original music for multimedia art installations. The visual and textual prompts can be used to capture the atmosphere of the installation, and the generated music could be used to enhance the overall viewing experience. It can also be used to generate original music that is specifically tailored to an individual's taste and preferences. Finally, the system can be used to generate original music for music education and training purposes. The visual and textual prompts could be used to capture the desired musical style and structure, and the generated music could be used as a tool for students to learn about different musical styles and structures.
+\\
+
+In this paper, we discuss a methodology that begins with the extraction of features from images, including elements such as captions of images, sentiment from the captions, and pace. This process involves the integration of metadata relevant to the image. Subsequently, the MusicGen model, developed by Meta is used, which is proficient in generating a soundtrack from a textual input. Subsequent sections will provide further clarity on specific features, and methodologies.
+}
+
+\section{Literature Survey}
+
+{
+During the development of the proposed pipeline, we consider various existing architectures to build upon, 
+
+GIT \citep{wang2022git} had multiple motivations, to unify all vision language tasks including image captioning, image VQA, and its video counterpart. Another was to create a simple model structure: a single image encoder and a single text decoder. Lastly, the third motivation was to scale up to boost the model's performance. They found it unclear how to control the generated caption and how to perform in-context learning without updating parameters, which they left as future work.
+\\
+
+Both ``Emotion-based music visualization using photos'' \citep{chen2008emotion} and ``Generating music from an image''
+\citep{sergio2015generating} tackles the process of music generation by directly converting the images to music, using properties such as color, textureness, lines, HSV values, and more. While this approach is direct, most of the nuance of the image is lost in direct conversion.
+\\
+
+The authors of \citep{choi2016text} say that music can be represented as a sequence of events, each with its probability of occurring. Therefore, we can use HMMs (Hidden Markov Models) to model and predict these sequences.
+The drawback of HMMs is that for N hidden states, we need to learn N\textsuperscript{2} parameters. RNNs can solve this issue, but they are plagued by the vanishing gradient problem, which is taken care of by LSTMs. However, the quality of the music generated was subpar.
+\\
+
+Amongst all the reviewed papers, the following stood out with their innovative methods and are discussed in more detail:
+}
+
+\subsection{Music Gen}
+{
+MusicGen \citep{copet2023simple} is Meta’s take on music generation from textual input. It is a single-language model that works over multiple streams of discrete music representation, the music tokens. These tokens consist of vectors with dimensions as large as 44.1k to 48k for each second of music corresponding to the frequency of music (which is a sampling rate from 44.1kHz to 48kHz). As human ears are sensitive, people are more likely to notice disharmony within a poorly generated song, rather than a poorly generated image. Therefore, accuracy is especially important for music generation.
+\\
+
+MusicGen uses an auto-regressive transformer-based decoder that is conditioned on melodic representation. The encoder-decoder model used to encode the audio to tokens is EnCodec \citep{defossez2022high}, another model created by Meta. In EnCodec, an input goes through multiple interleaving codebook patterns, each of which helps in highly reducing the number of dimensions that result in the intermediary encoded input. The same codebooks are used later to decode the input from the latent space back to the original dimensions.
+\\
+
+The first step in the process is Audio Tokenization, which happens through the previously mentioned EnCodec, a convolutional auto-encoder with latent space quantized using RVQ (Residual Vector Quantization) and an adversarial reconstruction loss. 
+During training, the model is given a pair of textual input and corresponding music. The music is converted to tokens using EnCodec, and those tokens are mapped with the text input in the latent space. During inference, when given a text as input, the model picks out the most appropriate tokens from the encoded latent space and puts them through the decoder, generating a musical soundtrack. 
+\\
+
+The tokens that are taken through the decoder result in a vector of 32k values for every second of music generated, learning to generate coherent music at 32kHz. Of the models that were researched for this experiment, MusicGen is the only model that, instead of stacking numerous models in a pipeline, utilizes a singular unit to generate the music, the auto-encoder.
+\\
+
+MusicGen was trained on 20k hours of licensed music and evaluated on the MusicCaps benchmark composed of 5.5k samples (10 seconds long) prepared by expert musicians.
+}
+
+
+\subsection{MusicLM}
+{
+MusicLM \citep{agostinelli2023musiclm} is Google’s approach to music generation from textual input. Unlike MusicGen, MusicLM comprises three main underlying architectures, which are MuLan \citep{huang2022mulan}, SoundStream \citep{zeghidour2021soundstream}, and w2v-BERT \citep{chung2021w2v}. Each of these models was trained independently by Google for their specific inputs. Before this, Google released a language model approach to music generation, AudioLM \citep{borsos2023audiolm} that was augmented with MuLan resulting in MusicLM.
+\\
+
+MuLan is a joint text-to-music embedding that stands on two towers - a text tower and an audio tower, and it indicates how closely a text and music sample are related to each other. The text-embedding tower is BERT pre-trained on text, and the audio embedding tower is ResNet-50. w2v-BERT is responsible for generating semantic tokens. SoundStream is a state-of-the-art audio compression model that retains a high reconstruction quality, responsible for generating acoustic tokens.
+\\
+
+The training process consists of three stages. The first stage involves extracting the required tokens from the input music sample, and MuLan’s audio tower is responsible for generating the audio tokens. The second stage involves the training of the semantic model which is conditioned on MuLan’s previously generated audio tokens to predict the semantic tokens. 
+\\
+
+The final stage is the acoustic model which is conditioned on both, M\textsubscript{a} (MuLan audio tokens) and S (MuLan semantic tokens), to predict acoustic tokens. The main purpose of the semantic model is to capture the long-term structure whereas for the acoustic model, it is to capture fine-grained details.
+\\
+
+During inference, M\textsubscript{a} is replaced with M\textsubscript{t}, and the text tokens from MuLan, which uses the aforementioned semantic model and the acoustic model to generate a waveform that is decoded using SoundStream, into a musical soundtrack. The final generated music has a sampling rate of 24Khz, which is lower than that of MusicGen, providing an additional reason to choose this over MusicLM.
+}
+
+
+\subsection{Blip-2}
+{
+BLIP-2 \citep{li2023blip} is a well-known model that has drawn notice for its creative methodology. The model consists of a two-step procedure that aims to build a solid foundation for zero-shot instructed image-to-text generation which characterizes BLIP-2's design. The model uses a lightweight querying transformer in the first stage. Using a frozen image encoder, bootstrapped vision-language representation learning is used to train this transformer. Two transformers - an image-grounded text generator and an image-text pair mediator, are essential to this step.
+\\
+
+Image-Text Matching: Acquiring fine-grained alignment between picture and text representations is the main goal of this binary classification problem. The model makes predictions about the positive (matched) or negative (unmatched) nature of an image-text pair.
+\\
+
+Image-Text Contrastive Learning: The model maximizes the reciprocal information between the picture and text representations through contrastive learning. Alignment is achieved by contrasting positive and negative pairings.
+\\
+
+Image-Grounded Text Generation: This part builds the groundwork for the next step of the model by producing text based on input photos.
+\\
+
+The output of the Q-transformer is taken and then passed into the LLM Decoder. The model uses a fully connected layer to linearly project the output query embeddings into the same dimension as the text embeddings of the LLM. The generative capabilities of LLMs are utilized to generate the final caption that is presented as an output.
+\\
+
+The outputs of the Q-former act as soft visual prompts (in terms of text) to guide the LLM in generating the appropriate caption for the image.
+\\
+
+BLIP-2 achieves state-of-the-art performance on various vision-language tasks while having a small number of trainable parameters during pre-training. BLIP-2 also demonstrates emerging capabilities in zero-shot instructed image-to-text generation.
+}
+
+\subsection{NLTK}
+{
+VADER \citep{hutto2014vader} is a lexicon and rule-based sentiment analysis tool created to examine the sentiment of a piece of text, considering various factors such as negations, intensity, and sentiment shifters. Developed by researchers at the Georgia Institute of Technology, VADER's lexicon is pre-built and includes sentiment scores for words. This allows it to generate a sentiment score for any given text.
+The Natural Language Toolkit (NLTK), an all-encompassing library built for Python, has acknowledged VADER as a valuable tool for sentiment analysis. This integration with VADER allows users to leverage its strengths and capabilities seamlessly within their NLP pipelines. NLTK is an open-source software and the source code is distributed under the terms of the Apache License Version 2.0 making it a great choice for its inclusion.
+\\
+
+VADER utilizes a combination of lexical and grammatical factors to analyze sentiment. The model considers the intensity of sentiments, punctuation, and capitalization to enhance the accuracy of its predictions. VADER calculates its sentiment scores based on its large corpus that has average scores for various text tokens. On tokenizing the text, VADER assigns the aforementioned scores to them and normalizes them giving us the overall sentiment of the given text. This is also called the ``Polarity Score'' as it even outputs a positive, negative, and neutral score.
+VADER can be used in various domains such as social media analysis, customer feedback analysis, or market research. In this experiment, it has been chosen to derive the sentiment from the image captions.
+}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/HLD.png}
+    \caption{High-level diagram, inputs could be a single image or a sequence of images for a slideshow with a backing soundtrack.}
+    \label{fig:high-level-diagram}
+\end{figure}
+
+\section{Methods}
+Given the array of models integrated into the project, a systematic pipeline was established to enhance efficiency. The pipeline is bifurcated into two principal sections: feature extraction from the image and subsequent utilization of these features.
+
+The initial section encompasses three distinct models:
+\begin{itemize}
+    \item Image captioning model
+    \item Sentiment analyzer model
+    \item Pace model
+\end{itemize}
+
+The subsequent section employs Meta's model for the generation of the soundtrack.
+
+\subsection{Image Captioning}
+
+Image captioning is the application of artificial intelligence that combines computer vision and natural language processing to provide descriptive narratives for images. By leveraging deep learning techniques, image captioning models can recognize objects, scenes, and relationships within pictures, translating the image into coherent textual descriptions.
+\\
+
+This is the first model that is utilized in the pipeline to take the image as input and translate it into text for further processing. The famous image captioning dataset Flickr-8k was utilized, which is a benchmark collection for sentence-based image description and search, consisting of 8,000 images that are each paired with five different captions which provide clear descriptions of the salient features. The images were chosen from six different Flickr groups, and tend not to contain any well-known people or locations, but were manually selected to depict a variety of scenes and situations. BLIP-2 is the image captioning model that was utilized for this stage of the pipeline.
+
+\subsection{Sentiment Analyzer}
+
+To further bridge the gap between image and music, it proved necessary to include the sentiment from the images such that the music generated could capture the essence of the image. It was also noticed that providing a sentiment along with the text generated yielded better results in the final musical output.
+
+Two primary approaches were considered for sentiment extraction:
+
+\begin{itemize}
+    \item Direct sentiment analysis from images.
+    \item Sentiment analysis from the generated image captions.
+\end{itemize}
+
+The latter approach was selected for this experiment due to its computational efficiency and potential for integration with the utilized models.
+
+To achieve this, the NLTK (Natural Language Toolkit) library was utilized, which analyzed the text generated from BLIP-2, performing sentiment classification to assign probabilities for positive, negative, or neutral statements. Finally, the extracted sentiment was integrated into the music generation prompt.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\linewidth]{images/PaceModel.png}
+    \caption{Pace Model Architecture: Trained on the frozen layers of ResNet50v2 augmented with a flattening layer and 3 dense layers to finally get 3 classes.}
+    \label{fig:pace-model}
+\end{figure}
+
+\subsection{Pace Model}
+
+While the previous models have demonstrated commendable proficiency in capturing the predominant aspects of the image, significant variability in the generated soundtracks was observed. Therefore, this experiment introduces the ``pace'' model to take control over the tempo of the soundtrack. This model assumes a pivotal role in determining the optimal pace or tempo.
+\\
+
+For instance, an image depicting two cars racing can imply high intensity, suggesting a correspondingly high-tempo soundtrack. Conversely, an image of a peaceful landscape with rolling hills inspires calmness and serenity, reflected in a slow-tempo soundtrack. This addition aims to enhance the coherence and consistency of the generated soundtracks. Given the absence of existing datasets for this model, the Flickr-8k dataset was manually annotated, categorizing each image into one of three classes: slow, medium, or fast.
+\\
+
+ResNet50v2 was chosen as the best core model due to its substantial pre-training on a variety of datasets, which provided a solid foundation for model development.
+This model's architecture begins with the integration of the ResNet50v2 frozen layers, followed by a flattening layer to flatten the output of the ResNet50v2 model.
+Finally, three dense layers of 1024, 256, and 3 neurons each are added. The first two dense layers use Rectified Linear Unit (ReLU) activation functions, and the last dense layer uses a Softmax activation function, resulting in the classification output of slow, medium, and fast.
+\\
+
+This model underwent training across multiple epochs, specifically 10, 15, 20, and 30, utilizing varied batch sizes of 32, 64, and 128. Optimal outcomes were observed in the case of a 15-epoch training regimen paired with a batch size of 32. The dataset this was trained on was very diverse and we achieved a training accuracy of 94\%. We later confirmed these results by conducting a survey.
+
+\subsection{Music Generation Model}
+
+As previously mentioned, various music generation models were systematically assessed, with MusicGen emerging as the leading performer. In the final phase of the pipeline, the outputs acquired thus far are aggregated - comprising the image caption, the associated sentiment extracted from the caption, and the determined ``pace'' of the image. This composite set of inputs, formatted as: ``[a man on a snowboard performing a trick], [excitement], [fast tempo]'' is subsequently presented as input to Meta's MusicGen model.
+\\
+
+The ``facebook/musicgen-small'' checkpoint that has been trained on 300 million parameters was used. This was chosen instead of the other models due to its availability and hardware limitations. This model was run on a dedicated GPU system and this processing power was harnessed with the help of a custom-built API. A clear separation is maintained between the user interface and the music generation server.
+\\
+
+Furthermore, the model's functionality was extended to encompass two distinct outputs: independent audio generation for a single image and the creation of a slideshow with a backing soundtrack for multiple images as the input.
+
+\section*{Results}
+
+\subsection*{Pace Model}
+
+To test the effectiveness of the pace model, a survey was conducted to evaluate the accuracy of the model outputs. The survey comprised ten images, each accompanied by its corresponding ``pace'' generated by the model. Subsequently, participants were polled to ascertain their agreement or disagreement with the perceived pace alignment. Out of the ten images, a positive response was obtained for eight, with an average agreement rate of 80.66\%, signifying a favorable reception of the pace model's outputs.
+\\
+
+While the two images that received less favorable responses on the survey point to areas for improvement, it is crucial to recognize that achieving unanimous positive reception across all images may be an unattainable goal. The varying criteria for evaluation among individuals show the inherent subjectivity associated with pace perception, emphasizing the continued need for refinement in the model.
+
+\begin{figure}[ht]
+    \centering
+    \subfigure[Dog Running: fast]{\includegraphics[width=0.22\textwidth]{images/fast.jpeg}}
+    \subfigure[Calm Scenery: slow]{\includegraphics[width=0.22\textwidth]{images/slow.jpeg}}
+    \subfigure[Man on Skateboard: medium]{\includegraphics[width=0.22\textwidth]{images/medium.jpeg}}
+    \subfigure[Fast Car: fast]{\includegraphics[width=0.22\textwidth]{images/fast2.jpeg}}
+    \subfigure[Calm Landscape: slow]{\includegraphics[width=0.22\textwidth]{images/slow2.jpeg}}
+    \caption{Pace Model predictions for a variety of images. [All images are sourced from \url{https://pexels.com} Copyright Free]}
+    \label{fig:pace-model-predictions}
+\end{figure}
+
+\subsection*{Music Generation}
+
+To further solidify our findings, another survey was conducted comprising six images and the soundtrack generated from the proposed pipeline. The participants assessed the coherency of the generated soundtrack to the image.
+
+This was received positively with an average agreement rate of 81\% that the soundtrack generated is coherent with the image.
+
+\subsection*{MusicGen vs MusicLM}
+
+For the last stage of soundtrack generation in the suggested pipeline, we utilized Meta's MusicGen rather than Google's MusicLM because of accessibility and hardware constraints. To gain more insight, we conducted a survey where participants ranked two soundtracks, one produced by MusicGen and the other by MusicLM, for a total of 9 photos. Our proposed pipeline generated the prompts that were used as input to MusicGen and MusicLM. With an average positive result of 68.9\%, MusicGen won 8 out of 9 times.
+
+\section*{Conclusion}
+
+This study explored the feasibility of generating music from images by employing a pipeline of ``BLIP-2'', ``NLTK Sentiment Analyser'', ``Pace'' Model, and Meta's ``MusicGen'' model. While efficiency was achieved with an overall positive response, limitations arose due to computational constraints, impacting the final music quality. Due to the use of frozen layers through transfer learning, the system inherits the risks that exist in the components that are present in it.
+Further research could explore feature extraction and the creation of a shared latent space for the extracted features and music, alongside further refinement of the proposed ``pace'' model.
+
+% ----
+\nocite{kreuk2022audiogen}
+\nocite{wu2008study}
+\nocite{gajarla2015emotion}
+\nocite{donahue2018adversarial}
+% ----
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}
