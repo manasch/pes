@@ -5,8 +5,6 @@ In this project we tackle an interesting problem of generating music from image 
 
 The research highlights potential application in multimedia, immersive storytelling etc. This approach opens new horizons at the intersection of visual and auditory perception, showcasing a promising avenue for cross-modal translation in the ever-evolving field of technology and arts.
 
-The paper publication is still in progress.
-
 ## Demo
 
 The live link can be found [here](https://huggingface.co/spaces/onlycaps/audio_palette) on HuggingFace.

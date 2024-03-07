@@ -8,8 +8,9 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{hyperref}
-\usepackage[round]{natbib}
+% \usepackage[round]{natbib}
 \usepackage{subfigure}
+\usepackage{svg}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -64,96 +65,59 @@ badriprasad@pes.edu}
 \maketitle
 
 \begin{abstract}
-In this experiment, we aim to create a streamlined way of generating a musical soundtrack from an image. The proposed pipeline employs extracting important features from an image, such as the context in terms of text captioning and the sentiment portrayed by the image. Here, we also introduce our ``pace'' model, which was trained on a manually annotated dataset of around 8k images. This model essentially extracts the ``pace'' or ``tempo'' for the soundtrack, from the image. Based on a survey conducted, the pace model proved to be a necessary and impactful addition to the pipeline. Using these extracted features, Meta's music generation model, MusicGen, generates the soundtrack. We discuss the methods used along with the underlying architectures and demonstrate their effectiveness in creating a suitable auditory experience. Another functionality that has been implemented is the generation of a slideshow with music, with the input being a set of similar images. The study highlights potential applications in multimedia, immersive storytelling, and more.
+This experiment aims to create a streamlined way of generating a musical soundtrack from an image. The proposed pipeline employs extracting necessary features from an image, such as the context in terms of text captioning and the sentiment portrayed by the image. Using these extracted features, Meta's music generation model, MusicGen, generates a soundtrack. We also introduce our ``pace'' model, which was trained on a manually annotated dataset of around 8,000 images. Based on a conducted survey, the pace model proved to be a necessary and impactful addition to the pipeline. This model extracts the ``pace'' or ``tempo'' for a soundtrack from the image. We discuss the methods used along with the underlying architectures and demonstrate their effectiveness in creating a suitable auditory experience. Another implemented functionality is the generation of a slideshow with music, with the input being a set of similar images. The experiment highlights potential applications in multimedia, immersive storytelling, and more.
 \end{abstract}
 
 \begin{IEEEkeywords}
-cnn, rnn, image captioning, sentiment analysis, music generation, resnet
+CNN, RNN, Image Captioning, Sentiment Analysis, Music Generation, ResNet
 \end{IEEEkeywords}
 
 \section{Introduction}
 
 {
-Artistic experiences attain greater depth through multi-sensory engagement. In the recent developments of multi-modal landscapes, image-to-music is an unexplored area and through this research experiment, we try to bridge that gap.
+Artistic experiences attain greater depth through multi-sensory engagement. In the recent developments of multi-modal landscapes, image-to-music is an unexplored area, and this research experiment tries to bridge that gap.
 \\
 
-Trying to transform the essence of an image into music is a difficult task because the ``essence'' is subjective for every individual and therefore there could be an abundance of possibilities for a single image.
+Trying to transform the essence of an image into music is a difficult task because the ``essence'' is subjective for every individual, leading to an abundance of possibilities for a single image.
 \\
 
-Multiple approaches can be considered, such as directly co-relating certain features from an image to specific audio and combining them in a shared space, or converting these features to an intermediary format before transforming this to the musical output. The latter approach may result in the loss of some subtleties, but it can be built on existing technologies.
-We propose a unique and distinctive pipeline by combining an array of off-the-shelf components with our model known as the ``Pace'' model. This pipeline generates a soundtrack that can capture the numerous factors of the image. The various components of the pipeline work in conjunction to discern the aforementioned attributes of the image, each playing its role.
+Multiple approaches can be considered, such as directly co-relating certain features from an image to specific audio and combining them in a shared space. Another approach can be converting these features into an intermediary format before transforming it into the musical output. The latter approach may result in the loss of some subtleties but can be built on existing technologies.
+We propose a unique and distinctive pipeline by combining an array of off-the-shelf components with our model known as the ``Pace'' model. This pipeline generates a soundtrack that can capture the numerous factors of the image. The various components of the pipeline work in conjunction to discern the previously mentioned attributes of the image, each playing its role.
 \\
 
-In addition to creating a soundtrack for a single image, we also offer the functionality of creating a slideshow from the input of several input images, with a cohesive backing soundtrack. This could be extended to various applications.
+In addition to creating a soundtrack for a single image, we also offer the functionality of creating a slideshow from the input of several input images, with a cohesive backing soundtrack. That is extensible to various applications.
 
-The system can be used to generate original music for multimedia art installations. The visual and textual prompts can be used to capture the atmosphere of the installation, and the generated music could be used to enhance the overall viewing experience. It can also be used to generate original music that is specifically tailored to an individual's taste and preferences. Finally, the system can be used to generate original music for music education and training purposes. The visual and textual prompts could be used to capture the desired musical style and structure, and the generated music could be used as a tool for students to learn about different musical styles and structures.
+The system can be used to generate original music for multimedia art installations. Visual and textual prompts can be used to capture the atmosphere of the installation, and the generated music could be used to enhance the overall viewing experience. Another use could be to generate original music specifically tailored to an individual's taste and preferences. Finally, the system can be used to generate original music for music education and training purposes. The visual and textual prompts could be used to capture the desired musical style and structure, and the generated music could be a tool for students to learn about different musical styles and structures.
 \\
 
-In this paper, we discuss a methodology that begins with the extraction of features from images, including elements such as captions of images, sentiment from the captions, and pace. This process involves the integration of metadata relevant to the image. Subsequently, the MusicGen model, developed by Meta is used, which is proficient in generating a soundtrack from a textual input. Subsequent sections will provide further clarity on specific features, and methodologies.
+In this paper, we discuss a methodology that begins with the extraction of features from images, including elements such as captions of images, sentiment from the captions, and pace. This process involves the integration of metadata relevant to the image. Subsequently, the MusicGen model, developed by Meta, is used. It is proficient in generating a soundtrack from a textual input. Subsequent sections will provide further clarity on specific features and methodologies.
 }
 
 \section{Literature Survey}
 
 {
-During the development of the proposed pipeline, we consider various existing architectures to build upon, 
+During the development of the proposed pipeline, we consider various existing architectures to build upon,
 
-GIT \citep{wang2022git} had multiple motivations, to unify all vision language tasks including image captioning, image VQA, and its video counterpart. Another was to create a simple model structure: a single image encoder and a single text decoder. Lastly, the third motivation was to scale up to boost the model's performance. They found it unclear how to control the generated caption and how to perform in-context learning without updating parameters, which they left as future work.
+GIT \cite{wang2022git} had multiple motivations: To unify all vision language tasks including image captioning, image VQA, and its video counterpart. Another was to create a simple model structure: A single image encoder and a single text decoder. The third motivation was to scale up to boost the model's performance. They found it unclear how to control the generated caption and how to perform in-context learning without updating parameters, which they left as future work.
 \\
 
-Both ``Emotion-based music visualization using photos'' \citep{chen2008emotion} and ``Generating music from an image''
-\citep{sergio2015generating} tackles the process of music generation by directly converting the images to music, using properties such as color, textureness, lines, HSV values, and more. While this approach is direct, most of the nuance of the image is lost in direct conversion.
-\\
-
-The authors of \citep{choi2016text} say that music can be represented as a sequence of events, each with its probability of occurring. Therefore, we can use HMMs (Hidden Markov Models) to model and predict these sequences.
+The authors of \cite{choi2016text} say that music can be represented as a sequence of events, each with its probability of occurring. We can use HMMs (Hidden Markov Models) to model and predict these sequences.
 The drawback of HMMs is that for N hidden states, we need to learn N\textsuperscript{2} parameters. RNNs can solve this issue, but they are plagued by the vanishing gradient problem, which is taken care of by LSTMs. However, the quality of the music generated was subpar.
+\\
+
+Both ``Generating music from an image''
+\cite{sergio2015generating} and ``Emotion-based music visualization using photos'' \cite{chen2008emotion} tackled the process of music generation by directly converting the images to music, using properties such as color, textureness, lines, HSV values, and more. While this approach is direct, most of the nuance of the image is lost in direct conversion.
 \\
 
 Amongst all the reviewed papers, the following stood out with their innovative methods and are discussed in more detail:
 }
 
-\subsection{Music Gen}
-{
-MusicGen \citep{copet2023simple} is Meta’s take on music generation from textual input. It is a single-language model that works over multiple streams of discrete music representation, the music tokens. These tokens consist of vectors with dimensions as large as 44.1k to 48k for each second of music corresponding to the frequency of music (which is a sampling rate from 44.1kHz to 48kHz). As human ears are sensitive, people are more likely to notice disharmony within a poorly generated song, rather than a poorly generated image. Therefore, accuracy is especially important for music generation.
-\\
-
-MusicGen uses an auto-regressive transformer-based decoder that is conditioned on melodic representation. The encoder-decoder model used to encode the audio to tokens is EnCodec \citep{defossez2022high}, another model created by Meta. In EnCodec, an input goes through multiple interleaving codebook patterns, each of which helps in highly reducing the number of dimensions that result in the intermediary encoded input. The same codebooks are used later to decode the input from the latent space back to the original dimensions.
-\\
-
-The first step in the process is Audio Tokenization, which happens through the previously mentioned EnCodec, a convolutional auto-encoder with latent space quantized using RVQ (Residual Vector Quantization) and an adversarial reconstruction loss. 
-During training, the model is given a pair of textual input and corresponding music. The music is converted to tokens using EnCodec, and those tokens are mapped with the text input in the latent space. During inference, when given a text as input, the model picks out the most appropriate tokens from the encoded latent space and puts them through the decoder, generating a musical soundtrack. 
-\\
-
-The tokens that are taken through the decoder result in a vector of 32k values for every second of music generated, learning to generate coherent music at 32kHz. Of the models that were researched for this experiment, MusicGen is the only model that, instead of stacking numerous models in a pipeline, utilizes a singular unit to generate the music, the auto-encoder.
-\\
-
-MusicGen was trained on 20k hours of licensed music and evaluated on the MusicCaps benchmark composed of 5.5k samples (10 seconds long) prepared by expert musicians.
-}
-
-
-\subsection{MusicLM}
-{
-MusicLM \citep{agostinelli2023musiclm} is Google’s approach to music generation from textual input. Unlike MusicGen, MusicLM comprises three main underlying architectures, which are MuLan \citep{huang2022mulan}, SoundStream \citep{zeghidour2021soundstream}, and w2v-BERT \citep{chung2021w2v}. Each of these models was trained independently by Google for their specific inputs. Before this, Google released a language model approach to music generation, AudioLM \citep{borsos2023audiolm} that was augmented with MuLan resulting in MusicLM.
-\\
-
-MuLan is a joint text-to-music embedding that stands on two towers - a text tower and an audio tower, and it indicates how closely a text and music sample are related to each other. The text-embedding tower is BERT pre-trained on text, and the audio embedding tower is ResNet-50. w2v-BERT is responsible for generating semantic tokens. SoundStream is a state-of-the-art audio compression model that retains a high reconstruction quality, responsible for generating acoustic tokens.
-\\
-
-The training process consists of three stages. The first stage involves extracting the required tokens from the input music sample, and MuLan’s audio tower is responsible for generating the audio tokens. The second stage involves the training of the semantic model which is conditioned on MuLan’s previously generated audio tokens to predict the semantic tokens. 
-\\
-
-The final stage is the acoustic model which is conditioned on both, M\textsubscript{a} (MuLan audio tokens) and S (MuLan semantic tokens), to predict acoustic tokens. The main purpose of the semantic model is to capture the long-term structure whereas for the acoustic model, it is to capture fine-grained details.
-\\
-
-During inference, M\textsubscript{a} is replaced with M\textsubscript{t}, and the text tokens from MuLan, which uses the aforementioned semantic model and the acoustic model to generate a waveform that is decoded using SoundStream, into a musical soundtrack. The final generated music has a sampling rate of 24Khz, which is lower than that of MusicGen, providing an additional reason to choose this over MusicLM.
-}
-
-
 \subsection{Blip-2}
 {
-BLIP-2 \citep{li2023blip} is a well-known model that has drawn notice for its creative methodology. The model consists of a two-step procedure that aims to build a solid foundation for zero-shot instructed image-to-text generation which characterizes BLIP-2's design. The model uses a lightweight querying transformer in the first stage. Using a frozen image encoder, bootstrapped vision-language representation learning is used to train this transformer. Two transformers - an image-grounded text generator and an image-text pair mediator, are essential to this step.
+BLIP-2 \cite{li2023blip} is a well-known model that has drawn notice for its creative methodology. The model consists of a two-step procedure that aims to build a solid foundation for zero-shot instructed image-to-text generation that characterizes BLIP-2's design. The model uses a lightweight querying transformer in the first stage. Using a frozen image encoder, bootstrapped vision-language representation learning is used to train this transformer. Two transformers - an image-grounded text generator and an image-text pair mediator, are essential to this step.
 \\
 
-Image-Text Matching: Acquiring fine-grained alignment between picture and text representations is the main goal of this binary classification problem. The model makes predictions about the positive (matched) or negative (unmatched) nature of an image-text pair.
+Image-Text Matching: Acquiring fine-grained alignment between picture and text representations is the primary goal of this binary classification problem. The model makes predictions about the positive (matched) or negative (unmatched) nature of an image-text pair.
 \\
 
 Image-Text Contrastive Learning: The model maximizes the reciprocal information between the picture and text representations through contrastive learning. Alignment is achieved by contrasting positive and negative pairings.
@@ -162,29 +126,71 @@ Image-Text Contrastive Learning: The model maximizes the reciprocal information 
 Image-Grounded Text Generation: This part builds the groundwork for the next step of the model by producing text based on input photos.
 \\
 
-The output of the Q-transformer is taken and then passed into the LLM Decoder. The model uses a fully connected layer to linearly project the output query embeddings into the same dimension as the text embeddings of the LLM. The generative capabilities of LLMs are utilized to generate the final caption that is presented as an output.
+The output of the Q-transformer is taken and then passed into the LLM Decoder. The model uses a fully connected layer to linearly project the output query embeddings into the same dimension as the text embeddings of the LLM. The generative capabilities of LLMs are utilized to generate the final caption presented as an output.
 \\
 
 The outputs of the Q-former act as soft visual prompts (in terms of text) to guide the LLM in generating the appropriate caption for the image.
 \\
 
-BLIP-2 achieves state-of-the-art performance on various vision-language tasks while having a small number of trainable parameters during pre-training. BLIP-2 also demonstrates emerging capabilities in zero-shot instructed image-to-text generation.
+BLIP-2 was evaluated for both image-to-text retrieval and text-to-image retrieval on COCO and Flickr30K datasets and achieved state-of-the-art performance on various vision-language tasks with a small number of trainable parameters during pre-training. BLIP-2 also demonstrates emerging capabilities in zero-shot instructed image-to-text generation.
 }
 
 \subsection{NLTK}
 {
-VADER \citep{hutto2014vader} is a lexicon and rule-based sentiment analysis tool created to examine the sentiment of a piece of text, considering various factors such as negations, intensity, and sentiment shifters. Developed by researchers at the Georgia Institute of Technology, VADER's lexicon is pre-built and includes sentiment scores for words. This allows it to generate a sentiment score for any given text.
-The Natural Language Toolkit (NLTK), an all-encompassing library built for Python, has acknowledged VADER as a valuable tool for sentiment analysis. This integration with VADER allows users to leverage its strengths and capabilities seamlessly within their NLP pipelines. NLTK is an open-source software and the source code is distributed under the terms of the Apache License Version 2.0 making it a great choice for its inclusion.
+VADER \cite{hutto2014vader} is a lexicon and rule-based sentiment analysis tool created to examine the sentiment of a piece of text, considering various factors such as negations, intensity, and sentiment shifters. Developed by researchers at the Georgia Institute of Technology, VADER's lexicon is pre-built and includes sentiment scores for words. That allows it to generate a sentiment score for any given text.
+The Natural Language Toolkit (NLTK), an all-encompassing library built for Python, has acknowledged VADER as a valuable tool for sentiment analysis. This integration with VADER allows users to leverage its strengths and capabilities seamlessly within their NLP pipelines. NLTK is an open-source software whose source code is distributed under the terms of the Apache License Version 2.0 making it a great choice.
 \\
 
-VADER utilizes a combination of lexical and grammatical factors to analyze sentiment. The model considers the intensity of sentiments, punctuation, and capitalization to enhance the accuracy of its predictions. VADER calculates its sentiment scores based on its large corpus that has average scores for various text tokens. On tokenizing the text, VADER assigns the aforementioned scores to them and normalizes them giving us the overall sentiment of the given text. This is also called the ``Polarity Score'' as it even outputs a positive, negative, and neutral score.
-VADER can be used in various domains such as social media analysis, customer feedback analysis, or market research. In this experiment, it has been chosen to derive the sentiment from the image captions.
+VADER utilizes a combination of lexical and grammatical factors to analyze sentiment. The model considers the intensity of sentiment, punctuation, and capitalization to enhance the accuracy of its predictions. VADER calculates its sentiment scores based on its large corpus, which has average scores for various text tokens. On tokenizing the text, VADER assigns the previously mentioned scores to them and normalizes them, giving the overall sentiment of the given text. That is called the ``Polarity Score'' as it outputs a positive, negative, and neutral score.
+VADER can be used in various domains like social media analysis, customer feedback analysis, or market research. In this experiment, it has been chosen to derive the sentiment from the image captions.
+}
+
+\subsection{Music Gen}
+{
+MusicGen \cite{copet2023simple} is Meta’s take on music generation from textual input. It is a single-language model that works over multiple streams of discrete music representation, the music tokens. These tokens consist of vectors with dimensions as large as 44,100 to 48,000 for each second of music corresponding to the frequency of music (which is a sampling rate from 44.1 kHz to 48 kHz). As human ears are sensitive, people are likelier to notice disharmony within poorly generated audio than a poorly generated image. Therefore, accuracy is especially important for music generation.
+\\
+
+MusicGen uses an auto-regressive transformer-based decoder conditioned on melodic representation. The encoder-decoder model used to encode the audio to tokens is EnCodec \cite{defossez2022high}, another model created by Meta. In EnCodec, an input goes through multiple interleaving codebook patterns, each of which helps in highly reducing the number of dimensions that result in the intermediary encoded input. The same codebooks are later used to decode the input from the latent space back to the original dimensions.
+\\
+
+The first step in the process is Audio Tokenization, which happens through the previously mentioned EnCodec, a convolutional auto-encoder with latent space quantized using RVQ (Residual Vector Quantization) and an adversarial reconstruction loss. 
+A pair of textual inputs and corresponding music is given to the model during training. The music is converted to tokens using EnCodec. These tokens are mapped with the text input in the latent space. During inference, when given a text as input, the model picks out the most appropriate tokens from the encoded latent space and puts them through the decoder, generating a musical soundtrack. 
+\\
+
+The tokens that are taken through the decoder result in a vector of 32,000 values for every second of music generated, learning to generate coherent music at 32 kHz. Of the researched models for this experiment, MusicGen is the only model that, instead of stacking numerous models in a pipeline, utilizes a singular unit to generate the music, the auto-encoder.
+\\
+
+MusicGen can also generate music from a reference melody. It achieves this by using the audio tokenization method mentioned previously and encoding these tokens into the latent space with the help of EnCodec. This encoded information is passed into the model as an additional input alongside earlier generated tokens. It follows the LLM approach of predicting the next token based on the previous ones. When conditioned on a reference melody, the encoded format of the reference melody acts as the starting token, which is otherwise some randomized starting token.
+\\
+
+MusicGen was trained on 20,000 hours of licensed music, of which 10,000 high-quality music tracks are part of an internal dataset while the remaining were sourced from ShutterShock and Pond5 music datasets.
+}
+
+
+\subsection{MusicLM}
+{
+MusicLM \cite{agostinelli2023musiclm} is Google’s approach to music generation from textual input. Unlike MusicGen, MusicLM comprises three main underlying architectures, which are MuLan \cite{huang2022mulan}, SoundStream \cite{zeghidour2021soundstream}, and w2v-BERT \cite{chung2021w2v}. Each of these models was trained independently by Google for their specific inputs. Before this, Google released a language model approach to music generation, AudioLM \cite{borsos2023audiolm} that was augmented with MuLan resulting in MusicLM.
+\\
+
+MuLan \cite{huang2022mulan} is a joint text-to-music embedding that stands on two towers - a text tower and an audio tower, and it indicates how closely a text and music sample are related. The text-embedding tower is BERT pre-trained on text, and the audio embedding tower is ResNet-50. w2v-BERT \cite{chung2021w2v} is responsible for generating semantic tokens. SoundStream \cite{zeghidour2021soundstream} is a state-of-the-art audio compression model that retains a high reconstruction quality, responsible for generating acoustic tokens.
+\\
+
+The training process consists of three stages. The first stage involves extracting the required tokens from the input music sample, and MuLan’s audio tower is responsible for generating the audio tokens. The second stage encompasses training the semantic model conditioned on MuLan’s previously generated audio tokens to predict the semantic tokens. 
+\\
+
+The final stage is the acoustic model, which is conditioned on both M\textsubscript{a} (MuLan audio tokens) and S (MuLan semantic tokens) to predict acoustic tokens. The main purpose of the semantic model is to capture the long-term structure, whereas the acoustic model is to capture fine-grained details.
+\\
+
+During inference, M\textsubscript{a} is replaced with M\textsubscript{t}, and the text tokens from MuLan, which uses the aforementioned semantic model and the acoustic model to generate a waveform that is decoded using SoundStream, into a musical soundtrack. The final generated music has a sampling rate of 24 kHz, which is lower than that of MusicGen, providing an additional reason to choose MusicGen over MusicLM.
+\\
+
+MusicLM was trained on 280,000 hours of material from the Free Music Archive (FMA \url{https://freemusicarchive.org/}) and evaluated on the MusicCaps \cite{agostinelli2023musiclm} benchmark composed of 5,251 music samples (10 seconds long) prepared by the authors, each of which is labeled with an English aspect list and a free text caption written by musicians. The aspect list highlights and keywords help distinguish the music sample, whereas the caption describes the sample in depth. The text solely focuses on how the music sounds, and not the metadata like the artist name.
 }
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\linewidth]{images/HLD.png}
-    \caption{High-level diagram, inputs could be a single image or a sequence of images for a slideshow with a backing soundtrack.}
+    \caption{High-Level Diagram: Inputs could be a single image or a sequence of images for a slideshow with a backing soundtrack.}
     \label{fig:high-level-diagram}
 \end{figure}
 
@@ -202,10 +208,10 @@ The subsequent section employs Meta's model for the generation of the soundtrack
 
 \subsection{Image Captioning}
 
-Image captioning is the application of artificial intelligence that combines computer vision and natural language processing to provide descriptive narratives for images. By leveraging deep learning techniques, image captioning models can recognize objects, scenes, and relationships within pictures, translating the image into coherent textual descriptions.
+Image captioning is the application of artificial intelligence that combines computer vision and natural language processing to provide descriptive narratives for images. By leveraging deep learning techniques, image captioning models can recognize objects, scenes, and relationships within pictures, translating the image into coherent textual descriptions. 
 \\
 
-This is the first model that is utilized in the pipeline to take the image as input and translate it into text for further processing. The famous image captioning dataset Flickr-8k was utilized, which is a benchmark collection for sentence-based image description and search, consisting of 8,000 images that are each paired with five different captions which provide clear descriptions of the salient features. The images were chosen from six different Flickr groups, and tend not to contain any well-known people or locations, but were manually selected to depict a variety of scenes and situations. BLIP-2 is the image captioning model that was utilized for this stage of the pipeline.
+The initial step in the proposed pipeline involves taking the image as input and converting it into text for further processing. A custom image captioning model was developed using the widely acclaimed Flickr30k dataset. That is a benchmark collection for sentence-based image description and search, consisting of 30,000 images, each paired with five different captions providing clear descriptions of the salient features. Images were chosen from six different Flickr groups, and they tend not to contain any well-known people or locations, but were manually selected to depict a variety of scenes and situations. Training a model on this dataset was not possible due to hardware constraints. As a result, a model was trained on a smaller dataset known as Flickr8k. As that model did not yield appreciable results, it was replaced by BLIP-2 for this stage of the pipeline.
 
 \subsection{Sentiment Analyzer}
 
@@ -231,28 +237,32 @@ To achieve this, the NLTK (Natural Language Toolkit) library was utilized, which
 
 \subsection{Pace Model}
 
-While the previous models have demonstrated commendable proficiency in capturing the predominant aspects of the image, significant variability in the generated soundtracks was observed. Therefore, this experiment introduces the ``pace'' model to take control over the tempo of the soundtrack. This model assumes a pivotal role in determining the optimal pace or tempo.
+While the previous models demonstrated commendable proficiency in capturing the predominant aspects of the image, significant variability in the generated soundtracks was observed. Therefore, this experiment introduces the ``pace'' model to take control over the tempo of the soundtrack. This model assumes a pivotal role in determining the optimal pace or tempo.
 \\
 
-For instance, an image depicting two cars racing can imply high intensity, suggesting a correspondingly high-tempo soundtrack. Conversely, an image of a peaceful landscape with rolling hills inspires calmness and serenity, reflected in a slow-tempo soundtrack. This addition aims to enhance the coherence and consistency of the generated soundtracks. Given the absence of existing datasets for this model, the Flickr-8k dataset was manually annotated, categorizing each image into one of three classes: slow, medium, or fast.
+For instance, an image depicting two cars racing can imply high intensity, suggesting a correspondingly high-tempo soundtrack. Conversely, an image of a peaceful landscape with rolling hills inspires calmness and serenity, reflected in a slow-tempo soundtrack. This addition aims to enhance the coherence and consistency of the generated soundtracks. Given the absence of existing datasets for this model, the Flickr8k (\url{https://www.kaggle.com/datasets/srbhshinde/flickr8k-sau}) dataset was manually annotated, categorizing each image into one of three classes: slow, medium, or fast.
 \\
 
 ResNet50v2 was chosen as the best core model due to its substantial pre-training on a variety of datasets, which provided a solid foundation for model development.
 This model's architecture begins with the integration of the ResNet50v2 frozen layers, followed by a flattening layer to flatten the output of the ResNet50v2 model.
-Finally, three dense layers of 1024, 256, and 3 neurons each are added. The first two dense layers use Rectified Linear Unit (ReLU) activation functions, and the last dense layer uses a Softmax activation function, resulting in the classification output of slow, medium, and fast.
+Finally, three dense layers of 1024, 256, and 3 neurons each are added. The first two dense layers use Rectified Linear Unit (ReLU) activation functions, and the last dense layer uses a Softmax activation function, resulting in classification outputs of either slow, medium or fast.
 \\
 
-This model underwent training across multiple epochs, specifically 10, 15, 20, and 30, utilizing varied batch sizes of 32, 64, and 128. Optimal outcomes were observed in the case of a 15-epoch training regimen paired with a batch size of 32. The dataset this was trained on was very diverse and we achieved a training accuracy of 94\%. We later confirmed these results by conducting a survey.
+Dense layers are multiple layers of neurons that receive inputs from all neurons of the previous layer. In CNNs, these layers convert the output of conv-pool layers into vectors, i.e., the desired output. In this scenario, the vectors are further converted into a smaller vector of size three. This final vector determines the class of the image.
+The Rectified Linear Unit (ReLU) or rectifier activation function brings non-linearity into a deep learning network and resolves the vanishing gradients issue. It understands the positive aspects of its argument. It is a widely used activation function in deep learning. It was used in this scenario as it resulted in the best output.
+\\
+
+The model underwent training across multiple epochs: 10, 15, 20, and 30, utilizing varied batch sizes of 32, 64, and 128. Optimal outcomes were observed in the case of a 15-epoch training regimen paired with a batch size of 32. The dataset it was trained on was very diverse and achieved a training accuracy of 94\%. We later confirmed these results by conducting a survey.
 
 \subsection{Music Generation Model}
 
-As previously mentioned, various music generation models were systematically assessed, with MusicGen emerging as the leading performer. In the final phase of the pipeline, the outputs acquired thus far are aggregated - comprising the image caption, the associated sentiment extracted from the caption, and the determined ``pace'' of the image. This composite set of inputs, formatted as: ``[a man on a snowboard performing a trick], [excitement], [fast tempo]'' is subsequently presented as input to Meta's MusicGen model.
+As previously mentioned, various music generation models were systematically assessed, with MusicGen emerging as the leading performer. In the final phase of the pipeline, the outputs acquired thus far are aggregated. These comprise the image caption, the associated sentiment extracted from the caption, and the determined ``pace'' of the image. This composite set of inputs, formatted as: ``[a man on a snowboard performing a trick], [excitement], [fast tempo]'' is subsequently presented as input to Meta's MusicGen model.
 \\
 
-The ``facebook/musicgen-small'' checkpoint that has been trained on 300 million parameters was used. This was chosen instead of the other models due to its availability and hardware limitations. This model was run on a dedicated GPU system and this processing power was harnessed with the help of a custom-built API. A clear separation is maintained between the user interface and the music generation server.
+The ``facebook/musicgen-small'' checkpoint, trained on 300 million parameters, was used. That was chosen instead of the other models due to its availability and hardware limitations. The model was run on a dedicated GPU system whose processing power was harnessed with the help of a custom-built API. While using the model, a clear separation between the user interface and the music generation server was maintained.
 \\
 
-Furthermore, the model's functionality was extended to encompass two distinct outputs: independent audio generation for a single image and the creation of a slideshow with a backing soundtrack for multiple images as the input.
+Furthermore, the model's functionality was extended to encompass two distinct outputs: independent audio generation for a single image and a slideshow with a backing soundtrack for multiple images as the input.
 
 \section*{Results}
 
@@ -270,7 +280,7 @@ While the two images that received less favorable responses on the survey point 
     \subfigure[Man on Skateboard: medium]{\includegraphics[width=0.22\textwidth]{images/medium.jpeg}}
     \subfigure[Fast Car: fast]{\includegraphics[width=0.22\textwidth]{images/fast2.jpeg}}
     \subfigure[Calm Landscape: slow]{\includegraphics[width=0.22\textwidth]{images/slow2.jpeg}}
-    \caption{Pace Model predictions for a variety of images. [All images are sourced from \url{https://pexels.com} Copyright Free]}
+    \caption{Pace Model predictions for a variety of images. [All images are sourced from \url{https://pexels.com}, Copyright-Free]}
     \label{fig:pace-model-predictions}
 \end{figure}
 
@@ -278,15 +288,18 @@ While the two images that received less favorable responses on the survey point 
 
 To further solidify our findings, another survey was conducted comprising six images and the soundtrack generated from the proposed pipeline. The participants assessed the coherency of the generated soundtrack to the image.
 
-This was received positively with an average agreement rate of 81\% that the soundtrack generated is coherent with the image.
+That was received positively with an average agreement rate of 81\% that the soundtrack generated is coherent with the image.
 
 \subsection*{MusicGen vs MusicLM}
 
-For the last stage of soundtrack generation in the suggested pipeline, we utilized Meta's MusicGen rather than Google's MusicLM because of accessibility and hardware constraints. To gain more insight, we conducted a survey where participants ranked two soundtracks, one produced by MusicGen and the other by MusicLM, for a total of 9 photos. Our proposed pipeline generated the prompts that were used as input to MusicGen and MusicLM. With an average positive result of 68.9\%, MusicGen won 8 out of 9 times.
+For the last stage of soundtrack generation in the suggested pipeline, we utilized Meta's MusicGen rather than Google's MusicLM because of accessibility and hardware constraints. To gain more insight, we conducted a survey where participants ranked two soundtracks, one produced by MusicGen and the other by MusicLM, for nine photos. Our proposed pipeline generated the prompts used as input to MusicGen and MusicLM. With an average positive result of 68.9\%, MusicGen won 8 out of 9 times.
 
 \section*{Conclusion}
 
 This study explored the feasibility of generating music from images by employing a pipeline of ``BLIP-2'', ``NLTK Sentiment Analyser'', ``Pace'' Model, and Meta's ``MusicGen'' model. While efficiency was achieved with an overall positive response, limitations arose due to computational constraints, impacting the final music quality. Due to the use of frozen layers through transfer learning, the system inherits the risks that exist in the components that are present in it.
+\\
+
+A few points to consider for the improvement of the model: Using cloud compute resources to handle the ``musicgen-large'' checkpoint instead of ``musicgen-small'', crowsourcing a larger dataset for the ``Pace'' model and setting up a survey on crowdsourcing platforms. Another method could be introducing parallel processing in the pipeline to improve time and efficiency.
 Further research could explore feature extraction and the creation of a shared latent space for the extracted features and music, alongside further refinement of the proposed ``pace'' model.
 
 % ----
@@ -296,7 +309,7 @@ Further research could explore feature extraction and the creation of a shared l
 \nocite{donahue2018adversarial}
 % ----
 
-\bibliographystyle{plainnat}
+\bibliographystyle{ieeetr}
 \bibliography{refs}
 
 \end{document}
